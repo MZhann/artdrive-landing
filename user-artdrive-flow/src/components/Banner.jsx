@@ -67,6 +67,7 @@ const Banner = () => {
                     height={248}
                     width={280}
                     className="sm:mt-[-30px] sm:w-[300px] md:w-[370px] lg:w-[390px]"
+                    alt="winner"
                 />
             </div>
         </div>

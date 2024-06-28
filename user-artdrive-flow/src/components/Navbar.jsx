@@ -45,7 +45,7 @@ const Navbar = () => {
                             alt="mode"
                         />
                     </button>
-                    <Image src={lang} />
+                    <Image src={lang} alt="language changer"/>
                     <div className="flex justify-center items-center w-[95px] mr-[-5px]">
                         <SignUpButton />
                     </div>
