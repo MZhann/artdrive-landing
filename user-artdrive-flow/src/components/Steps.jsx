@@ -43,7 +43,7 @@ const Steps = () => {
                                 4
                             </p>
                             <p className="text-3xl font-dinround text-[#484848]">
-                                Judge other contestant's work.
+                                Judge other contestant&apos;s work.
                             </p>
                         </div>
                         <div className="flex space-x-7 mb-7">
