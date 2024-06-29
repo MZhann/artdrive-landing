@@ -154,3 +154,29 @@ body{
 .transition-transform {
   transition: transform 0.3s ease;
 }
+
+
+.ticker {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.ticker_item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: ticker 40s linear infinite;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateZ(0);
+  }
+  to {
+    transform: translate3d(-1000%, 0, 0);
+  }
+}

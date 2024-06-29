@@ -9,6 +9,7 @@ import Steps from "@/components/Steps";
 import TrueFans from "@/components/TrueFans";
 import FAQ from "@/components/Faq";
 import { ThemeProvider } from "@/context/ThemeContext";
+import RunningStroke from "@/components/RunningStroke";
 
 const Main = () => {
     return (
@@ -17,6 +18,7 @@ const Main = () => {
                 <MainContainer>
                     <Navbar />
                     <Banner />
+                    <RunningStroke />
                     <WhyArtDrive />
                     <EarthCard />
                     <Steps />
