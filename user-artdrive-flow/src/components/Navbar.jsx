@@ -27,6 +27,7 @@ const Navbar = () => {
                         width={51}
                         height={56}
                         alt="logo"
+                        priority
                         className="w-[90px]"
                     />
                     <Image
@@ -34,6 +35,7 @@ const Navbar = () => {
                         width={25}
                         height={10}
                         alt="beta"
+                        priority
                         className="w-[30px]"
                     />
                 </Link>
@@ -46,6 +48,7 @@ const Navbar = () => {
                             src={lang}
                             className="w-[25px] hover:w-[30px]"
                             alt="language changer"
+                            priority
                         />
                     </button>
                     <div className="flex justify-center items-center w-[95px] h-[65px] mr-[-5px]">
