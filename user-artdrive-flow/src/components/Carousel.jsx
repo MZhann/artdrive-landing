@@ -67,6 +67,8 @@ const Carousel = ({ items }) => {
               src={item.src}
               alt={"picture"}
               priority
+              width={500}
+              height={1000}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="rounded-2xl object-cover object-center"
