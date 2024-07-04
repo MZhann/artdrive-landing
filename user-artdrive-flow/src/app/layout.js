@@ -1,18 +1,25 @@
-import { Inter } from "next/font/google";
+// src/app/layout.js
 import "./globals.css";
-
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "ArtDrive",
   description: "Register to not miss the chance",
 };
 
-export default function RootLayout({ children }) {
+function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
+
+export default RootLayout;

@@ -1,58 +1,59 @@
+import Image from "next/image";
+import arrow from "../../public/images/arrow.svg";
+
 const Steps = () => {
     return (
-        <div className=" flex flex-col items-start px-4 sm:px-20 lg:px-[15%] lg:items-center">
-            <div className="flex justify-center lg:w-[80%] xl:w-[1100px]">
-                <div className="flex flex-col w-[90%] ">
-                    <h1 className="text-[#2B2B2B] font-dinroundbold text-[2.5rem] pt-16 leading-10 mb-6">
-                        How does it work?
-                    </h1>
-                    <p className="text-[#2B2B2B] font-dinround text-3xl">
-                        Become the best and richest creator in{" "}
-                        <span className="text-green-600 font-dinroundbold">
-                            5
-                        </span>{" "}
-                        steps
-                    </p>
-                    <div className="flex flex-col mt-10 ">
+        <div className="flex flex-col bg-bg-how bg-cover mt-[-2px] z-5 items-start px-4 sm:px-20 lg:px-[5%] lg:items-center">
+            <div className="flex justify-center lg:w-[90%] xl:w-[1100px]">
+                <div className="flex flex-col md:flex-row w-[90%] md:space-x-10 lg:space-x-30">
+                    <div>
+                        <h1 className="text-white font-italiana text-5xl sm:text-4xl pt-16 leading-[55px] text-nowrap mb-2">
+                            How does it <br className="sm:hidden"></br>work?
+                        </h1>
+                        <p className="text-[#CAC9CB] font-montserrat text-2xl">
+                            Unlock Your Potential in{" "}
+                            <span className="text-[#B326F5] text-4xl font-bold">5</span>{" "}
+                            Simple Steps
+                        </p>
+                        <Image
+                            src={arrow}
+                            width={350}
+                            height={50}
+                            alt="arrow"
+                            className="ml-0 mt-10 hidden md:block"
+                        />
+                    </div>
+                    <div className="flex sm:pb-[50px] flex-col w-full mt-20 sm:mt-16 text-[#CAC9CB] font-montserrat ">
                         <div className="flex space-x-7 mb-7">
-                            <p className="text-[#80E69D] font-dinroundbold text-5xl">
+                            <p className="text-[#B326F5] text-5xl ml-2">
                                 1
                             </p>
-                            <p className="text-3xl font-dinround text-[#484848]">
-                                Join a tournament.
+                            <p className="text-2xl">
+                                Join a tournament
                             </p>
                         </div>
                         <div className="flex space-x-7 mb-7">
-                            <p className="text-[#80E69D] font-dinroundbold text-5xl">
-                                2
-                            </p>
-                            <p className="text-3xl font-dinround text-[#484848]">
-                                Submit your work.
+                            <p className="text-[#B326F5] text-5xl">2</p>
+                            <p className="text-2xl">
+                                Submit your work
                             </p>
                         </div>
                         <div className="flex space-x-7 mb-7">
-                            <p className="text-[#80E69D] font-dinroundbold text-5xl">
-                                3
-                            </p>
-                            <p className="text-3xl font-dinround text-[#484848]">
-                                Transfer a buy-in.
+                            <p className="text-[#B326F5] text-5xl">3</p>
+                            <p className="text-2xl">
+                                Enter the Prize pool
                             </p>
                         </div>
                         <div className="flex space-x-7 mb-7">
-                            <p className="text-[#80E69D] font-dinroundbold text-5xl">
-                                4
-                            </p>
-                            <p className="text-3xl font-dinround text-[#484848]">
-                                Judge other contestant&apos;s work.
+                            <p className="text-[#B326F5] text-5xl">4</p>
+                            <p className="text-2xl">
+                                Vote on fellow creators&apos; work
                             </p>
                         </div>
                         <div className="flex space-x-7 mb-7">
-                            <p className="text-[#80E69D] font-dinroundbold text-5xl">
-                                5
-                            </p>
-                            <p className="text-3xl font-dinround text-[#484848]">
-                                Win the love of an audience and win amazing
-                                prizes!
+                            <p className="text-[#B326F5] text-5xl">5</p>
+                            <p className="text-2xl">
+                                Impress the crowd and reap the rewards
                             </p>
                         </div>
                     </div>

@@ -40,7 +40,6 @@ const faqData = [
         answer: `- Contestants ent entry fee, which varies by contest.\n- Judges participate for free.\n- Platform collects a 5% fee from the prize pool for operational and marketing expenses.`,
     },
 
-    // Add more questions and answers as needed
 ];
 
 const FAQItem = ({ question, answer }) => {
@@ -57,16 +56,16 @@ const FAQItem = ({ question, answer }) => {
     }, [isOpen]);
 
     return (
-        <div className="mb-4">
+        <div className="mb-4 bg-black ">
             <button
                 className="w-full text-left p-1 rounded-lg focus:outline-none font-dinroundbold text-xl text-[#2A2A2A] flex items-center justify-between"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <div className="font-dinroundmedium">{question}</div>
+                <div className="font-montserrat sm:text-lg text-[#CAC9CB]">{question}</div>
                 <div
-                    className={`transition-transform duration-300 ease font-dinround text-5xl ${
-            isOpen ? 'rotate-45' : 'rotate-0'
-          }`}
+                    className={`transition-transform duration-300 ease font-dinround  text-[#CAC9CB] text-5xl ${
+                        isOpen ? "rotate-45" : "rotate-0"
+                    }`}
                 >
                     +
                 </div>
@@ -74,13 +73,18 @@ const FAQItem = ({ question, answer }) => {
             <hr></hr>
             <div
                 ref={contentRef}
-                className={`overflow-hidden transition-height duration-300 ease opacity-0 ${isOpen ? 'opacity-100' : 'opacity-0'}
+                className={`overflow-hidden transition-height duration-300 ease opacity-0 ${
+                    isOpen ? "opacity-100" : "opacity-0"
+                }
                 }`}
                 style={{
                     height: isOpen ? contentRef.current.scrollHeight : "0px",
                 }}
             >
-                <div className="p-4 bg-white border-l-4 border-blue-500" style={{ whiteSpace: 'pre-line' }}>
+                <div
+                    className="p-4 bg-black border-l-4 border-[#B326F5] font-montserrat text-[#CAC9CB]"
+                    style={{ whiteSpace: "pre-line" }}
+                >
                     {answer}
                 </div>
             </div>
@@ -90,9 +94,9 @@ const FAQItem = ({ question, answer }) => {
 
 const FAQ = () => {
     return (
-        <div className="w-full flex flex-col items-center mb-20">
+        <div className="w-full flex pb-10 flex-col items-center bg-black">
             <div className="w-[85%] sm:w-[70%] md:w-[60%] lg:w-[1000px]">
-                <h2 className="text-3xl font-bold mb-6 font-dinroundmedium">
+                <h2 className="text-3xl sm:text-2xl font-semibold mb-6 font-montserrat text-white">
                     Frequently Asked Questions
                 </h2>
                 {faqData.map((item, index) => (
@@ -103,7 +107,6 @@ const FAQ = () => {
                     />
                 ))}
             </div>
-            
         </div>
     );
 };

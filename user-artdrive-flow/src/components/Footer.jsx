@@ -1,34 +1,26 @@
 import Image  from "next/image"
-import logo from "../../public/images/ArtDriveLogo.png"
+import logo from "../../public/images/ArtDriveWhiteLogo.svg"
 import Link from "next/link"
 import x from "../../public/images/x.svg"
-import pinterest from "../../public/images/pinterest.svg"
-import youtube from "../../public/images/youtube.svg"
+import discord from "../../public/images/discord.svg"
 import insta from "../../public/images/insta.svg"
 
 const Footer = () => {
     return (
-        <div className="flex justify-center w-full bg-[#000000] h-[263px]">
-            <div className="flex flex-col items-center w-[100%] lg:w-[1000px] xl:w-[1450px]">
-                <div className="flex items-center w-[70%] justify-between mt-3">
-                    <Image src={logo} width={100} height={71} alt="artdrive logo" />
-                    <div className="flex flex-col text-white font-dinround space-y-5">
-                        <Link href={"/about"} className="hover:underline">About Us</Link>
-                        <Link href={'#'} className="hover:underline">Support</Link>
-                    </div>
-                </div>
-                <div className="flex space-x-8 mt-10 items-center">
+        <div className="flex justify-center items-center w-full bg-[#000000] h-[143px]">
+            <div className="flex justify-between w-full items-center lg:w-[1000px] xl:w-[1450px] px-[10%]">
+                <Link href={'/'} className="flex items-center">
+                    <Image className="w-[70px] sm:w-[100px]" src={logo} width={100} height={71} alt="artdrive logo" />
+                </Link>
+                <div className="flex space-x-8 items-center">
                     <Link href={'https://x.com/ArtDrive_io'} target="_blank" rel="noopener noreferrer">
-                        <Image src={x} width={30} height={30} alt="x/twitter logo" />
-                    </Link>
-                    <Link href={'#'} target="_blank" rel="noopener noreferrer">
-                        <Image src={pinterest} width={32} height={32} alt="linkedin logo"/>
-                    </Link>
-                    <Link href={'https://www.youtube.com/@artdriveofficial'} target="_blank" rel="noopener noreferrer">
-                        <Image src={youtube} width={34} height={24} alt="youtube logo"/>            
+                        <Image className="w-[25px] sm:w-[40px]" src={x} width={40} height={30} alt="x/twitter logo" />
                     </Link>
                     <Link href={'https://www.instagram.com/artdrive_official?igsh=MXBieDRpZ25ia3hmMQ=='} target="_blank" rel="noopener noreferrer">
-                        <Image src={insta} width={33} height={33} alt="instagram logo"/>
+                        <Image className="w-[25px] sm:w-[40px]" src={insta} width={43} height={33} alt="instagram logo"/>
+                    </Link>
+                    <Link href={'https://www.instagram.com/artdrive_official?igsh=MXBieDRpZ25ia3hmMQ=='} target="_blank" rel="noopener noreferrer">
+                        <Image className="w-[25px] sm:w-[40px]" src={discord} width={43} height={33} alt="discord logo"/>
                     </Link>
                 </div>
             </div>

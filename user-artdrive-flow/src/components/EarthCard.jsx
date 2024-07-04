@@ -1,15 +1,10 @@
-import Image from "next/image";
-import earth from "../../public/images/earth.svg";
-
 const EarthCard = () => {
     return (
-        <div className="bg-bg-image bg-cover flex items-center justify-center h-[200px] mt-10 sm:mt-14 lg:h-[270px]">
-            <div className="flex items-center space-x-5 sm:space-x-8">
-                <Image src={earth} height={107} width={107} alt="3d earth" className="sm:w-[180px] lg:w-[250px]" />
-                <h2 className="text-2xl sm:text-3xl font-dinroundmedium lg:text-4xl">
-                    Compete anytime,<br></br>
-                    anywhere
-                </h2>
+        <div className="bg-black bg-cover mt-[-2px] flex overflow-y-hidden items-center sm:w-full justify-center h-[200px]">
+            <div className="flex items-center justify-center sm:w-full">
+                <div className="text-3xl lg:text-4xl xl:text-5xl lg:font-normal flex flex-col items-center sm:flex-row sm:justify-center text-white font-montserrat text-center">
+                    <span className="text-white lg:font-normal font-montserrat text-center sm:flex">Compete <span className="hidden sm:flex">&nbsp;</span></span>  <span className="text-gradient-two font-montserrat font-bold hidden lg:font-semibold sm:flex text-center">anytime! anywhere!</span> <span className="sm:hidden text-gradient-two font-montserrat font-bold">anytime! <br className="sm:hidden"></br> <span className="sm:hidden text-gradient font-montserrat font-bold">anywhere!</span></span>
+                </div>
             </div>
         </div>
     );

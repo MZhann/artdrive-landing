@@ -8,25 +8,20 @@ import EarthCard from "@/components/EarthCard";
 import Steps from "@/components/Steps";
 import TrueFans from "@/components/TrueFans";
 import FAQ from "@/components/Faq";
-import { ThemeProvider } from "@/context/ThemeContext";
-import RunningStroke from "@/components/RunningStroke";
 
 const Main = () => {
     return (
         <div>
-            <ThemeProvider>
-                <MainContainer>
-                    <Navbar />
-                    <Banner />
-                    <RunningStroke />
-                    <WhyArtDrive />
-                    <EarthCard />
-                    <Steps />
-                    <TrueFans />
-                    <FAQ />
-                    <Footer />
-                </MainContainer>
-            </ThemeProvider>
+            <MainContainer>
+                <Navbar />
+                <Banner />
+                <WhyArtDrive />
+                <EarthCard />
+                <Steps />
+                <TrueFans />
+                <FAQ />
+                <Footer />
+            </MainContainer>
         </div>
     );
 };
