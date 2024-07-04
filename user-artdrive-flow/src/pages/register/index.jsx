@@ -140,7 +140,7 @@ const Register = () => {
                             Set your name
                         </h1>
                         <p className="text-2xl mt-4 font-dinround text-[white] mb-2">
-                            To start, what's your name?
+                            To start, what&apos;s your name?
                         </p>
                         <div className="mb-4 ">
                             <p className="font-dinroundbold text-white mt-5 mb-1 ml-1">
