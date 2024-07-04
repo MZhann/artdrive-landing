@@ -24,34 +24,34 @@ const Steps = () => {
                         />
                     </div>
                     <div className="flex sm:pb-[50px] flex-col w-full mt-20 sm:mt-16 text-[#CAC9CB] font-montserrat ">
-                        <div className="flex space-x-7 mb-7">
-                            <p className="text-[#B326F5] text-5xl ml-2">
+                        <div className="flex items-center space-x-7 mb-7">
+                            <p className="text-[#B326F5] text-center text-5xl ml-2">
                                 1
                             </p>
                             <p className="text-2xl">
                                 Join a tournament
                             </p>
                         </div>
-                        <div className="flex space-x-7 mb-7">
-                            <p className="text-[#B326F5] text-5xl">2</p>
+                        <div className="flex items-center space-x-7  mb-7">
+                            <p className="text-[#B326F5] text-5xl text-center">2</p>
                             <p className="text-2xl">
                                 Submit your work
                             </p>
                         </div>
-                        <div className="flex space-x-7 mb-7">
-                            <p className="text-[#B326F5] text-5xl">3</p>
+                        <div className="flex items-center space-x-7 mb-7">
+                            <p className="text-[#B326F5] text-5xl text-center">3</p>
                             <p className="text-2xl">
                                 Enter the Prize pool
                             </p>
                         </div>
-                        <div className="flex space-x-7 mb-7">
-                            <p className="text-[#B326F5] text-5xl">4</p>
+                        <div className="flex items-center space-x-7 mb-7">
+                            <p className="text-[#B326F5] text-5xl text-center">4</p>
                             <p className="text-2xl">
                                 Vote on fellow creators&apos; work
                             </p>
                         </div>
-                        <div className="flex space-x-7 mb-7">
-                            <p className="text-[#B326F5] text-5xl">5</p>
+                        <div className="flex items-center space-x-7 mb-7">
+                            <p className="text-[#B326F5] text-5xl text-center">5</p>
                             <p className="text-2xl">
                                 Impress the crowd and reap the rewards
                             </p>
