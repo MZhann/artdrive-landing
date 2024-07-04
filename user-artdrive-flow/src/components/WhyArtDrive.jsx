@@ -3,24 +3,24 @@ import Card from "@/components/Card";
 const WhyArtDrive = () => {
     const cardData = [
         {
-            imageSrc: "/images/trophy.svg",
+            imageSrc: "/images/trophy.png",
             title: "Rise to the Top",
             text: "Showcase your best work, compete globally, and win amazing prizes!",
         },
         {
-            imageSrc: "/images/money.svg",
+            imageSrc: "/images/money.png",
             title: "Win BIG",
             text: "No cap on Prize pools. The bigger the tournament, the bigger the prize fund!",
         },
     ];
     const cardData2 = [
         {
-            imageSrc: "/images/rocket.svg",
+            imageSrc: "/images/rocket.png",
             title: "Explode your audience",
             text: "Supercharge your social media growth and find your true fans!",
         },
         {
-            imageSrc: "/images/diamond.svg",
+            imageSrc: "/images/diamond.png",
             title: "Find true art gems",
             text: "Become a Judge and uncover hidden art gems while earning rewards!",
         },

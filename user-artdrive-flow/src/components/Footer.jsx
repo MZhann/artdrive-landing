@@ -1,5 +1,5 @@
 import Image  from "next/image"
-import logo from "../../public/images/ArtDriveWhiteLogo.svg"
+import logo from "../../public/images/ArtDriveWhiteLogo.png"
 import Link from "next/link"
 import x from "../../public/images/x.svg"
 import discord from "../../public/images/discord.svg"

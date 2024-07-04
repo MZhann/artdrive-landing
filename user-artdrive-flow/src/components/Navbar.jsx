@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import ArtDriveLogo from "../../public/images/ArtDriveWhiteLogo.svg";
+import ArtDriveLogo from "../../public/images/ArtDriveWhiteLogo.png";
 import beta from "../../public/images/beta.svg";
 import lang from "../../public/images/lang.svg";
 import SignUpButton from "./SignUpButton";

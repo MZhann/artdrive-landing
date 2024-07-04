@@ -35,13 +35,13 @@ const Banner = () => {
         "comics",
     ];
     const items = [
-        { src: "/images/bannerArt1.svg" },
+        { src: "/images/bannerArt1.png" },
         { src: "/images/bannerArt2.png" },
-        { src: "/images/bannerArt3.svg" },
-        { src: "/images/bannerArt4.svg" },
-        { src: "/images/bannerArt5.svg" },
-        { src: "/images/bannerArt6.svg" },
-        { src: "/images/bannerArt7.svg" },
+        { src: "/images/bannerArt3.png" },
+        { src: "/images/bannerArt4.jpeg" },
+        { src: "/images/bannerArt5.png" },
+        { src: "/images/bannerArt6.jpg" },
+        { src: "/images/bannerArt7.jpg" },
     ];
 
     return (
