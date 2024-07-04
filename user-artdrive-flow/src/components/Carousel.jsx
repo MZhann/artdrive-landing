@@ -67,11 +67,9 @@ const Carousel = ({ items }) => {
               src={item.src}
               alt={"picture"}
               priority
-              width={500}
-              height={1000}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="rounded-2xl object-cover object-center"
+            //   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="rounded-2xl object-cover w-[100%] object-center"
             />
             <div className="absolute inset-0 flex items-end justify-start p-4 text-2xl text-gray-800 rounded-2xl">
               <div className="w-[100px] h-[40px] font-semibold font-montserrat text-center flex flex-col pt-1 items-center bg-black text-white text-xs rounded-2xl">
