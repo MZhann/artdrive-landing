@@ -36,7 +36,7 @@ const Banner = () => {
     ];
     const items = [
         { src: "/images/bannerArt1.svg" },
-        { src: "/images/bannerArt2.svg" },
+        { src: "/images/bannerArt2.png" },
         { src: "/images/bannerArt3.svg" },
         { src: "/images/bannerArt4.svg" },
         { src: "/images/bannerArt5.svg" },
