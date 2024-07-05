@@ -1,4 +1,4 @@
-import "../app/globals.css";
+import "../../app/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
@@ -9,11 +9,12 @@ import Steps from "@/components/Steps";
 import TrueFans from "@/components/TrueFans";
 import FAQ from "@/components/Faq";
 
-const Main = ({ initialLanguage }) => {
+const Mainru = () => {
+
   return (
     <div>
       <MainContainer>
-        <Navbar initialLanguage={initialLanguage} />
+        <Navbar />
         <Banner />
         <WhyArtDrive />
         <EarthCard />
@@ -26,4 +27,4 @@ const Main = ({ initialLanguage }) => {
   );
 };
 
-export default Main;
+export default Mainru;

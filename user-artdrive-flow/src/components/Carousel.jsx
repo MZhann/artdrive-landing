@@ -6,7 +6,7 @@ import { useSwipeable } from "react-swipeable";
 import left from "../../public/images/left.svg";
 import right from "../../public/images/right.svg";
 
-const Carousel = ({ items }) => {
+const Carousel = ({ items, lang }) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
   const handleNext = () => {
@@ -72,10 +72,10 @@ const Carousel = ({ items }) => {
               className="rounded-2xl object-cover w-[100%] object-center"
             />
             <div className="absolute inset-0 flex items-end justify-start p-4 text-2xl text-gray-800 rounded-2xl">
-              <div className="w-[100px] h-[40px] font-semibold font-montserrat text-center flex flex-col pt-1 items-center bg-black text-white text-xs rounded-2xl">
-                this art won
+              <div className={`${lang == 'en' ? 'text-xs  pt-1' : 'text-[8px] pt-0 pt-[-15px]'} w-[100px] h-[40px] font-semibold font-montserrat text-center flex flex-col items-center bg-black text-white  rounded-2xl`}>
+                 {lang == 'en' ? 'this art won' : 'этот арт выиграл'}
                 <br />
-                <span className="font-bold text-sm ">
+                <span className={`font-bold ${lang == 'en' ? 'text-sm' : 'text-xs mt-[-10px]'} `}>
                   {(index + 50) * 100}$
                 </span>
               </div>

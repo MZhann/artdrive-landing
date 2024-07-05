@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import "../../app/globals.css";
 import Image from "next/image";
@@ -13,7 +13,14 @@ const Register = () => {
     const [showEmail, setShowEmail] = useState(true);
     const [showName, setShowName] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [language, setLanguage] = useState("en");
 
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem("language");
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    }, []);
     const goBack = () => {
         router.push("/");
     };
@@ -105,19 +112,23 @@ const Register = () => {
                 {showEmail && (
                     <div>
                         <h1 className="text-2xl mb-4 text-white font-dinroundbold text-center">
-                            Sign Up
+                            {language == "en"
+                                ? "Sign Up"
+                                : "Зарегистрироваться"}
                         </h1>
                         <h3 className="text-lg mb-2 text-white font-dinroundmedium">
-                            Please, enter your email:
+                            {language == "en"
+                                ? "Please, enter your email:"
+                                : "Пожалуйста, введите ваш email"}
                         </h3>
                     </div>
                 )}
 
                 {showEmail && (
                     <div className="mb-4">
-                        <p className="font-dinroundbold mt-5 text-white mb-1 ml-1">
+                        {/* <p className="font-dinroundbold mt-5 text-white mb-1 ml-1">
                             email
-                        </p>
+                        </p> */}
 
                         <input
                             placeholder="email"
@@ -137,23 +148,38 @@ const Register = () => {
                 {showName && (
                     <div className="text-[#2B2B2B]">
                         <h1 className=" text-[white] mt-4 text-4xl">
-                            Set your name
+                            {language == "en"
+                                ? "Set your name"
+                                : "Укажите ваше имя"}
                         </h1>
                         <p className="text-2xl mt-4 font-dinround text-[white] mb-2">
-                            To start, what&apos;s your name?
+                            {language == "en"
+                                ? "To start, what&apos;s your name?"
+                                : "Для начала, как вас зовут?"}
                         </p>
                         <div className="mb-4 ">
-                            <p className="font-dinroundbold text-white mt-5 mb-1 ml-1">
+                            {/* <p className="font-dinroundbold text-white mt-5 mb-1 ml-1">
                                 Name
-                            </p>
+                            </p> */}
 
-                            <input
-                                placeholder="name"
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="w-full p-5 border-2 border-[#888888] placeholder-gray-700 rounded-lg"
-                            />
+                            {language == "en" ? (
+                                <input
+                                    placeholder="name"
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="w-full p-5 border-2 border-[#888888] placeholder-gray-700 rounded-lg"
+                                />
+                            ) : (
+                                <input
+                                    placeholder="имя"
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="w-full p-5 border-2 border-[#888888] placeholder-gray-700 rounded-lg"
+                                />
+                            )}
+
                             {errors.name && (
                                 <p className="text-yellow-500 text-sm">
                                     {errors.name}
@@ -166,15 +192,21 @@ const Register = () => {
                 {showPassword && (
                     <div className="text-white">
                         <h1 className=" text-white mt-4 text-4xl">
-                            Pick a password
+                            {language == "en"
+                                ? "Pick a password"
+                                : "Придумайте пароль"}
                         </h1>
                         <p className="text-2xl mt-4 font-dinround text-white mb-2">
-                            Now, set your password with at least 8 characters:
+                            {language == "en"
+                                ? "Now, set your password with at least 8 characters:"
+                                : "Теперь придумайте пароль минимум из 8 символов: минимум 1 заглавная, 1 строчная и 1 цифра"}
                         </p>
                         <div className="mb-4 ">
-                            <p className="font-dinroundbold text-white mt-5 mb-1 ml-1">
-                                Password
-                            </p>
+                            {/* <p className="font-dinroundbold text-white mt-5 mb-1 ml-1">
+                                
+                                {language == 'en' ? 'Password' : 'пароль'}
+
+                            </p> */}
 
                             <input
                                 placeholder="Password 8+ characters"
@@ -197,7 +229,9 @@ const Register = () => {
                         onClick={handleEmail}
                         className="w-full p-5 mt-10 bg-blue-500 text-white rounded-xl border-b-blue-800 border-4 hover:bg-blue-600"
                     >
-                        Continue with email
+                        {language == "en"
+                            ? "Continue with email"
+                            : "Продолжить с email"}
                     </button>
                 )}
 
@@ -206,7 +240,7 @@ const Register = () => {
                         onClick={handleName}
                         className="w-full p-5 mt-10 bg-blue-500 text-white rounded-xl border-b-blue-800 border-4 hover:bg-blue-600"
                     >
-                        Continue
+                        {language == "en" ? "Continue" : "Продолжить"}
                     </button>
                 )}
 
@@ -215,7 +249,7 @@ const Register = () => {
                         onClick={handleSubmit}
                         className="w-full p-5 mt-10 bg-blue-500 text-white rounded-xl border-b-blue-800 border-4 hover:bg-blue-600"
                     >
-                        Continue
+                        {language == "en" ? "Continue" : "Продолжить"}
                     </button>
                 )}
 
@@ -233,7 +267,9 @@ const Register = () => {
                                 alt="google logo"
                             />
                             <div className="text-white">
-                                Sign up with Google
+                                {language == "en"
+                                    ? "Sign up with Google"
+                                    : "Зарегистрироваться с Google"}
                             </div>
                         </button>
                     </div>

@@ -1,6 +1,16 @@
 import Card from "@/components/Card";
+import { useState, useEffect } from "react";
 
 const WhyArtDrive = () => {
+    const [language, setLanguage] = useState("en");
+
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem("language");
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    }, []);
+
     const cardData = [
         {
             imageSrc: "/images/trophy.png",
@@ -30,9 +40,10 @@ const WhyArtDrive = () => {
             className={`text-[#2A2A2A] w-full sm:pb-8 flex flex-col items-center md:px-0 lg:px-[15%] bg-bg-about bg-cover overflow-hidden`}
         >
             <h1
-                className={`bold text-5xl font-italiana mb-20 mt-20 sm:mt-12 sm:text-4xl lg:text-5xl text-white`}
+                className={`${language == 'en' ? 'font-italiana text-5xl' : 'font-particiana text-4xl text-center'} bold   mb-20 mt-20 sm:mt-12 sm:text-5xl lg:text-5xl text-white`}
             >
-                Why ArtDrive?
+                {language == 'en' ? 'Why ArtDrive' : 'Почему ArtDrive?'}
+                
             </h1>
             <div className="card-list w-full flex flex-col items-center">
                 <div className="flex flex-wrap lg:flex-col sm:space-x-10 lg:space-x-[160px] justify-center lg:w-[700px] lg:ml-[-120px] ">
@@ -42,6 +53,7 @@ const WhyArtDrive = () => {
                             imageSrc={card.imageSrc}
                             title={card.title}
                             text={card.text}
+                            lang={language}
                         />
                     ))}
                 </div>
@@ -52,6 +64,8 @@ const WhyArtDrive = () => {
                             imageSrc={card.imageSrc}
                             title={card.title}
                             text={card.text}
+                            lang={language}
+
                         />
                     ))}
                 </div>

@@ -22,6 +22,7 @@ module.exports = {
         dinroundmedium: ['dinroundmedium', 'sans-serif'],
         custom: ['italiana', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-serif'],
+        particiana: ['particiana', 'sans-serif'],
       },
     },
   },

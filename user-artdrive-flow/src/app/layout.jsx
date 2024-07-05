@@ -1,12 +1,12 @@
 // src/app/layout.js
-import "./globals.css";
+import './globals.css';
 
 export const metadata = {
   title: "ArtDrive",
   description: "Register to not miss the chance",
 };
 
-function RootLayout({ children }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
@@ -21,5 +21,3 @@ function RootLayout({ children }) {
     </html>
   );
 }
-
-export default RootLayout;

@@ -10,20 +10,21 @@ import TrueFans from "@/components/TrueFans";
 import FAQ from "@/components/Faq";
 
 const Main = () => {
-    return (
-        <div>
-            <MainContainer>
-                <Navbar />
-                <Banner />
-                <WhyArtDrive />
-                <EarthCard />
-                <Steps />
-                <TrueFans />
-                <FAQ />
-                <Footer />
-            </MainContainer>
-        </div>
-    );
+
+  return (
+    <div>
+      <MainContainer>
+        <Navbar />
+        <Banner />
+        <WhyArtDrive />
+        <EarthCard />
+        <Steps />
+        <TrueFans />
+        <FAQ />
+        <Footer />
+      </MainContainer>
+    </div>
+  );
 };
 
 export default Main;

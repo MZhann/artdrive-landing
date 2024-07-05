@@ -33,6 +33,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "particiana";
+    src: url("/fonts/ofont.ru_Patriciana.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 .font-italiana {
     font-family: "italiana", sans-serif;
 }
@@ -258,11 +265,9 @@ body {
 }
 
 .text-gradient-fans {
-  background: linear-gradient(90deg, #3884F5, #D934D7, #FE781E);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+    background: linear-gradient(90deg, #3884f5, #d934d7, #fe781e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
 }
-
-

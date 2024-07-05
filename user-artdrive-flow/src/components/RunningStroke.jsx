@@ -1,4 +1,6 @@
+// import "../app/globals.css";
 import "../app/globals.css";
+
 import React from "react";
 import Image from "next/image";
 import youtube from '../../public/images/companyLogos/youtube.svg'

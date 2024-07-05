@@ -1,12 +1,38 @@
 import Image from "next/image";
 
-const Card = ({ imageSrc, title, text }) => {
+const Card = ({ imageSrc, title, text, lang }) => {
+    const translations = {
+        "Rise to the Top":
+            "Продемонстрируй свои лучшие работы, соревнуйся и выигрывай потрясающие призы!",
+        "Win BIG":
+            "Призовые фонды не ограничены. Чем крупнее турнир, тем больше призовой фонд!",
+        "Explode your audience":
+            "Увеличь рост в социальных сетях и найди своих настоящих поклонников!",
+        "Find true art gems":
+            "Стань судьей и раскрой скрытые сокровища искусства, зарабатывая при этом награды!",
+    };
+
+    const translatedTitle =
+        lang === "en"
+            ? title
+            : title === "Rise to the Top"
+            ? "Поднимись на Вершину"
+            : title === "Win BIG"
+            ? "Выигрывай По-Крупному"
+            : title == "Explode your audience"
+            ? "Взорви свою аудиторию"
+            : title == "Find true art gems"
+            ? "Находи жемчужины искусства"
+            : title;
+
+    const translatedText = lang === "en" ? text : translations[title] || title;
+
     return (
         <div
-      className={`relative flex flex-col border-[0.5px] mb-10 border-gray-500 w-[85%] sm:w-[35%] lg:w-[100%] lg:h-[130px] lg:justify-center lg:bg-[#212022] sm:h-[232px] md:h-[252px]  justify-start items-center px-6 lg:px-0 text-[#2A2A2A] rounded-3xl ${
-        imageSrc=='/images/rocket.png' ? "" : ""
-      }` }
-    >
+            className={`relative flex flex-col border-[0.5px] mb-10 border-gray-500 w-[85%] sm:w-[35%] lg:w-[100%] lg:h-[130px] lg:justify-center lg:bg-[#212022]   justify-start items-center px-6 lg:px-0 text-[#2A2A2A] rounded-3xl ${
+                lang == "en" ? "sm:h-[232px] md:h-[252px]" : "sm:h-[290px] md:h-[320px]"
+            }`}
+        >
             <Image
                 src={imageSrc}
                 height={222}
@@ -26,20 +52,25 @@ const Card = ({ imageSrc, title, text }) => {
             />
 
             <div
-                className={imageSrc==`/images/diamond.png`?`text-pretty lg:w-[100%] flex flex-col sm:text-right sm:items-end lg:pr-8 pt-4 pb-4 lg:pb-0 lg:pt-0`
-                    : imageSrc==`/images/rocket.png` ?`text-pretty flex lg:w-[100%] flex-col sm:text-right sm:items-end lg:items-start lg:text-left pt-4 lg:pt-0 pb-2 lg:pb-0 lg:pl-8`
-                    : imageSrc==`/images/money.png` ? `text-pretty lg:w-[100%] flex flex-col lg:items-end lg:text-right pt-4 lg:pt-0 lg:pr-8 pb-2 lg:pb-0`
-                    :`text-pretty flex flex-col justify-start lg:w-[100%] pt-4 lg:pt-0 pb-5 lg:pb-0 lg:pl-8`}
+                className={
+                    imageSrc == `/images/diamond.png`
+                        ? `text-pretty lg:w-[100%] flex flex-col sm:text-right sm:items-end lg:pr-8 pt-4 pb-4 lg:pb-0 lg:pt-0`
+                        : imageSrc == `/images/rocket.png`
+                        ? `text-pretty flex lg:w-[100%] flex-col sm:text-right sm:items-end lg:items-start lg:text-left pt-4 lg:pt-0 pb-2 lg:pb-0 lg:pl-8`
+                        : imageSrc == `/images/money.png`
+                        ? `text-pretty lg:w-[100%] flex flex-col lg:items-end lg:text-right pt-4 lg:pt-0 lg:pr-8 pb-2 lg:pb-0`
+                        : `text-pretty flex flex-col justify-start lg:w-[100%] pt-4 lg:pt-0 pb-5 lg:pb-0 lg:pl-8`
+                }
             >
                 <h2
                     className={`font-montserrat text-2xl lg:text-3xl sm:text-2xl mb-4 font-semibold  why-text-gradient w-[85%] leading-8 `}
                 >
-                    {title}
+                    {translatedTitle}
                 </h2>
                 <p
                     className={`text-xl md:text-xl lg:text-[20px] font-montserrat sm:text-base text-[#CAC9CB] text-pretty w-[85%] lg:w-[75%] `}
                 >
-                    {text}
+                    {translatedText}
                 </p>
             </div>
         </div>

@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 "use client";
 
 import Image from "next/image";
@@ -12,7 +11,13 @@ import { useRouter } from "next/router";
 const Navbar = () => {
     const router = useRouter();
 
-    const changeLanguage = () => {
+    const language = router.pathname.startsWith("/ru") ? "ru" : "en";
+
+    const toggleLanguage = () => {
+        const newLanguage = language === "en" ? "ru" : "en";
+        localStorage.setItem("language", newLanguage);
+        const newPath = newLanguage === "en" ? "/" : "/ru";
+        router.push(newPath);
     };
 
     return (
@@ -24,35 +29,36 @@ const Navbar = () => {
                 <Link href="/" className="flex space-x-2 items-end">
                     <Image
                         src={ArtDriveLogo}
-                        width={90}
+                        width={51}
                         height={56}
                         alt="logo"
-                        priority
-                        // className="w-[90px]"
+                        className="w-[90px]"
                     />
                     <Image
                         src={beta}
-                        width={30}
+                        width={25}
                         height={10}
                         alt="beta"
-                        priority
-                        className=""
+                        className="w-[30px]"
                     />
                 </Link>
                 <div className="flex space-x-3">
                     <button
-                        onClick={changeLanguage}
-                        className="flex items-center justify-center w-[30px]"
+                        onClick={toggleLanguage}
+                        className="flex items-center justify-center space-x-2 w-[50px]"
                     >
+                        <span className="ml-2 text-white">
+                            {language === "en" ? "en" : "ru"}
+                        </span>
                         <Image
                             src={lang}
                             className="w-[25px] hover:w-[30px]"
                             alt="language changer"
-                            priority
                         />
                     </button>
+
                     <div className="flex justify-center items-center w-[95px] h-[65px] mr-[-5px]">
-                        <SignUpButton />
+                        <SignUpButton lang={language} />
                     </div>
                 </div>
             </div>
@@ -61,4 +67,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

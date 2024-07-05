@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import "../../app/globals.css";
-import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import MainContainer from "@/components/MainContainer";
-import googleLogo from "../../../public/images/Google-logo.svg";
+import "../../../app/globals.css";
 
 const Verification = () => {
     const router = useRouter();
     const [code, setCode] = useState("");
 
     const [language, setLanguage] = useState("en");
-
+    
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
         if (storedLanguage) {
@@ -52,39 +47,31 @@ const Verification = () => {
                 </button>
                 <h1 className="text-2xl uppercase mb-4 font-dinroundbold text-center">
                     
-                    {language == "en"
-                            ? "Check your email"
-                            : "Проверьте email"}
+                    Проверьте email
                 </h1>
                 <p className="dinroundmedium text-xl text-gray-300 text-pretty">
-                {language == "en"
-                            ? "We have sent you a six-digit confirmation code to"
-                            : "Мы отправили вам шестизначный код подтверждения на"}
+                
+                            Мы отправили вам шестизначный код подтверждения на
                     {" "}
                     <span className="font-bold text-white text-xl">thousand@gmail.com</span>.
                     {" "}
-                    {language == "en"
-                            ? "Please enter it below to confirm your email address."
-                            : "Пожалуйста, введите его ниже, чтобы подтвердить свой email."}
+                    Пожалуйста, введите его ниже, чтобы подтвердить свой email.
                 </p>
 
                 <div className="h-[1px] w-full bg-gray-300 my-7"></div>
 
                 <div className="mb-4 ">
                     <input
-                        placeholder="Confirmation Code"
+                        placeholder="код подтверждения"
                         type="text"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        className="w-full p-5 border-2 border-[#888888] text-black placeholder-gray-900 rounded-lg"
+                        className="w-full p-5 border-2 border-[#888888] text-gray-800 placeholder-gray-700 rounded-lg"
                     />
                 </div>
 
                 <button onClick={handleCode} className="w-full p-5 mt-5 bg-blue-500 text-white rounded-xl border-b-blue-800 border-4 hover:bg-blue-600">
-                    
-                    {language == "en"
-                            ? "Continue"
-                            : "Продолжить"}
+                    Продолжить
                 </button>
             </div>
         </div>
