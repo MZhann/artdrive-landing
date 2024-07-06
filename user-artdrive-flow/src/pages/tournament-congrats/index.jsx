@@ -1,9 +1,22 @@
 import Image from "next/image";
 import done from '../../../public/images/done.png';
+import {signOut, useSession} from "next-auth/react";
+import {useEffect} from "react";
+import {useRouter} from "next/router";
 
 const TournamentCongrats = () => {
+    const {data: session} = useSession()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!session) {
+            router.push("/register")
+        }
+    }, [session])
+
     return (
         <div className="w-[393px] h-[852px] relative bg-white">
+            {session && session.user?.name}
             <Image  src={done} alt="done" width={70} height={70} className="absolute top-60 left-40"/>
             <div className="w-[215px] h-[23px] left-[79px] top-[344px] absolute text-center text-neutral-800 text-2xl font-bold font-['Roboto'] uppercase">
                 congratulations!

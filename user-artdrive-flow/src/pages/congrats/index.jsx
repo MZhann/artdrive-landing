@@ -94,13 +94,14 @@ import Link from "next/link";
 
 import xLogo from "../../../public/images/x.svg"; 
 import discordLogo from "../../../public/images/discord.svg";
+import {signOut, useSession} from "next-auth/react";
 
 const Congrats = () => {
     const router = useRouter();
     const { name } = router.query;
     const [userName, setUserName] = useState("");
     const [language, setLanguage] = useState("en");
-
+    const {data: session} = useSession()
     const back = () => {
         router.push("/");
     };
@@ -116,7 +117,10 @@ const Congrats = () => {
         if (name) {
             setUserName(name);
         }
-    }, [name]);
+        if (session) {
+            setUserName(session.user?.name);
+        }
+    }, [name, session]);
 
     return (
         <div className="w-full h-[100vh] flex items-center justify-center dark-purple-gradient bg-cover">
@@ -168,6 +172,7 @@ const Congrats = () => {
                         ? "Back to landing"
                         : "Вернуться на главную"}
                 </button>
+                <button onClick={() => signOut()}>LOG OUT</button>
             </div>
         </div>
     );
