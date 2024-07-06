@@ -248,6 +248,19 @@ body {
     text-fill-color: transparent;
 }
 
+.purple {
+    background: linear-gradient(90deg, #632694);
+}
+
+.purple-gradient {
+    background: linear-gradient(to right, #632694, #ca40fa);
+}
+
+.dark-purple-gradient {
+    background: linear-gradient(to bottom, #010101, #1a0128,  #290636);
+}
+
+
 .why-text-gradient {
     background: linear-gradient(90deg, #ecaeeb, #a4caf6);
     -webkit-background-clip: text;

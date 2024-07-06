@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import "../../app/globals.css";
-import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import MainContainer from "@/components/MainContainer";
-import googleLogo from "../../../public/images/Google-logo.svg";
 
 const Verification = () => {
     const router = useRouter();
     const [code, setCode] = useState("");
 
     const [language, setLanguage] = useState("en");
+    const [placeholder, setPlaceholder] = useState("confirmation code");
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
@@ -20,22 +16,32 @@ const Verification = () => {
         }
     }, []);
 
+    const handlePasswordBlur = (inputValue) => {
+        if (!inputValue) {
+            setPlaceholder("confirmation code");
+        }
+    };
+
+    const handlePasswordFocus = () => {
+        setPlaceholder("");
+    };
+
     const goBack = () => {
         router.push("/register");
     };
 
     const handleCode = () => {
         router.push("/congrats");
-    }
+    };
 
     return (
-        <div className="w-full h-[100vh] flex items-center justify-center bg-bg-about bg-cover">
-            <div className="max-w-md mx-auto w-[90%] mt-[-40px] p-8 font-dinroundmedium border-2 border-gray-400 bg-white bg-opacity-10 rounded-2xl text-white">
+        <div className="w-full h-[100vh] flex items-center justify-center dark-purple-gradient bg-cover">
+            <div className="w-[500px] mx-3 shadow-lg font-montserrat p-6 mt-[-40px] rounded-3xl">
                 <button
                     onClick={goBack}
-                    className="text-start  flex items-center p-2 rounded"
+                    className="text-start mt-[-200px] mb-[160px] flex items-center p-2 rounded"
                 >
-                    <div className="mr-2">
+                    <div className="mr-2 flex">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5"
@@ -50,41 +56,38 @@ const Verification = () => {
                         </svg>
                     </div>
                 </button>
-                <h1 className="text-2xl uppercase mb-4 font-dinroundbold text-center">
-                    
-                    {language == "en"
-                            ? "Check your email"
-                            : "Проверьте email"}
+                <h1 className="text-xl mb-10 uppercase font-semibold mt-[-150px] text-white font-montserrat text-center">
+                    {language == "en" ? "Check your email" : "Проверьте email"}
                 </h1>
-                <p className="dinroundmedium text-xl text-gray-300 text-pretty">
-                {language == "en"
-                            ? "We have sent you a six-digit confirmation code to"
-                            : "Мы отправили вам шестизначный код подтверждения на"}
-                    {" "}
-                    <span className="font-bold text-white text-xl">thousand@gmail.com</span>.
-                    {" "}
-                    {language == "en"
-                            ? "Please enter it below to confirm your email address."
-                            : "Пожалуйста, введите его ниже, чтобы подтвердить свой email."}
-                </p>
+                <div className="w-full flex flex-col items-center">
+                    <p className="text-sm mb-2 text-[#DADADA] font-montserrat text-center w-[220px]">
+                        {language == "en"
+                            ? "We have just sent a confirmation code to your email:"
+                            : "Мы отправили вам шестизначный код подтверждения на"}{" "}
+                        <span className="font-bold text-white text-sm">
+                            thousand@gmail.com
+                        </span>
+                        .{" "}
+                    </p>
+                </div>
 
-                <div className="h-[1px] w-full bg-gray-300 my-7"></div>
-
-                <div className="mb-4 ">
+                <div className="mb-4 mt-4">
                     <input
-                        placeholder="Confirmation Code"
+                        placeholder={placeholder}
+                        onFocus={handlePasswordFocus}
+                        onBlur={(e) => handlePasswordBlur(e.target.value)}
                         type="text"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        className="w-full p-5 border-2 border-[#888888] text-black placeholder-gray-900 rounded-lg"
+                        className="w-full p-5 border-2 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
                     />
                 </div>
 
-                <button onClick={handleCode} className="w-full p-5 mt-5 bg-blue-500 text-white rounded-xl border-b-blue-800 border-4 hover:bg-blue-600">
-                    
-                    {language == "en"
-                            ? "Continue"
-                            : "Продолжить"}
+                <button
+                    onClick={handleCode}
+                    className="w-full p-5 mt-10 h-[50px] flex items-center justify-center text-white text-lg rounded-xl purple-gradient"
+                >
+                    {language == "en" ? "Continue" : "Продолжить"}
                 </button>
             </div>
         </div>
