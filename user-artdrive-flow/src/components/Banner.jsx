@@ -47,31 +47,31 @@ const Banner = () => {
                   "comics",
               ]
             : [
-                  "арт искусства",
                   "картины",
+                  "ИИ арт",
                   "фото",
                   "мемы",
                   "комиксы",
-                  "работы",
-                  "арт искусства",
+                  "и многое другое",
                   "картины",
+                  "ИИ арт",
                   "фото",
                   "мемы",
                   "комиксы",
-                  "работы",
-                  "арт искусства",
+                  "и многое другое",
                   "картины",
+                  "ИИ арт",
                   "фото",
                   "мемы",
                   "комиксы",
-                  "работы",
-                  "арт искусства",
+                  "и многое другое",
                   "картины",
+                  "ИИ арт",
                   "фото",
                   "мемы",
                   "комиксы",
-                  "работы",
-                  "арт искусства",
+                  "и многое другое",
+                  "картины",
               ];
 
     const items = [
@@ -94,7 +94,7 @@ const Banner = () => {
                                 <div className={`text-white tracking-wide text-nowrap  mb-3  ${language !== 'en' ? 'font-particiana tracking-tighter text-center sm:text-start text-[2rem] font-semibold sm:text-[2.6rem] lg:text-5xl xl:text-6xl' : 'font-italiana text-5xl lg:text-6xl xl:text-7xl'}`}>
                                     {language === "en"
                                         ? "Monetize your"
-                                        : "Монетизируйте свои"}
+                                        : "Монетизируй"}
                                 </div>{" "}
                                 <div className="word-container sm:hidden">
                                     <div className={`${language == 'en' ? 'text-5xl' : 'text-4xl mt-[-20px] pt-[8px]'} word-list text-center mb-4 font-bold tracking-wide  font-montserrat text-white text-pretty text-gradient`}>
@@ -108,11 +108,11 @@ const Banner = () => {
                                 <div className={`mb-4 hidden sm:block font-semibold tracking-wide text-4xl font-montserrat text-pretty text-gradient lg:text-[2.7rem] xl:text-5xl`}>
                                     {language === "en"
                                         ? "content, art,"
-                                        : "рисунки, картины,"}{" "}
+                                        : "картины, ИИ арт,"}{" "}
                                     <br className="hidden md:flex"></br>
                                     {language === "en"
                                         ? "photos, memes,"
-                                        : "фотографии, мемы,"}{" "}
+                                        : "фото, мемы,"}{" "}
                                     <br className="hidden sm:flex"></br>
                                     {language === "en"
                                         ? "comics and more"

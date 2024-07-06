@@ -13,9 +13,8 @@ const faqData = [
     {
         question: "HOW DOES THE TOURNAMENT WORK?",
         questionRu: "КАК ПРОХОДИТ ТУРНИР",
-        answer: "- The tournament has at least 9 rounds, each lasting around 10 minutes.\n- Audience votes by swiping right (like) or left (pass) on 2-10 artworks per round.\n- Top 50% advance each round. the rest are eliminated until only one winner remains.",
-        answerRu:
-            'Турнир состоит как минимум из 9 раундов, каждый из которых длится около 10 минут.\n- Зрители голосуют, проводя пальцем вправо ("нравится") или влево ("пропускать") по 2-10 работам за раунд.\n - 50% лучших проходят в каждом раунде. остальные выбывают до тех пор, пока не останется только один победитель.',
+        answer: "- The tournament has at least 9 rounds, each lasting around 10 minutes.\n- Audience votes by swiping right (like) or left (pass) on 2-10 artworks per round.\n- The tournament uses a play-off system, whereby each round 50% of best contestants advance to the next stage, while the rest are eliminated until only one winner remains.",
+        answerRu: '- Зрители голосуют, свайпом вправо ("нравится") или свайпом влево ("не нравится") оценивая по 10-20 работ за раунд.\n- Розыгрыш проводится по системе плей-офф. В каждом раунде 50% лучших работ проходят в следующий круг, а остальные выбывают до тех пор, пока не определится победитель.',
     },
     {
         question: "WHO CAN JOIN?",
@@ -27,16 +26,14 @@ const faqData = [
     {
         question: "WHAT TOURNAMENT CATEGORIES ARE THERE?",
         questionRu: "КАКИЕ СУЩЕСТВУЮТ КАТЕГОРИИ ТУРНИРОВ?",
-        answer: "- Each tournament has a main theme like nature, cyberpunk, universe, animals, or anime characters. \n- The theme is provided in the tournament description.",
-        answerRu:
-            "- У каждого турнира есть основная тема, например, природа, киберпанк, вселенная, животные или персонажи аниме. \n- Тема указана в описании турнира.",
+        answer: "- Each tournament has a main theme like nature, cyberpunk, anime characters, etc. \n- The theme is provided in the tournament description.",
+        answerRu: "- У каждого турнира есть основная тема, например: природа, киберпанк, персонажи аниме и т.п.\n- Тема будет указана в описании турнира.",
     },
     {
         question: "HOW DOES THE VOTING WORK?",
         questionRu: "КАК ПРОХОДИТ ОЦЕНИВАНИЕ?",
-        answer: "- Anyone can register as a judge and vote. \n- Voting is live and anonymous to ensure fairness.",
-        answerRu:
-            "- Любой желающий может зарегистрироваться в качестве судьи и проголосовать. \n- Голосование проводится в режиме реального времени и анонимно для обеспечения справедливости.",
+        answer: "- Anyone can register as a contest judge.\n- Voting is conducted in Live during the tournament and kept anonymous to ensure fairness.",
+        answerRu: "- Любой желающий может зарегистрироваться в качестве судьи и проголосовать. \n- Голосование проводится во время турнира, в режиме реального времени и анонимно для все участников.",
     },
     {
         question: "WHAT ARE THE PRIZES FOR CONTESTANTS?",

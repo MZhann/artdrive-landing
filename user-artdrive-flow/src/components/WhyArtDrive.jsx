@@ -15,24 +15,24 @@ const WhyArtDrive = () => {
         {
             imageSrc: "/images/trophy.png",
             title: "Rise to the Top",
-            text: "Showcase your best work, compete globally, and win amazing prizes!",
+            text: "Showcase your best work, compete globally, and win amazing prizes",
         },
         {
             imageSrc: "/images/money.png",
             title: "Win BIG",
-            text: "No cap on Prize pools. The bigger the tournament, the bigger the prize fund!",
+            text: "No cap on Prize pools. The bigger the tournament, the bigger the prize fund",
         },
     ];
     const cardData2 = [
         {
             imageSrc: "/images/rocket.png",
             title: "Explode your audience",
-            text: "Supercharge your social media growth and find your true fans!",
+            text: "Supercharge your social media growth and find your true fans",
         },
         {
             imageSrc: "/images/diamond.png",
             title: "Find true art gems",
-            text: "Become a Judge and uncover hidden art gems while earning rewards!",
+            text: "Become a contest Judge to earn rewards and uncover hidden art gems",
         },
     ];
     return (

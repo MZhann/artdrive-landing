@@ -32,6 +32,7 @@ const Steps = () => {
                             {language == "en"
                                 ? "Unlock Your Potential in"
                                 : "Расскрой Свой Потенциал В "}{" "}
+                            <br className="sm:hidden"></br>
                             <span className="text-[#B326F5] text-4xl font-bold">
                                 5
                             </span>{" "}
@@ -83,7 +84,7 @@ const Steps = () => {
                             <p className="text-2xl">
                                 {language == "en"
                                     ? "Vote on fellow creators&apos; work"
-                                    : "Оцените работы коллег-создателей"}
+                                    : "Оцени работы других участников"}
                             </p>
                         </div>
                         <div className="flex items-center space-x-7 mb-7">
@@ -93,7 +94,7 @@ const Steps = () => {
                             <p className="text-2xl">
                                 {language == "en"
                                     ? "Impress the crowd and reap the rewards"
-                                    : "Произведите впечатление на толпу и пожинайте плоды"}
+                                    : "Завоюй любовь аудитории и получи заслуженный приз"}
                             </p>
                         </div>
                     </div>
