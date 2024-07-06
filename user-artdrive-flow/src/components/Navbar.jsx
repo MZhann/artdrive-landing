@@ -29,8 +29,8 @@ const Navbar = () => {
                 <Link href="/" className="flex space-x-2 items-end">
                     <Image
                         src={ArtDriveLogo}
-                        width={51}
-                        height={56}
+                        width={81}
+                        height={81}
                         alt="logo"
                         className="w-[90px]"
                     />
