@@ -22,7 +22,7 @@ const Steps = () => {
                                 language == "en"
                                     ? "font-italiana"
                                     : "font-particiana"
-                            } text-white  text-5xl sm:text-4xl pt-16 leading-[55px] text-nowrap mb-2`}
+                            } text-white  text-5xl sm:text-4xl pt-16 leading-[55px] text-nowrap mb-7`}
                         >
                             {language == "en" ? "How does it" : "Как это"}{" "}
                             <br className="sm:hidden"></br>
@@ -32,8 +32,8 @@ const Steps = () => {
                             {language == "en"
                                 ? "Unlock Your Potential in"
                                 : "Расскрой Свой Потенциал В "}{" "}
-                            <br className="sm:hidden"></br>
-                            <span className="text-[#B326F5] text-4xl font-bold">
+                            <br className="md:hidden"></br>
+                            <span className="text-[#B326F5] text-4xl font-bold  ">
                                 5
                             </span>{" "}
                             {language == "en" ? "Simple Steps" : "Простых Шага"}

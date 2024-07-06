@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import "../../app/globals.css";
+import Image from "next/image";
+import loadingGif from '../../../public/loading.gif';
 
 const Verification = () => {
     const router = useRouter();
-    const [code, setCode] = useState("");
+    const { email, name } = router.query;
 
+    const [userEmail, setUserEmail] = useState("");
+    const [userName, setUserName] = useState("");
+
+    const [code, setCode] = useState("");
     const [language, setLanguage] = useState("en");
     const [placeholder, setPlaceholder] = useState("confirmation code");
+    const [error, setError] = useState(""); // Add state for error message
+    const [loading, setLoading] = useState(false); // Add state for loading
+
+    useEffect(() => {
+        if (email && name) {
+            setUserEmail(email);
+            setUserName(name);
+        }
+    }, [email, name]);
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
+        setUserName(name);
         if (storedLanguage) {
             setLanguage(storedLanguage);
         }
@@ -30,10 +46,61 @@ const Verification = () => {
         router.push("/register");
     };
 
-    const handleCode = () => {
-        router.push("/congrats");
-    };
+    const handleCode = async () => {
+        // Reset error state
+        setError("");
 
+        // Validate input
+        if (code.length !== 6 || isNaN(code)) {
+            setError(
+                language == "en"
+                    ? "Code must be a 6-digit number"
+                    : "Код должен состоять из 6 цифр"
+            );
+            return;
+        }
+
+        setLoading(true); // Set loading state
+
+        const verificationData = {
+            email: userEmail,
+            code: code,
+        };
+
+        try {
+            const response = await fetch(
+                "https://artdrivebackend-production.up.railway.app/api/v1/verify/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(verificationData),
+                }
+            );
+
+            if (response.ok) {
+                router.push({
+                    pathname: "/congrats",
+                    query: { name: userName },
+                });
+            } else {
+                setError(
+                    language == "en"
+                        ? "Incorrect email or code"
+                        : "Неправильный email или код"
+                );
+            }
+        } catch (error) {
+            setError(
+                language == "en"
+                    ? "An error occurred during verification"
+                    : "Произошла ошибка при проверке"
+            );
+        } finally {
+            setLoading(false); // Reset loading state
+        }
+    };
     return (
         <div className="w-full h-[100vh] flex items-center justify-center dark-purple-gradient bg-cover">
             <div className="w-[500px] mx-3 shadow-lg font-montserrat p-6 mt-[-40px] rounded-3xl">
@@ -65,7 +132,7 @@ const Verification = () => {
                             ? "We have just sent a confirmation code to your email:"
                             : "Мы отправили вам шестизначный код подтверждения на"}{" "}
                         <span className="font-bold text-white text-sm">
-                            thousand@gmail.com
+                            {email}
                         </span>
                         .{" "}
                     </p>
@@ -83,11 +150,25 @@ const Verification = () => {
                     />
                 </div>
 
+                {error && (
+                    <p className="text-red-500 text-sm text-center">{error}</p>
+                )}
+
                 <button
                     onClick={handleCode}
                     className="w-full p-5 mt-10 h-[50px] flex items-center justify-center text-white text-lg rounded-xl purple-gradient"
+                    disabled={loading} 
                 >
-                    {language == "en" ? "Continue" : "Продолжить"}
+                    {loading ? (
+                        <Image
+                            src={loadingGif}
+                            alt="Loading..."
+                            width={30}
+                            height={30}
+                        />
+                    ) : (
+                        language == "en" ? "Continue" : "Продолжить"
+                    )}
                 </button>
             </div>
         </div>

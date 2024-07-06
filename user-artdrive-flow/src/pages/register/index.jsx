@@ -143,7 +143,10 @@ const Register = () => {
 
                 if (response.ok) {
                     console.log('response is ok: ', response);
-                    router.push("/verification");
+                    router.push({
+                        pathname: '/verification',
+                        query: { email, name },
+                    });
                 } else {
                     console.log('response is not ok: ', response);
                     const data = await response.json();
