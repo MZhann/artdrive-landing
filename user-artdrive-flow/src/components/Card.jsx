@@ -42,11 +42,11 @@ const Card = ({ imageSrc, title, text, lang }) => {
                     imageSrc == "/images/rocket.png"
                         ? `absolute right-[-60px] top-[-20px] w-[180px] scale-x-[-1] sm:scale-x-[-1] sm:w-[150px] sm:left-[-50px] sm:top-[-30px] lg:scale-x-[1] lg:w-[180px] lg:left-[510px]  lg:top-[-50px]`
                         : imageSrc == "/images/diamond.png"
-                        ? `absolute right-[-100px] top-30 w-[180px] sm:w-[120px] sm:left-[-50px] sm:bottom-0 lg:scale-x-[-1] lg:left-3 lg:top-[-25px]`
+                        ? `absolute right-[-30px] top-5 w-[130px] sm:w-[120px] sm:left-[-50px] sm:bottom-0 lg:scale-x-[-1] lg:left-3 lg:top-[-25px]`
                         : imageSrc == "/images/money.png"
-                        ? `absolute right-[-90px] w-[180px] top-[-20px] sm:w-[130px] sm:right-[-50px] sm:top-[-50px] lg:left-0 lg:top-[-30px] lg:w-[150px]`
+                        ? `absolute right-[-30px] w-[130px] top-[-20px] sm:w-[130px] sm:right-[-50px] sm:top-[-50px] lg:left-0 lg:top-[-30px] lg:w-[150px]`
                         : imageSrc == "/images/trophy.png"
-                        ? `absolute right-[-100px] top-[-50px] w-[200px] sm:w-[150px] sm:right-[-50px] sm:top-[-50px] lg:w-[180px] lg:right-[0px] lg:top-[-60px]`
+                        ? `absolute right-[-50px] top-[0px] w-[140px] sm:w-[150px] sm:right-[-50px] sm:top-[-50px] lg:w-[180px] lg:right-[0px] lg:top-[-60px]`
                         : `absolute right-[-100px]`
                 }
             />

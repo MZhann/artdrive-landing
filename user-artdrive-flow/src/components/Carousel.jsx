@@ -72,11 +72,17 @@ const Carousel = ({ items, lang }) => {
               className="rounded-2xl object-cover w-[100%] object-center"
             />
             <div className="absolute inset-0 flex items-end justify-start p-4 text-2xl text-gray-800 rounded-2xl">
-              <div className={`${lang == 'en' ? 'text-xs  pt-1' : 'text-[8px] pt-0 pt-[-15px]'} w-[100px] h-[40px] font-semibold font-montserrat text-center flex flex-col items-center bg-black text-white  rounded-2xl`}>
-                 {lang == 'en' ? 'this art won' : 'этот арт выиграл'}
+              <div className={`${lang == 'en' ? 'text-[0.6rem]  pt-1 w-[100px]' : 'text-[0.6rem] w-[110px]'}  h-[50px] font-semibold font-montserrat text-center flex flex-col items-center bg-black text-white  rounded-2xl`}>
+                 <div className={`p-0 m-0 leading-3 ${lang == 'en' ? '' : 'mt-1'}`}>
+                   {lang == 'en' ? 'estimated' : 'предполагаемый'}
+                 </div>
+                 <div className="p-0 m-0 leading-3">
+                   {lang == 'en' ? 'winning:' : 'выигрыш:'}
+
+                 </div>
                 <br />
-                <span className={`font-bold ${lang == 'en' ? 'text-sm' : 'text-xs mt-[-10px]'} `}>
-                  {(index + 50) * 100}$
+                <span className={`font-bold ${lang == 'en' ? 'text-xs leading-3 mt-[-30px]' : 'text-xs leading-3 mt-[-30px]'} `}>
+                  {(index + 9) * 100}$
                 </span>
               </div>
             </div>
