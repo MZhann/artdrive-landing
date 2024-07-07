@@ -134,7 +134,7 @@ const Banner = () => {
                                     : "ежедневные турниры для создателей контента"}
                             </div>
                             <div className="justify-center hidden sm:flex sm:w-[154px] items-center h-[100px] lg:ml-10 lg:mt-5">
-                                <GetStartedButton h={true} lang={language} />
+                                <GetStartedButton h={true} language={language} />
                             </div>
                         </div>
 
