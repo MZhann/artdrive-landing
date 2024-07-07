@@ -46,7 +46,7 @@ const Card = ({ imageSrc, title, text, lang }) => {
                         : imageSrc == "/images/money.png"
                         ? `absolute right-[-30px] w-[130px] top-[-20px] sm:w-[130px] sm:right-[-50px] sm:top-[-50px] lg:left-0 lg:top-[-30px] lg:w-[150px]`
                         : imageSrc == "/images/trophy.png"
-                        ? `absolute right-[-50px] top-[0px] w-[140px] sm:w-[150px] sm:right-[-50px] sm:top-[-50px] lg:w-[180px] lg:right-[0px] lg:top-[-60px]`
+                        ? `absolute right-[-40px] top-[0px] w-[140px] sm:w-[150px] sm:right-[-50px] sm:top-[-50px] lg:w-[180px] lg:right-[0px] lg:top-[-60px]`
                         : `absolute right-[-100px]`
                 }
             />
