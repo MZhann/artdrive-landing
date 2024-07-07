@@ -141,7 +141,7 @@ const Banner = () => {
                         <Carousel lang={language} items={items} />
 
                         <div className="flex justify-center items-center sm:hidden h-[100px]">
-                            <GetStartedButton />
+                            <GetStartedButton h={true} lang={language}/>
                         </div>
                     </div>
                 </div>
