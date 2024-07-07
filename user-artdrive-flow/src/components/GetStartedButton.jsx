@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/router";
-const SignUpButton = ({ h, language }) => {
+const SignUpButton = ({ lang, h  }) => {
     const router = useRouter();
 
     const navigateToRegister = () => {
@@ -11,7 +11,7 @@ const SignUpButton = ({ h, language }) => {
         <button
             onClick={navigateToRegister}
             className={`${
-                language == "en"
+                lang == "en"
                     ? "p-1 w-[124px] hover:w-[220px]"
                     : "text-nowrap w-[140px]  flex items-center hover:w-[200px] justify-center"
             } h-[32px] text-[14px] p-1  rounded-3xl bg-[#A8FF35] text-black text-center mb-10 font-montserrat  font-semibold hover:h-[35px] duration-200 transition-all ${
@@ -20,7 +20,7 @@ const SignUpButton = ({ h, language }) => {
                     : "w-[204px] h-[42px] rounded-3xl bg-[#A8FF35] text-black text-center text-[18px] p-1 font-montserrat font-semibold hover:w-[220px] hover:h-[48px] mb-10 duration-200 transition-all"
             }`}
         >
-            {language == "en" ? "Start Now" : "Начни сейчас"}
+            {lang == "en" ? "Start Now" : "Начни сейчас"}
         </button>
     );
 };
