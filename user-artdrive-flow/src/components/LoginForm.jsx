@@ -14,7 +14,7 @@ const LoginForm = ({language}) => {
         if (session) {
             router.push("/congrats")
         }
-    }, [session])
+    }, )
 
     return (
         <button

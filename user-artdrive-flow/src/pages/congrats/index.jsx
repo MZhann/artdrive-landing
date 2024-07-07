@@ -167,13 +167,18 @@ const Congrats = () => {
 
                 <button
                     className="w-full p-5 mt-10 h-[50px] flex items-center justify-center text-white text-lg rounded-xl purple-gradient"
-                    onClick={back}
+                    onClick={() => {
+                        signOut().then(() => {
+                            console.log("back")
+                            window.location.href = "/"
+                        })
+                    }}
                 >
                     {language == "en"
                         ? "Back to landing"
                         : "Вернуться на главную"}
                 </button>
-                <button onClick={() => signOut()}>LOG OUT</button>
+
             </div>
         </div>
     );
