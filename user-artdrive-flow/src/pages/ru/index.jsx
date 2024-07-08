@@ -8,6 +8,7 @@ import EarthCard from "@/components/EarthCard";
 import Steps from "@/components/Steps";
 import TrueFans from "@/components/TrueFans";
 import FAQ from "@/components/Faq";
+import PhoneBlock from "@/components/PhoneBlock";
 
 const Mainru = () => {
 
@@ -16,6 +17,7 @@ const Mainru = () => {
       <MainContainer>
         <Navbar />
         <Banner />
+        <PhoneBlock />
         <WhyArtDrive />
         <EarthCard />
         <Steps />
