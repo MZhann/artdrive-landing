@@ -239,7 +239,11 @@ body {
         transform: translate3d(-1000%, 0, 0);
     }
 }
-
+.phone-text-gradient {
+    background: linear-gradient(to right, #f00, #00f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .text-gradient {
     background: linear-gradient(90deg, #03c5ef, #8126f5, #ffa200);
     -webkit-background-clip: text;

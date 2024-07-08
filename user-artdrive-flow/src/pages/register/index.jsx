@@ -19,6 +19,7 @@ const Register = () => {
     const [namePlaceholder, setNamePlaceholder] = useState("name");
     const [passwordPlaceholder, setPasswordPlaceholder] = useState("password");
     const [loading, setLoading] = useState(false);
+    const [passwordStrength, setPasswordStrength] = useState("");
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
@@ -97,26 +98,41 @@ const Register = () => {
         }
     };
 
+    const evaluatePasswordStrength = (password) => {
+        if (password.length < 8) {
+            setPasswordStrength("weak");
+        } else if (password.length >= 8 && password.length < 10) {
+            setPasswordStrength("so-so");
+        } else if (password.length >= 10 && password.length < 12) {
+            setPasswordStrength("good");
+        } else if (password.length >= 12) {
+            setPasswordStrength("great");
+        } else {
+            setPasswordStrength("");
+        }
+    };
+
+    useEffect(() => {
+        evaluatePasswordStrength(password);
+    }, [password]);
+
     const handleSubmit = async () => {
         let validationErrors = {};
         if (!name) validationErrors.name = "Name is required";
         if (!email) {
             validationErrors.email = "Email is required";
-            console.log('name is required');
+            console.log("name is required");
         } else if (!validateEmail(email)) {
             validationErrors.email = "Invalid email address";
-            console.log('email is required');
-
+            console.log("email is required");
         }
         if (!password) {
             validationErrors.password = "Password is required";
-            console.log('password is required');
-
+            console.log("password is required");
         } else if (!validatePassword(password)) {
             validationErrors.password =
                 "Password must be at least 8 characters long";
-            console.log('password should be more than 8 letters');
-
+            console.log("password should be more than 8 letters");
         }
 
         if (Object.keys(validationErrors).length === 0) {
@@ -127,7 +143,7 @@ const Register = () => {
                 password: password,
             };
 
-            console.log('user data: ', userData);
+            console.log("user data: ", userData);
 
             try {
                 const response = await fetch(
@@ -142,13 +158,13 @@ const Register = () => {
                 );
 
                 if (response.ok) {
-                    console.log('response is ok: ', response);
+                    console.log("response is ok: ", response);
                     router.push({
-                        pathname: '/verification',
+                        pathname: "/verification",
                         query: { email, name },
                     });
                 } else {
-                    console.log('response is not ok: ', response);
+                    console.log("response is not ok: ", response);
                     const data = await response.json();
                     setErrors({
                         submit:
@@ -157,14 +173,14 @@ const Register = () => {
                     });
                 }
             } catch (error) {
-                console.log('error occurred');
+                console.log("error occurred");
                 setErrors({ submit: "An error occurred during registration" });
             } finally {
                 setLoading(false); // Set loading to false after completion
             }
         } else {
             setErrors(validationErrors);
-            console.log('validation errors');
+            console.log("validation errors");
         }
     };
     return (
@@ -324,6 +340,30 @@ const Register = () => {
                                 : "Пожалуйста, придумайте пароль"}
                         </h3>
                         <div className="mb-4 ">
+                            {/* <input
+                                placeholder={passwordPlaceholder}
+                                onFocus={handlePasswordFocus}
+                                onBlur={(e) =>
+                                    handlePasswordBlur(e.target.value)
+                                }
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full p-5 border-2 mb-4 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
+                            />
+                            <div className="flex justify-between space-x-3">
+                                <div className={`h-1 w-1/3 bg-yellow-500 rounded-3xl`}></div>
+                                <div className={`h-1 w-1/3 bg-green-600 rounded-3xl hidden`}></div>
+                                <div className={`h-1 w-1/3 bg-blue-700 rounded-3xl hidden`}></div>
+                            </div>
+                            <p className="text-white mt-6">
+                                Choose a password with at least 8 characters. /So-so password/Good password/Great Password
+                            </p>
+                            {errors.password && (
+                                <p className="text-yellow-500 text-sm">
+                                    {errors.password}
+                                </p>
+                            )} */}
                             <input
                                 placeholder={passwordPlaceholder}
                                 onFocus={handlePasswordFocus}
@@ -333,8 +373,44 @@ const Register = () => {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full p-5 border-2 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
+                                className="w-full p-5 border-2 mb-4 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
                             />
+                            <div className="flex  space-x-3">
+                                <div
+                                    className={`h-1 w-1/3 rounded-3xl ${
+                                        passwordStrength === "weak" ||
+                                        passwordStrength === "good" ||
+                                        passwordStrength === "great"
+                                            ? "bg-red-500"
+                                            : "hidden"
+                                    }`}
+                                ></div>
+                                <div
+                                    className={`h-1 w-1/3 rounded-3xl ${
+                                        passwordStrength === "good" ||
+                                        passwordStrength === "great"
+                                            ? "bg-green-600"
+                                            : "hidden"
+                                    }`}
+                                ></div>
+                                <div
+                                    className={`h-1 w-1/3 rounded-3xl ${
+                                        passwordStrength === "great"
+                                            ? "bg-blue-700"
+                                            : "hidden"
+                                    }`}
+                                ></div>
+                            </div>
+                            <p className="text-white mt-6">
+                                {passwordStrength === "weak" &&
+                                    "Choose a password with at least 8 characters."}
+                                {passwordStrength === "so-so" &&
+                                    "Weak password."}
+                                {passwordStrength === "good" &&
+                                    "Good Password."}
+                                {passwordStrength === "great" &&
+                                    "Great Password."}
+                            </p>
                             {errors.password && (
                                 <p className="text-yellow-500 text-sm">
                                     {errors.password}

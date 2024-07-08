@@ -9,7 +9,7 @@ import x from '../../public/images/companyLogos/x.svg'
 import midjourney from '../../public/images/companyLogos/midjourney.svg'
 import stableDiffusion from '../../public/images/companyLogos/stableDiffusion.png'
 import tt from '../../public/images/companyLogos/tt.svg'
-import eth from '../../public/images/companyLogos/eth.svg'
+import solana from '../../public/images/companyLogos/solana.png'
 import usdt from '../../public/images/companyLogos/tether.svg'
 import pinterest from '../../public/images/companyLogos/pint.svg'
 
@@ -28,8 +28,8 @@ const RunningStroke = () => {
                     <Image src={stableDiffusion} width={100} height={100} className="w-[140px]  sm:w-[100px] mt-[4px]"  alt="stable diffusion logo"/>
                 </div>
 
-                <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px] px-[0px]">
-                    <Image src={eth} width={100} height={100} className=" w-[60px] sm:w-[45px] mr-[-40px]"  alt="eth logo"/>
+                <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px] px-[0px] mx-4">
+                    <Image src={solana} width={450} height={300} className=" w-[120px] sm:w-[100px] mr-[-40px]"  alt="solana logo"/>
                 </div>
 
                 <div className="ticker_item w-[150px]  sm:w-[120px] h-[150px] px-[0px]">
@@ -61,7 +61,8 @@ const RunningStroke = () => {
                 </div>
 
                 <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px] px-[0px]">
-                    <Image src={eth} width={100} height={100} className=" w-[60px] sm:w-[45px] mr-[-40px]"  alt="eth logo"/>
+                    <Image src={solana} width={450} height={300} className=" w-[120px] sm:w-[100px] mr-[-40px]"  alt="solana logo"/>
+
                 </div>
 
                 <div className="ticker_item w-[150px]  sm:w-[120px] h-[150px] px-[0px]">
@@ -87,23 +88,19 @@ const RunningStroke = () => {
                 <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px]">
                     <Image src={midjourney}  width={100} height={100} className=" w-[60px] sm:w-[50px]"  alt="midjourney logo"/>
                 </div>
-
                 <div className="ticker_item w-[150px]  sm:w-[120px] h-[150px]">
                     <Image src={stableDiffusion} width={70} height={100} className="w-[140px]   sm:w-[100px] mt-[4px]"  alt="stable diffusion logo"/>
                 </div>
-
                 <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px]">
-                    <Image src={eth} width={100} height={100} className=" sm:w-[45px] mr-[-40px]"  alt="eth logo"/>
-                </div>
+                    <Image src={solana} width={450} height={300} className=" w-[120px] sm:w-[100px] mr-[-40px]"  alt="solana logo"/>
 
+                </div>
                 <div className="ticker_item w-[150px]  sm:w-[120px] h-[150px]">
                     <Image src={usdt} width={100} height={100} className=" w-[60px] sm:w-[40px]"  alt="usdt logo"/>
                 </div>
-
                 <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px]">
                     <Image src={tt} width={100} height={100} className="w-[150px] sm:w-[100px]"  alt="ticktock logo"/>
                 </div>
-
                 <div className="ticker_item w-[150px]   sm:w-[120px] h-[150px]">
                     <Image src={pinterest} width={100} height={100} className=" sm:w-[30px]"  alt="pinterest logo"/>
                 </div>
