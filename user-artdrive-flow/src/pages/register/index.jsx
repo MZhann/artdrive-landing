@@ -185,7 +185,7 @@ const Register = () => {
     };
     return (
         <div className="w-full flex  h-screen justify-center items-center dark-purple-gradient bg-cover">
-            <div className="w-[500px] mx-3 shadow-lg font-montserrat p-6 mt-[-40px] rounded-3xl">
+            <div className="w-[500px] mx-3 font-montserrat p-6 mt-[-40px] rounded-3xl">
                 {showEmail && (
                     <button
                         onClick={goBack}
