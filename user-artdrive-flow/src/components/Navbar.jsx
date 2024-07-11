@@ -4,21 +4,48 @@ import Image from "next/image";
 import Link from "next/link";
 import ArtDriveLogo from "../../public/images/ArtDriveWhiteLogo.png";
 import beta from "../../public/images/beta.svg";
-import lang from "../../public/images/lang.svg";
+import langImage from "../../public/images/lang.svg";
 import SignUpButton from "./SignUpButton";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
     const router = useRouter();
+    const routeLanguage = router.pathname.startsWith("/ru") ? "ru" : "en";
+    const [language, setLanguage] = useState(routeLanguage);
 
-    const language = router.pathname.startsWith("/ru") ? "ru" : "en";
+    useEffect(() => {
+        setLanguage(routeLanguage);
+        localStorage.setItem('language', language);
+        const storedLanguage = localStorage.getItem("language");
+        console.log('storedLanguage: ' + storedLanguage);
+    }, []);
 
     const toggleLanguage = () => {
-        const newLanguage = language === "en" ? "ru" : "en";
-        localStorage.setItem("language", newLanguage);
-        const newPath = newLanguage === "en" ? "/" : "/ru";
+       
+        let toggledLang = language == 'ru' ? 'en' : 'ru';
+        const newPath = toggledLang === "en" ? "/" : "/ru";
+        console.log('pushed to: ', newPath);
         router.push(newPath);
     };
+    // useEffect(() => {
+    //     const storedLanguage = localStorage.getItem("language");
+    //     if (storedLanguage) {
+    //         setLanguage(storedLanguage);
+    //     }else{
+    //         localStorage.setItem('language', 'en');
+    //         let newLang = localStorage.getItem('language');
+    //         setLanguage(newLang)
+    //     }
+    // }, []);
+
+    // const toggleLanguage = () => {
+    //     const localLang = localStorage.getItem('language');
+    //     const newLanguage = localLang === "en" ? "ru" : "en";
+    //     localStorage.setItem("language", localLang);
+    //     const newPath = newLanguage === "en" ? "/" : "/ru";
+    //     router.push(newPath);
+    // };
 
     return (
         <header
@@ -48,10 +75,10 @@ const Navbar = () => {
                         className="flex items-center justify-center space-x-2 w-[50px]"
                     >
                         <span className="ml-2 text-white">
-                            {language === "en" ? "en" : "ru"}
+                            {language === "en" ? "ru" : "en"}
                         </span>
                         <Image
-                            src={lang}
+                            src={langImage}
                             className="w-[25px] hover:w-[30px]"
                             alt="language changer"
                         />

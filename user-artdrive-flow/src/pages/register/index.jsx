@@ -14,7 +14,7 @@ const Register = () => {
     const [showEmail, setShowEmail] = useState(true);
     const [showName, setShowName] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [language, setLanguage] = useState("en");
+    const [language, setLanguage] = useState("");
     const [emailPlaceholder, setEmailPlaceholder] = useState("email");
     const [namePlaceholder, setNamePlaceholder] = useState("name");
     const [passwordPlaceholder, setPasswordPlaceholder] = useState("password");
@@ -23,12 +23,22 @@ const Register = () => {
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
+        console.log('storedLang is:', storedLanguage )
         if (storedLanguage) {
             setLanguage(storedLanguage);
+            console.log('language in /register is ' + language)
+        }else{
+            localStorage.setItem('language', 'rus')
         }
+        language !== "en" && setNamePlaceholder("имя");
     }, []);
+
     const goBack = () => {
-        router.push("/");
+        if(language == 'en'){
+            router.push("/");
+        }else{
+            router.push("/ru");
+        }
     };
 
     const handleFocus = () => {
@@ -47,7 +57,9 @@ const Register = () => {
 
     const handleNameBlur = (inputValue) => {
         if (!inputValue) {
-            setEmailPlaceholder("name");
+            language !== "en"
+                ? setNamePlaceholder("имя")
+                : setNamePlaceholder("name");
         }
     };
 
@@ -88,7 +100,11 @@ const Register = () => {
         if (!email) {
             validationErrors.email = "Email is required";
         } else if (!validateEmail(email)) {
-            validationErrors.email = "Invalid email address";
+            {
+                language == "en"
+                    ? (validationErrors.email = "Invalid email address")
+                    : (validationErrors.email = "Неверный email");
+            }
         }
         if (Object.keys(validationErrors).length === 0) {
             setShowEmail(false);
@@ -99,10 +115,12 @@ const Register = () => {
     };
 
     const evaluatePasswordStrength = (password) => {
-        if (password.length < 8) {
-            setPasswordStrength("weak");
+        if (password.length == 0) {
+            setPasswordStrength("");
+        } else if (password.length < 8) {
+            setPasswordStrength("too short");
         } else if (password.length >= 8 && password.length < 10) {
-            setPasswordStrength("so-so");
+            setPasswordStrength("weak");
         } else if (password.length >= 10 && password.length < 12) {
             setPasswordStrength("good");
         } else if (password.length >= 12) {
@@ -121,18 +139,14 @@ const Register = () => {
         if (!name) validationErrors.name = "Name is required";
         if (!email) {
             validationErrors.email = "Email is required";
-            console.log("name is required");
         } else if (!validateEmail(email)) {
             validationErrors.email = "Invalid email address";
-            console.log("email is required");
         }
         if (!password) {
             validationErrors.password = "Password is required";
-            console.log("password is required");
         } else if (!validatePassword(password)) {
             validationErrors.password =
                 "Password must be at least 8 characters long";
-            console.log("password should be more than 8 letters");
         }
 
         if (Object.keys(validationErrors).length === 0) {
@@ -142,8 +156,6 @@ const Register = () => {
                 username: name,
                 password: password,
             };
-
-            console.log("user data: ", userData);
 
             try {
                 const response = await fetch(
@@ -157,14 +169,14 @@ const Register = () => {
                     }
                 );
 
+                console.log('after POST method. Lanuage in localStorage is: ', localStorage.getItem('language'));
+
                 if (response.ok) {
-                    console.log("response is ok: ", response);
                     router.push({
                         pathname: "/verification",
                         query: { email, name },
                     });
                 } else {
-                    console.log("response is not ok: ", response);
                     const data = await response.json();
                     setErrors({
                         submit:
@@ -173,19 +185,18 @@ const Register = () => {
                     });
                 }
             } catch (error) {
-                console.log("error occurred");
                 setErrors({ submit: "An error occurred during registration" });
             } finally {
-                setLoading(false); // Set loading to false after completion
+                setLoading(false); 
             }
         } else {
             setErrors(validationErrors);
-            console.log("validation errors");
         }
     };
+
     return (
-        <div className="w-full flex  h-screen justify-center items-center dark-purple-gradient bg-cover">
-            <div className="w-[500px] mx-3 font-montserrat p-6 mt-[-40px] rounded-3xl">
+        <div className="w-full flex h-screen justify-center items-center dark-purple-gradient bg-cover">
+            <div className="w-[500px] h-[500px] mx-3 font-montserrat p-6 mt-[250px] rounded-3xl">
                 {showEmail && (
                     <button
                         onClick={goBack}
@@ -212,7 +223,7 @@ const Register = () => {
                         onClick={goBack}
                         className="text-start flex items-center p-2 rounded"
                     >
-                        <div className="mt-[-450px] z-50 text-white">
+                        <div className="mt-[-255px] z-50 text-white">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -228,13 +239,12 @@ const Register = () => {
                         </div>
                     </button>
                 )}
-
                 {showPassword && (
                     <button
                         onClick={goBack}
                         className="text-start flex items-center p-2 rounded"
                     >
-                        <div className="mt-[-450px] z-50 text-white">
+                        <div className="mt-[-255px] z-50 text-white">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -250,10 +260,9 @@ const Register = () => {
                         </div>
                     </button>
                 )}
-
                 {showEmail && (
                     <div>
-                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-150px] text-white font-montserrat text-center">
+                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-146px] text-white font-montserrat text-center">
                             {language == "en" ? "Sign Up" : "Регистрация"}
                         </h1>
                         <h3 className="text-sm mb-2 text-[#DADADA] font-montserrat">
@@ -263,7 +272,6 @@ const Register = () => {
                         </h3>
                     </div>
                 )}
-
                 {showEmail && (
                     <div className="mb-4">
                         <input
@@ -282,10 +290,9 @@ const Register = () => {
                         )}
                     </div>
                 )}
-
                 {showName && (
                     <div>
-                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-246px] text-white font-montserrat text-center">
+                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-146px] text-white font-montserrat text-center">
                             {language == "en" ? "Sign Up" : "Регистрация"}
                         </h1>
                         <h3 className="text-sm mb-2 text-[#DADADA] font-montserrat">
@@ -319,7 +326,6 @@ const Register = () => {
                                     className="w-full p-5 border-2 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
                                 />
                             )}
-
                             {errors.name && (
                                 <p className="text-yellow-500 text-sm">
                                     {errors.name}
@@ -328,10 +334,9 @@ const Register = () => {
                         </div>
                     </div>
                 )}
-
                 {showPassword && (
                     <div className="">
-                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-246px] text-white font-montserrat text-center">
+                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-146px] text-white font-montserrat text-center">
                             {language == "en" ? "Sign Up" : "Регистрация"}
                         </h1>
                         <h3 className="text-sm mb-2 text-[#DADADA] font-montserrat">
@@ -340,30 +345,6 @@ const Register = () => {
                                 : "Пожалуйста, придумайте пароль"}
                         </h3>
                         <div className="mb-4 ">
-                            {/* <input
-                                placeholder={passwordPlaceholder}
-                                onFocus={handlePasswordFocus}
-                                onBlur={(e) =>
-                                    handlePasswordBlur(e.target.value)
-                                }
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="w-full p-5 border-2 mb-4 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
-                            />
-                            <div className="flex justify-between space-x-3">
-                                <div className={`h-1 w-1/3 bg-yellow-500 rounded-3xl`}></div>
-                                <div className={`h-1 w-1/3 bg-green-600 rounded-3xl hidden`}></div>
-                                <div className={`h-1 w-1/3 bg-blue-700 rounded-3xl hidden`}></div>
-                            </div>
-                            <p className="text-white mt-6">
-                                Choose a password with at least 8 characters. /So-so password/Good password/Great Password
-                            </p>
-                            {errors.password && (
-                                <p className="text-yellow-500 text-sm">
-                                    {errors.password}
-                                </p>
-                            )} */}
                             <input
                                 placeholder={passwordPlaceholder}
                                 onFocus={handlePasswordFocus}
@@ -375,42 +356,62 @@ const Register = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full p-5 border-2 mb-4 font-thin h-[50px] border-[#737373] text-white placeholder-white text-sm rounded-xl bg-[#212022]"
                             />
-                            <div className="flex  space-x-3">
+                            <div className="flex justify-start space-x-3">
                                 <div
-                                    className={`h-1 w-1/3 rounded-3xl ${
-                                        passwordStrength === "weak" ||
-                                        passwordStrength === "good" ||
-                                        passwordStrength === "great"
+                                    className={`h-1 w-[32%] rounded-3xl ${
+                                        passwordStrength === "too short"
                                             ? "bg-red-500"
+                                            : passwordStrength === "weak"
+                                            ? "bg-yellow-500"
+                                            : passwordStrength === "good"
+                                            ? "bg-green-400"
+                                            : passwordStrength === "great"
+                                            ? "bg-blue-400"
                                             : "hidden"
                                     }`}
                                 ></div>
                                 <div
-                                    className={`h-1 w-1/3 rounded-3xl ${
-                                        passwordStrength === "good" ||
-                                        passwordStrength === "great"
-                                            ? "bg-green-600"
+                                    className={`h-1 w-[32%] rounded-3xl ${
+                                        passwordStrength === "good"
+                                            ? "bg-green-400"
+                                            : passwordStrength === "great"
+                                            ? "bg-blue-400"
                                             : "hidden"
                                     }`}
                                 ></div>
                                 <div
-                                    className={`h-1 w-1/3 rounded-3xl ${
+                                    className={`h-1 w-[32%] rounded-3xl ${
                                         passwordStrength === "great"
-                                            ? "bg-blue-700"
+                                            ? "bg-blue-400"
                                             : "hidden"
                                     }`}
                                 ></div>
                             </div>
+                            {/* <p className="text-white mt-6">
+                                {passwordStrength === "too short" ? {language == 'en' ? "Choose a password with at least 8 characters." : "Пароль должен содержать минимум 8 символов"}}
+                                {passwordStrength === "weak" ? language == 'en' ? "Weak password." : "Слабый пароль"}
+                                {passwordStrength === "good" ? language == 'en' ? "Good Password." : "Хороший пароль"}
+                                {passwordStrength === "great" ? language == 'en' ? "Great Password." : "Отличный пароль"}
+                            </p> */}
                             <p className="text-white mt-6">
+                                {passwordStrength === "too short" &&
+                                    (language === "en"
+                                        ? "Choose a password with at least 8 characters."
+                                        : "Пароль должен содержать минимум 8 символов")}
                                 {passwordStrength === "weak" &&
-                                    "Choose a password with at least 8 characters."}
-                                {passwordStrength === "so-so" &&
-                                    "Weak password."}
+                                    (language === "en"
+                                        ? "Weak password."
+                                        : "Слабый пароль")}
                                 {passwordStrength === "good" &&
-                                    "Good Password."}
+                                    (language === "en"
+                                        ? "Good Password."
+                                        : "Хороший пароль")}
                                 {passwordStrength === "great" &&
-                                    "Great Password."}
+                                    (language === "en"
+                                        ? "Great Password."
+                                        : "Отличный пароль")}
                             </p>
+
                             {errors.password && (
                                 <p className="text-yellow-500 text-sm">
                                     {errors.password}
@@ -419,7 +420,6 @@ const Register = () => {
                         </div>
                     </div>
                 )}
-
                 {showEmail && (
                     <button
                         onClick={handleEmail}
@@ -428,7 +428,6 @@ const Register = () => {
                         {language == "en" ? "Continue" : "Продолжить с email"}
                     </button>
                 )}
-
                 {showName && (
                     <button
                         onClick={handleName}
@@ -437,11 +436,10 @@ const Register = () => {
                         {language == "en" ? "Continue" : "Продолжить"}
                     </button>
                 )}
-
                 {showPassword && (
                     <button
                         onClick={handleSubmit}
-                        className="w-full p-5 mt-10 h-[50px] flex items-center justify-center text-white text-lg rounded-xl purple-gradient"
+                        className="w-full p-5 mt-5 h-[50px] flex items-center justify-center text-white text-lg rounded-xl purple-gradient"
                         disabled={loading}
                     >
                         {loading ? (
@@ -458,12 +456,10 @@ const Register = () => {
                         )}
                     </button>
                 )}
-
                 {showEmail && (
                     <div>
                         <div className="flex items-center mt-3">
                             <hr className="mt-2 w-1/2 h-1"></hr>
-
                             <div className="text-white px-4 text-sm">or</div>
                             <hr className="mt-2 w-1/2 h-1"></hr>
                         </div>

@@ -19,7 +19,7 @@ const Footer = () => {
                     <Link href={'https://www.instagram.com/artdrive_official?igsh=MXBieDRpZ25ia3hmMQ=='} target="_blank" rel="noopener noreferrer">
                         <Image className="w-[25px] sm:w-[40px]" src={insta} width={43} height={33} alt="instagram logo"/>
                     </Link>
-                    <Link href={'https://www.instagram.com/artdrive_official?igsh=MXBieDRpZ25ia3hmMQ=='} target="_blank" rel="noopener noreferrer">
+                    <Link href={'https://discord.gg/byq8huwJ'} target="_blank" rel="noopener noreferrer">
                         <Image className="w-[25px] sm:w-[40px]" src={discord} width={43} height={33} alt="discord logo"/>
                     </Link>
                 </div>

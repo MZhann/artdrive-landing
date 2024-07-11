@@ -12,7 +12,7 @@ const Verification = () => {
     const [userName, setUserName] = useState("");
 
     const [code, setCode] = useState("");
-    const [language, setLanguage] = useState("en");
+    const [language, setLanguage] = useState("");
     const [placeholder, setPlaceholder] = useState("confirmation code");
     const [error, setError] = useState(""); // Add state for error message
     const [loading, setLoading] = useState(false); // Add state for loading
@@ -26,10 +26,16 @@ const Verification = () => {
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
-        setUserName(name);
+        if (storedLanguage == 'ru'){
+            setPlaceholder("код подтверждения")
+        }
+        console.log("language in verification is: ", localStorage.getItem('language'));
         if (storedLanguage) {
             setLanguage(storedLanguage);
         }
+
+        setUserName(name);
+       
     }, []);
 
     const handlePasswordBlur = (inputValue) => {
@@ -102,13 +108,13 @@ const Verification = () => {
         }
     };
     return (
-        <div className="w-full h-[100vh] flex items-center justify-center dark-purple-gradient bg-cover">
-            <div className="w-[500px] mx-3 shadow-lg font-montserrat p-6 mt-[-40px] rounded-3xl">
+        <div className="w-full flex h-screen justify-center items-center dark-purple-gradient bg-cover">
+            <div className="w-[500px] h-[500px] mx-3 font-montserrat p-6 mt-[250px] rounded-3xl">
                 <button
                     onClick={goBack}
-                    className="text-start mt-[-200px] mb-[160px] flex items-center p-2 rounded"
+                    className="text-start flex items-center p-2 rounded"
                 >
-                    <div className="mr-2 flex">
+                    <div className="mt-[-255px] z-50 text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5"
@@ -127,7 +133,7 @@ const Verification = () => {
                     {language == "en" ? "Check your email" : "Проверьте email"}
                 </h1>
                 <div className="w-full flex flex-col items-center">
-                    <p className="text-sm mb-2 text-[#DADADA] font-montserrat text-center w-[220px]">
+                    <p className="text-sm mb-2 text-[#DADADA] font-montserrat text-center w-[270px]">
                         {language == "en"
                             ? "We have just sent a confirmation code to your email:"
                             : "Мы отправили вам шестизначный код подтверждения на"}{" "}

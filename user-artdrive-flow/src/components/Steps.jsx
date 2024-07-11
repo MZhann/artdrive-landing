@@ -83,7 +83,7 @@ const Steps = () => {
                             </p>
                             <p className="text-2xl">
                                 {language == "en"
-                                    ? "Vote on fellow creators&apos; work"
+                                    ? "Vote on fellow creators\' work"
                                     : "Оцени работы других участников"}
                             </p>
                         </div>
