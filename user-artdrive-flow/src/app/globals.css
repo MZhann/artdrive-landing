@@ -252,6 +252,11 @@ body {
     text-fill-color: transparent;
 }
 
+.tournament-bg{
+    background: radial-gradient(circle, #130626 0%, #000000 24%, #290F30 82%, #22133B 97%);
+
+}
+
 .purple {
     background: linear-gradient(90deg, #632694);
 }
@@ -287,4 +292,57 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+}
+
+.custom-radio input[type="radio"]:checked + span::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just to remove any scrollbar color */
+}
+
+/* Hide scrollbar for Firefox */
+.example {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* Hide scrollbar for Firefox */
+.example {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.custom-scroll::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* Hide scrollbar for Firefox */
+.custom-scroll {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
 }

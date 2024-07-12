@@ -23,10 +23,10 @@ const Register = () => {
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
-        console.log('storedLang is:', storedLanguage )
+        // console.log('storedLang is:', storedLanguage )
         if (storedLanguage) {
             setLanguage(storedLanguage);
-            console.log('language in /register is ' + language)
+            // console.log('language in /register is ' + language)
         }else{
             localStorage.setItem('language', 'rus')
         }
@@ -169,7 +169,7 @@ const Register = () => {
                     }
                 );
 
-                console.log('after POST method. Lanuage in localStorage is: ', localStorage.getItem('language'));
+                // console.log('after POST method. Lanuage in localStorage is: ', localStorage.getItem('language'));
 
                 if (response.ok) {
                     router.push({

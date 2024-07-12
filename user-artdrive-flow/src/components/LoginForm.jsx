@@ -15,13 +15,13 @@ const LoginForm = ({ language }) => {
     useEffect(() => {
 
         if (status === "authenticated" && session) {
-            console.log("in if session");
+            // console.log("in if session");
 
             const { user } = session;
             const SECRET_KEY = process.env.SECRET_KEY || "hardcoded_secret_key";
 
             if (SECRET_KEY) {
-                console.log("in if secretKey");
+                // console.log("in if secretKey");
 
                 try {
                     const token = jwt.sign(
@@ -60,10 +60,10 @@ const LoginForm = ({ language }) => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('data: ', data);
-                console.log('response: ', response);
+                // console.log('data: ', data);
+                // console.log('response: ', response);
                 const { jwt: receivedJwt } = data;
-                console.log("Received JWT from backend:", receivedJwt);
+                // console.log("Received JWT from backend:", receivedJwt);
                 // Store the JWT or perform any further actions required
                 router.push("/congrats");
             } else {
