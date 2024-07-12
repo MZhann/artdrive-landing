@@ -10,7 +10,7 @@ const Tournaments = () => {
         const fetchTournaments = async () => {
             try {
                 const response = await fetch(
-                    "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/soon_to_start/"
+                    "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/upcoming/"
                 );
                 const data = await response.json();
                 setTournaments(data);
