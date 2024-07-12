@@ -5,22 +5,27 @@ import Footer from "./Footer";
 
 const Tournaments = () => {
     const [tournaments, setTournaments] = useState([]);
+    const [activeTab, setActiveTab] = useState("upcoming");
+
+    const endpoints = {
+        upcoming: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/upcoming/",
+        past: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/past/",
+        live: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/live/"
+    };
+
+    const fetchTournaments = async (endpoint) => {
+        try {
+            const response = await fetch(endpoint);
+            const data = await response.json();
+            setTournaments(data);
+        } catch (error) {
+            console.error("Error fetching tournaments:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchTournaments = async () => {
-            try {
-                const response = await fetch(
-                    "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/upcoming/"
-                );
-                const data = await response.json();
-                setTournaments(data);
-            } catch (error) {
-                console.error("Error fetching tournaments:", error);
-            }
-        };
-
-        fetchTournaments();
-    }, []);
+        fetchTournaments(endpoints[activeTab]);
+    }, [activeTab]);
 
     return (
         <div className="tournament-bg w-full flex flex-col items-center min-h-[1000px]">
@@ -28,13 +33,22 @@ const Tournaments = () => {
             <div className="text-white mt-20">
                 <h1 className="text-center text-3xl">Tournaments</h1>
                 <div className="flex justify-between w-[300px] text-[#a9a8a9] space-x-2 mt-5">
-                    <button className="border-[white] text-white rounded-3xl border-2 py-1 px-6 flex justify-center items-center">
+                    <button
+                        className={`rounded-3xl py-1 px-6 flex justify-center items-center ${activeTab === "live" ? "border-2 border-white text-white" : "border-[#929192]"}`}
+                        onClick={() => setActiveTab("live")}
+                    >
                         Live
                     </button>
-                    <button className="border-[#929192] rounded-3xl py-1 px-6 flex justify-center items-center">
+                    <button
+                        className={`rounded-3xl py-1 px-6 flex justify-center items-center ${activeTab === "upcoming" ? "border-2 border-white text-white" : "border-[#929192]"}`}
+                        onClick={() => setActiveTab("upcoming")}
+                    >
                         Upcoming
                     </button>
-                    <button className="border-[#929192] rounded-3xl py-1 px-6 flex justify-center items-center">
+                    <button
+                        className={`rounded-3xl py-1 px-6 flex justify-center items-center ${activeTab === "past" ? "border-2 border-white text-white" : "border-[#929192]"}`}
+                        onClick={() => setActiveTab("past")}
+                    >
                         Past
                     </button>
                 </div>
