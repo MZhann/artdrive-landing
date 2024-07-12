@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ArtDriveLogo from "../../public/images/ArtDriveWhiteLogo.png";
 import beta from "../../public/images/beta.svg";
+import tournaments from "../../public/images/tournaments.png"
 import langImage from "../../public/images/lang.svg";
 import SignUpButton from "./SignUpButton";
 import { useRouter } from "next/router";
@@ -28,24 +29,7 @@ const Navbar = () => {
         console.log('pushed to: ', newPath);
         router.push(newPath);
     };
-    // useEffect(() => {
-    //     const storedLanguage = localStorage.getItem("language");
-    //     if (storedLanguage) {
-    //         setLanguage(storedLanguage);
-    //     }else{
-    //         localStorage.setItem('language', 'en');
-    //         let newLang = localStorage.getItem('language');
-    //         setLanguage(newLang)
-    //     }
-    // }, []);
-
-    // const toggleLanguage = () => {
-    //     const localLang = localStorage.getItem('language');
-    //     const newLanguage = localLang === "en" ? "ru" : "en";
-    //     localStorage.setItem("language", localLang);
-    //     const newPath = newLanguage === "en" ? "/" : "/ru";
-    //     router.push(newPath);
-    // };
+   
 
     return (
         <header
@@ -70,6 +54,10 @@ const Navbar = () => {
                     />
                 </Link>
                 <div className="flex space-x-3">
+                    <Link href={"/tournaments"} className="flex items-center justify-center">
+                        <Image src={tournaments} alt="tournaments page" width={100} height={100} className="w-[30px] h-[30px] mr-[-5px]" />
+                    </Link>
+
                     <button
                         onClick={toggleLanguage}
                         className="flex items-center justify-center space-x-2 w-[50px]"
