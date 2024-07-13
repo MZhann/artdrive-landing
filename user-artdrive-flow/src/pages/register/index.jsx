@@ -196,13 +196,13 @@ const Register = () => {
 
     return (
         <div className="w-full flex h-screen justify-center items-center dark-purple-gradient bg-cover">
-            <div className="w-[500px] h-[500px] mx-3 font-montserrat p-6 mt-[250px] rounded-3xl">
+            <div className="w-[500px] mx-3 font-montserrat p-6 mt-[50px] rounded-3xl">
                 {showEmail && (
                     <button
                         onClick={goBack}
                         className="text-start flex items-center p-2 rounded"
                     >
-                        <div className="mt-[-255px] z-50 text-white">
+                        <div className="mt-[-240px] z-50 text-white">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -223,7 +223,7 @@ const Register = () => {
                         onClick={goBack}
                         className="text-start flex items-center p-2 rounded"
                     >
-                        <div className="mt-[-255px] z-50 text-white">
+                        <div className="mt-[-435px] z-50 text-white">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -244,7 +244,7 @@ const Register = () => {
                         onClick={goBack}
                         className="text-start flex items-center p-2 rounded"
                     >
-                        <div className="mt-[-255px] z-50 text-white">
+                        <div className="mt-[-435px] z-50 text-white">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -292,7 +292,7 @@ const Register = () => {
                 )}
                 {showName && (
                     <div>
-                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-146px] text-white font-montserrat text-center">
+                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-243px] text-white font-montserrat text-center">
                             {language == "en" ? "Sign Up" : "Регистрация"}
                         </h1>
                         <h3 className="text-sm mb-2 text-[#DADADA] font-montserrat">
@@ -335,8 +335,8 @@ const Register = () => {
                     </div>
                 )}
                 {showPassword && (
-                    <div className="">
-                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-146px] text-white font-montserrat text-center">
+                    <div>
+                        <h1 className="text-xl mb-[50px] uppercase font-semibold mt-[-243px] text-white font-montserrat text-center">
                             {language == "en" ? "Sign Up" : "Регистрация"}
                         </h1>
                         <h3 className="text-sm mb-2 text-[#DADADA] font-montserrat">

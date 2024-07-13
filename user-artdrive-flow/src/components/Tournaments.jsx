@@ -29,7 +29,7 @@ const Tournaments = () => {
     }, [activeTab]);
 
     return (
-        <div className="tournament-bg w-full flex flex-col items-center min-h-[1000px]">
+        <div className="tournament-bg w-full h-full flex flex-col items-center">
             <Navbar />
             <div className="text-white mt-20">
                 <h1 className="text-center text-3xl">Tournaments</h1>
@@ -75,9 +75,7 @@ const Tournaments = () => {
                     />
                 ))}
             </div>
-            <div className="absolute bottom-[-200px] w-full">
-                <Footer />
-            </div>
+            
         </div>
     );
 };

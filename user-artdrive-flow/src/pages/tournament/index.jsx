@@ -6,7 +6,7 @@ import strange from "../../../public/images/strange.png";
 const Tournament = () => {
     return (
         <div className="w-[393px] h-[1769px] relative bg-white">
-         
+         awdawd
         </div>
     );
 };
