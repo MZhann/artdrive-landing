@@ -29,7 +29,7 @@ const Card = ({ imageSrc, title, text, lang }) => {
 
     return (
         <div
-            className={`relative flex flex-col border-[0.5px] mb-10 border-gray-500 w-[85%] sm:w-[35%] lg:w-[100%] lg:h-[130px] lg:justify-center lg:bg-[#212022]   justify-start items-center px-6 lg:px-0 text-[#2A2A2A] rounded-3xl ${
+            className={`relative flex  flex-col border-[0.5px] mb-10 border-gray-500 w-[85%] sm:w-[35%] lg:w-[100%] lg:h-[130px] lg:justify-center bg-white bg-opacity-5   justify-start items-center px-6 lg:px-0 text-[#2A2A2A] rounded-3xl ${
                 lang == "en" ? "sm:h-[232px] md:h-[252px]" : "sm:h-[290px] md:h-[320px]"
             }`}
         >

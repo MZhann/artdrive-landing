@@ -6,6 +6,7 @@ import Footer from "./Footer";
 const Tournaments = () => {
     const [tournaments, setTournaments] = useState([]);
     const [activeTab, setActiveTab] = useState("upcoming");
+    const [isLoading, setIsLoading] = useState('true')
 
     const endpoints = {
         upcoming: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/upcoming/",
@@ -57,6 +58,7 @@ const Tournaments = () => {
             <div className="w-full flex flex-col items-center pt-7 mb-64">
                 {tournaments.map((tournament) => (
                     <TournamentCard
+                        isLoading={isLoading}
                         key={tournament.id}
                         id={tournament.id}
                         name={tournament.name}
