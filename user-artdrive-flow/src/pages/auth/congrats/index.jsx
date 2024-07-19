@@ -1,11 +1,11 @@
-import "../../app/globals.css";
+import "../../../app/globals.css";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
-import xLogo from "../../../public/images/x.svg"; 
-import discordLogo from "../../../public/images/discord.svg";
+import xLogo from "../../../../public/images/x.svg"; 
+import discordLogo from "../../../../public/images/discord.svg";
 import {signOut, useSession} from "next-auth/react";
 
 const Congrats = () => {

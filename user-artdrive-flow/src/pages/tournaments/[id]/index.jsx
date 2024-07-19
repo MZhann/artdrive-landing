@@ -8,9 +8,9 @@ import ContestantButton from "@/components/tournament-components/ContestantButto
 import JudgeButton from "@/components/tournament-components/JudgeButton";
 import SponsorBlock from "@/components/tournament-components/SponsorBlock";
 import PrizeBlock from "@/components/tournament-components/PrizeBlock";
-import PrizeDivision from "@/components/tournament-components/PrizeDivision"
+import PrizeDivision from "@/components/tournament-components/PrizeDivision";
 import ModalContestantRegister from "@/components/modals/ModalContestantRegister";
-import ModalJudgeRegistration from "@/components/modals/ModalJudgeRegister";
+import ModalJudgeRegister from "@/components/modals/ModalJudgeRegister";
 
 const Tournament = () => {
     const router = useRouter();
@@ -18,7 +18,6 @@ const Tournament = () => {
     const { id } = router.query;
     const [showContestantModal, setContestantShowModal] = useState(false);
     const [showJudgeModal, setJudgeShowModal] = useState(false);
-    const [showScrollbar, setShowScrollbar] = useState(true);
 
     useEffect(() => {
         if (router.query) {
@@ -29,18 +28,52 @@ const Tournament = () => {
     const openContestantModal = () => setContestantShowModal(true);
     const closeContestantModal = () => setContestantShowModal(false);
     const openJudgeModal = () => setJudgeShowModal(true);
-    const closeJudgeModal = () => setJudgeShowModal(false)
+    const closeJudgeModal = () => setJudgeShowModal(false);
 
+    
+    const openTournament = () => {
+        router.push({
+            pathname: '/tournament',
+            query: { id: id }
+        });
+    };
 
-    const handleJudgeSubmit = () => {
-        console.log('handleJudgeSubmit clicked')
-    }
+    const handleJudgeSubmit = async (formData) => {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const response = await fetch(
+                `https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${id}/register_judge/`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${accessToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData),
+                }
+            );
+
+            if (response.ok) {
+                console.log("Successfully registered as a judge!");
+                closeJudgeModal();
+            } else {
+                console.error("Failed to register as a judge.");
+            }
+        } catch (error) {
+            console.error("An error occurred during registration:", error);
+        }
+    };
+
     const handleContestantSubmit = async (formData) => {
         try {
+            const accessToken = localStorage.getItem("accessToken");
             const response = await fetch(
                 `https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${id}/register_participant/`,
                 {
                     method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${accessToken}`
+                    },
                     body: formData,
                 }
             );
@@ -53,6 +86,38 @@ const Tournament = () => {
             }
         } catch (error) {
             console.error("An error occurred during registration:", error);
+        }
+    };
+
+    const renderContent = () => {
+        if (tournamentInfo.status === "upcoming") {
+            return (
+                <>
+                    <CountdownTimer startDate={tournamentInfo.startDate} />
+                    <div className="flex justify-between w-[90%] mt-5">
+                        <ContestantButton openModal={openContestantModal} />
+                        <JudgeButton openModal={openJudgeModal} />
+                    </div>
+                </>
+            );
+        } else if (tournamentInfo.status === "past") {
+            return (
+                <div className="mt-5 text-2xl">
+                    Tournament was over at {new Date(tournamentInfo.startDate).toLocaleDateString()}
+                </div>
+            );
+        } else if (tournamentInfo.status === "live") {
+            return (
+                <>
+                    <CountdownTimer startDate={tournamentInfo.startDate} />
+                    <div className="mt-5 text-2xl">Tournament is Live now</div>
+                    <div className="flex justify-center w-[90%] mt-5">
+                        <button onClick={openTournament} className="purple-gradient text-white py-3 rounded-xl px-6">
+                            Join
+                        </button>
+                    </div>
+                </>
+            );
         }
     };
 
@@ -76,14 +141,7 @@ const Tournament = () => {
                     </div>
                 </div>
 
-                {tournamentInfo.startDate && (
-                    <CountdownTimer startDate={tournamentInfo.startDate} />
-                )}
-
-                <div className="flex justify-between w-[90%] mt-5">
-                    <ContestantButton openModal={openContestantModal} />
-                    <JudgeButton openModal={openJudgeModal}/>
-                </div>
+                {renderContent()}
 
                 <div className="mt-5 text-2xl">Art Drive Tournament</div>
 
@@ -104,7 +162,7 @@ const Tournament = () => {
             </div>
             <Footer />
             <ModalContestantRegister show={showContestantModal} onClose={closeContestantModal} onSubmit={handleContestantSubmit} />
-            <ModalJudgeRegistration  show={showJudgeModal} onClose={closeJudgeModal} onSubmit={handleJudgeSubmit}/>
+            <ModalJudgeRegister show={showJudgeModal} onClose={closeJudgeModal} onSubmit={handleJudgeSubmit} />
         </div>
     );
 };

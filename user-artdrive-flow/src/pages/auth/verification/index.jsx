@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import "../../app/globals.css";
+import "../../../app/globals.css";
 import Image from "next/image";
-import loadingGif from '../../../public/loading.gif';
+import loadingGif from '../../../../public/loading.gif';
 
 const Verification = () => {
     const router = useRouter();
@@ -49,7 +49,7 @@ const Verification = () => {
     };
 
     const goBack = () => {
-        router.push("/register");
+        router.push("/auth/register");
     };
 
     const handleCode = async () => {
@@ -87,7 +87,7 @@ const Verification = () => {
 
             if (response.ok) {
                 router.push({
-                    pathname: "/congrats",
+                    pathname: "/auth/congrats",
                     query: { name: userName },
                 });
             } else {

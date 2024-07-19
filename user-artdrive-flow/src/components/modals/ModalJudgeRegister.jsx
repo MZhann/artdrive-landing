@@ -1,16 +1,39 @@
 import { useState } from "react";
+import loadingGif from "../../../public/loading.gif"; // Add your loading gif here
+import Image from "next/image";
 
 const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
     const [cryptoWallet, setCryptoWallet] = useState("");
-    const [socialMedia, setSocialMedia] = useState("");
     const [isCheater, setIsCheater] = useState(false);
     const [isJudge, setIsJudge] = useState(false);
+    const [isTermsChecked, setIsTermsChecked] = useState(false);
+    const [errors, setErrors] = useState({});
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (e) => {
+        setIsLoading(true);
         e.preventDefault();
+
+        let validationErrors = {};
+
+        if (!isJudge) {
+            validationErrors.isJudge = "This checkbox must be checked.";
+        }
+        if (!isCheater) {
+            validationErrors.isCheater = "This checkbox must be checked.";
+        }
+        if (!isTermsChecked) {
+            validationErrors.isTermsChecked = "This checkbox must be checked.";
+        }
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
         const formData = {
             crypto_wallet: cryptoWallet,
-            social_media: socialMedia,
             is_cheater: isCheater,
             is_judge: isJudge,
         };
@@ -64,17 +87,7 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
                             this address will be used for reward payments
                         </p>
                     </div>
-                    <div className="mb-4">
-                        <label className="block mb-2 pl-1">
-                            Link to your social media
-                        </label>
-                        <input
-                            type="text"
-                            className="w-full p-2 h-[45px] border bg-white bg-opacity-5 border-[#a9a8a9] rounded-2xl"
-                            value={socialMedia}
-                            onChange={(e) => setSocialMedia(e.target.value)}
-                        />
-                    </div>
+
                     <div className="mt-8 space-y-5 mb-8">
                         <div className="mb-4">
                             <label className="flex items-center space-x-2 w-full">
@@ -89,6 +102,11 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
                                     pursuit of true beauty
                                 </span>
                             </label>
+                            {errors.isJudge && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.isJudge}
+                                </p>
+                            )}
                         </div>
                         <div className="mb-4">
                             <label className="flex items-center space-x-2 w-full">
@@ -102,18 +120,32 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
                                     I am not a cheater
                                 </span>
                             </label>
+                            {errors.isCheater && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.isCheater}
+                                </p>
+                            )}
                         </div>
                         <div className="mb-4">
                             <label className="flex items-center space-x-2">
                                 <input
                                     type="checkbox"
-                                    required
+                                    checked={isTermsChecked}
+                                    onChange={() =>
+                                        setIsTermsChecked(!isTermsChecked)
+                                    }
                                     className="w-6 h-6 text-white bg-gray-300 rounded focus:ring-0 border-gray-300 checked:bg-white checked:border-transparent"
+                                    required
                                 />
                                 <span className="underline font-normal text-blue-500">
                                     Terms And Conditions
                                 </span>
                             </label>
+                            {errors.isTermsChecked && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.isTermsChecked}
+                                </p>
+                            )}
                         </div>
                     </div>
                     <div className="flex justify-center mb-20">
@@ -121,7 +153,18 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
                             type="submit"
                             className="purple-gradient text-white py-3 rounded-xl px-6"
                         >
-                            Submit
+                            {isLoading ? (
+                                <div className="w-[250px] flex justify-center items-center">
+                                    <Image
+                                        src={loadingGif}
+                                        alt="loading gif"
+                                        width={30}
+                                        height={10}
+                                    />
+                                </div>
+                            ) : (
+                                <div>Submit</div>
+                            )}
                         </button>
                     </div>
                 </form>

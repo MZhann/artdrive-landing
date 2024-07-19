@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import "../../app/globals.css";
+import "../../../app/globals.css";
 import Image from "next/image";
-import loadingGif from "../../../public/loading.gif"; // Add your loading gif here
+import Link from "next/link";
+import loadingGif from "../../../../public/loading.gif"; // Add your loading gif here
 import LoginForm from "@/components/LoginForm";
 
 const Register = () => {
@@ -27,16 +28,16 @@ const Register = () => {
         if (storedLanguage) {
             setLanguage(storedLanguage);
             // console.log('language in /register is ' + language)
-        }else{
-            localStorage.setItem('language', 'rus')
+        } else {
+            localStorage.setItem("language", "rus");
         }
         language !== "en" && setNamePlaceholder("имя");
     }, []);
 
     const goBack = () => {
-        if(language == 'en'){
+        if (language == "en") {
             router.push("/");
-        }else{
+        } else {
             router.push("/ru");
         }
     };
@@ -173,7 +174,7 @@ const Register = () => {
 
                 if (response.ok) {
                     router.push({
-                        pathname: "/verification",
+                        pathname: "/auth/verification",
                         query: { email, name },
                     });
                 } else {
@@ -187,7 +188,7 @@ const Register = () => {
             } catch (error) {
                 setErrors({ submit: "An error occurred during registration" });
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         } else {
             setErrors(validationErrors);
@@ -198,25 +199,34 @@ const Register = () => {
         <div className="w-full flex h-screen justify-center items-center dark-purple-gradient bg-cover">
             <div className="w-[500px] mx-3 font-montserrat p-6 mt-[50px] rounded-3xl">
                 {showEmail && (
-                    <button
-                        onClick={goBack}
-                        className="text-start flex items-center p-2 rounded"
-                    >
-                        <div className="mt-[-240px] z-50 text-white">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l6.293 6.293A1 1 0 0110 18z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </div>
-                    </button>
+                    <div className="flex justify-between w-full sm:w-[450px]">
+                        <button
+                            onClick={goBack}
+                            className="text-start flex items-center p-2 rounded"
+                        >
+                            <div className="mt-[-240px] z-50 text-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l6.293 6.293A1 1 0 0110 18z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </button>
+
+                        <Link
+                            href={"/auth/login"}
+                            className="text-white text-sm underline mt-[-125px] mr-[10px] cursor-pointer"
+                        >
+                            Log In
+                        </Link>
+                    </div>
                 )}
                 {showName && (
                     <button

@@ -306,7 +306,10 @@ body {
 
 
 
-
+.gradient-tournament-background {
+    background: linear-gradient(145deg, #000000, #0f010f, #1c021f, #15021f, #030339);
+    /* 135deg is the angle of the gradient */
+}
 
 
 

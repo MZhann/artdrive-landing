@@ -62,9 +62,6 @@ const Navbar = () => {
                         onClick={toggleLanguage}
                         className="flex items-center justify-center space-x-2 w-[50px]"
                     >
-                        <span className="ml-2 text-white">
-                            {language === "en" ? "ru" : "en"}
-                        </span>
                         <Image
                             src={langImage}
                             className="w-[25px] hover:w-[30px]"

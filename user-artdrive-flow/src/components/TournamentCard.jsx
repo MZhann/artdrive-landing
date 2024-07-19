@@ -34,7 +34,7 @@ const TournamentCard = ({
 
     return (
         <div className="w-full flex flex-col items-center">
-            {!isLoading ? (
+            {isLoading ? (
                 <div className="w-full flex flex-col items-center">
                     <div className="w-[90%] h-[80px] rounded-3xl bg-[#CAC9CB] bg-opacity-10 border-2 border-[#CAC9CB] animate-pulse mb-5"></div>
                 </div>
