@@ -116,6 +116,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+// import { Link } from 'next/link';
 
 const RankingComponent = ({ tournamentId }) => {
     const [rankings, setRankings] = useState([]);
@@ -208,6 +209,12 @@ const RankingComponent = ({ tournamentId }) => {
                     </div>
                 ))}
             </div>
+
+
+            <Link href={`/tournaments`}>
+            {/* <Link href={`/tournaments/${tournamentId}`}> */}
+                <div className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-indigo-800">Return to tournaments page</div>
+            </Link>
         </div>
     );
 };

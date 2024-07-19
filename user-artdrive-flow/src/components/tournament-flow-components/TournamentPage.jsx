@@ -560,7 +560,7 @@ const TournamentPage = ({
 
     useEffect(() => {
         ws.current = new WebSocket(
-            `ws://20.52.191.107:8001/ws/tournaments/${tournamentId}/`
+            `wss://artdrivebackenddaphne-production.up.railway.app/ws/tournaments/${tournamentId}/`
         );
 
         ws.current.onopen = () => {
