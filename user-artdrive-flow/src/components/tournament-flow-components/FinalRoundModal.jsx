@@ -6,7 +6,7 @@ import finalRound from "../../../public/images/image-buttons/finalRound.png";
 const FinalRoundModal = ({ show, onClose }) => {
     useEffect(() => {
         if (show) {
-            const timer = setTimeout(onClose, 4000); // Close modal after 4 seconds
+            const timer = setTimeout(onClose, 4000); 
             return () => clearTimeout(timer);
         }
     }, [show, onClose]);
