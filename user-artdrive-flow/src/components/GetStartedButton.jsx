@@ -4,7 +4,7 @@ const SignUpButton = ({ lang, h  }) => {
     const router = useRouter();
 
     const navigateToRegister = () => {
-        router.push("/register");
+        router.push("/auth/register");
     };
 
     return (

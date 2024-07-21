@@ -65,7 +65,7 @@ const LoginForm = ({ language }) => {
                 const { jwt: receivedJwt } = data;
                 // console.log("Received JWT from backend:", receivedJwt);
                 // Store the JWT or perform any further actions required
-                router.push("/congrats");
+                router.push("/auth/congrats");
             } else {
                 console.error("Failed to send user info to backend");
             }

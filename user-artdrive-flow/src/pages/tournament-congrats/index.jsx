@@ -10,7 +10,7 @@ const TournamentCongrats = () => {
 
     useEffect(() => {
         if (!session) {
-            router.push("/register")
+            router.push("/auth/register")
         }
     }, [session])
 

@@ -9,8 +9,7 @@ const Tournaments = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const endpoints = {
-        upcoming:
-            "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/upcoming/",
+        upcoming: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/upcoming/",
         past: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/past/",
         live: "https://artdrivebackend-production.up.railway.app/api/v1/tournaments/live/",
     };
