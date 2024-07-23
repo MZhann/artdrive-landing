@@ -1,78 +1,65 @@
 import React, { useState } from "react";
 import ProgressBar from "@/components/tournament-flow-components/round-components/ProgressBar";
 import ArtCarousel from "./round-components/ArtCarousel";
-import RoundStartModal from "@/components/tournament-flow-components/RoundStartModal";
-import FinalRoundModal from "@/components/tournament-flow-components/FinalRoundModal";
 
-const RoundComponent = ({ totalParticipants, artworks, tournamentId }) => {
-    const tournamentName = "Character Art";
-    // const totalParticipantsCount = totalParticipants;
+const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artworks, tournamentId }) => {
     const totalArts = artworks.length;
-    const [currentArt, setCurrentArt] = useState(1);
-    const [currentRound, setCurrentRound] = useState(1);
+    const [currentArt, setCurrentArt] = useState(0);
     const [likedArtworks, setLikedArtworks] = useState([]);
     const totalRounds = calculateRounds(totalParticipants);
-    const initialTime = 15;
+    const initialTime = 20;
 
     function calculateRounds(participants) {
-        if (participants < 2) return 0; // No rounds if less than 2 participants
-    
-        // Calculate nearest lower power of 2
+        if (participants < 2) return 0;
         let groupStageParticipants = Math.pow(2, Math.floor(Math.log2(participants)));
         let totalRounds = 0;
-    
-        // If the initial number of participants is already a power of 2
         if (groupStageParticipants === participants) {
-            totalRounds = Math.log2(participants); // All rounds are playoffs
+            totalRounds = Math.log2(participants);
         } else {
-            // Additional group stage round needed to reduce to the nearest power of 2
             totalRounds = Math.log2(groupStageParticipants) + 1;
         }
-        
-        console.log('there are: ' + totalRounds + ', ' + 1 + ' rounds.' )
-        return totalRounds + 1; // Adding 1 for the final round
+        return totalRounds + 1;
     }
-    
+
     const handleTimeUp = () => {
         console.log("time is up");
     };
 
     const images = artworks.map(art => ({ src: art.image, alt: art.description, id: art.id }));
 
-    const handleLike = (artId) => {
+    const handleLike = async (artId) => {
         setLikedArtworks((prevLikes) => [...prevLikes, artId]);
+        await sendLikes(artId);
+        handleNextArt();
     };
 
-    const handleDislike = () => {
-        // No need to do anything here since we are not adding dislikes to the array
-    };
-
-    const handleNextRound = () => {
-        setCurrentRound((prevRound) => prevRound + 1);
-        setCurrentArt(1);
-        // Fetch new artworks for the next round here
-    };
-
-    const sendLikes = async () => {
+    const sendLikes = async (artId) => {
         const accessToken = localStorage.getItem("accessToken");
         try {
-            const response = await fetch(`https://artdrivebackend-production.up.railway.app/api/v1/artwork/${tournamentId}/like/`, {
+            const response = await fetch(`https://artdrivebackend-production.up.railway.app/api/v1/artwork/${artId}/like/`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ artwork_ids: likedArtworks }),
             });
 
             if (response.ok) {
-                console.log("Likes submitted successfully");
-                // Proceed to the next round or show a modal
+                console.log("Like submitted successfully");
             } else {
-                console.error("Failed to submit likes.");
+                console.error("Failed to submit like.");
             }
         } catch (error) {
             console.error("An error occurred during submission:", error);
+        }
+    };
+
+    const handleNextArt = () => {
+        if (currentArt < totalArts - 1) {
+            setCurrentArt(currentArt + 1);
+        } else {
+            // onRoundOver();
+            console.log('I guess round is over')
         }
     };
 
@@ -93,10 +80,10 @@ const RoundComponent = ({ totalParticipants, artworks, tournamentId }) => {
                 <ArtCarousel
                     images={images}
                     onLike={handleLike}
-                    onDislike={handleDislike}
+                    onDislike={handleNextArt}
                     totalRounds={totalRounds}
                     currentRound={currentRound}
-                    onNextRound={handleNextRound}
+                    onNextRound={handleNextArt}
                 />
             </div>
         </div>
