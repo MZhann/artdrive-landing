@@ -58,7 +58,7 @@ const Navbar = () => {
                         <Image src={tournaments} alt="tournaments page" width={100} height={100} className="w-[30px] h-[30px] mr-[-5px]" />
                     </Link>
 
-                    <button
+                    {/* <button
                         onClick={toggleLanguage}
                         className="flex items-center justify-center space-x-2 w-[50px]"
                     >
@@ -67,7 +67,7 @@ const Navbar = () => {
                             className="w-[25px] hover:w-[30px]"
                             alt="language changer"
                         />
-                    </button>
+                    </button> */}
 
                     <div className="flex justify-center items-center w-[95px] h-[65px] mr-[-5px]">
                         <SignUpButton lang={language} />

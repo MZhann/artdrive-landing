@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import loadingGif from "../../../../public/loading.gif";
 import profile from "../../../../public/images/image-buttons/profile.svg";
 import share from "../../../../public/images/image-buttons/share.svg";
 import star from "../../../../public/images/image-buttons/star.svg";
 import like from "../../../../public/images/image-buttons/like.svg";
 
 const SingleArtComponent = ({ handleClose, image, onLike }) => {
+    const [loading, setLoading] = useState(false); // New state for loading
 
-    const closeSingleArtComponent = () => {
-        onLike();
+    const closeSingleArtComponent = async () => {
+        setLoading(true); // Show loading modal
+        await onLike();
+        setLoading(false); // Hide loading modal
         handleClose();
-    }
+    };
 
     return (
         <div className="inset-0 bg-black w-full h-full flex flex-col items-center">
@@ -22,8 +26,13 @@ const SingleArtComponent = ({ handleClose, image, onLike }) => {
                             alt="images"
                             width={600}
                             height={800}
-                            className="rounded-lg w-[390px] object-cover h-[500px]"
+                            className="rounded-lg w-[390px] object-cover bg-purple-950 animate-bg-pulse bg- h-[500px]"
                         />
+                        {loading && (
+                            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+                                <Image src={loadingGif} alt="Loading" width={50} height={50} />
+                            </div>
+                        )}
                         <div className="absolute top-3 right-3">
                             <button
                                 onClick={handleClose}

@@ -6,7 +6,7 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
     const totalArts = artworks.length;
     const [currentArt, setCurrentArt] = useState(0);
     const totalRounds = calculateRounds(totalParticipants);
-    const initialTime = 20;
+    const initialTime = 15;
 
     function calculateRounds(participants) {
         if (participants < 2) return 0;

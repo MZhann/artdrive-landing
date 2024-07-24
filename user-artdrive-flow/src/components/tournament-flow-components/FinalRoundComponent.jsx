@@ -8,7 +8,7 @@ import loading from '../../../public/loading.gif'
 const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, artworks, tournamentId }) => {
     const totalArts = artworks.length;
     const totalRounds = calculateRounds(totalParticipants);
-    const initialTime = 20;
+    const initialTime = 15;
     const [selectedImage, setSelectedImage] = useState(null);
     const [currentArtPair, setCurrentArtPair] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -99,7 +99,7 @@ const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, 
                 currentArt={currentIndex + 1}
                 totalRounds={totalRounds}
                 currentRound={currentRound}
-                initialTime={20}
+                initialTime={15}
                 onTimeUp={handleTimeUp}
                 resetTimer={resetTimer} // Pass resetTimer as a prop
             />
@@ -116,7 +116,7 @@ const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, 
                             alt={`Art ${index + 1}`}
                             width={500}
                             height={550}
-                            className="w-full h-[500px] border-4 border-gray-300 object-cover rounded-2xl"
+                            className="w-full h-[500px] border-4 border-gray-300 bg-purple-950 animate-bg-pulse object-cover rounded-2xl"
                         />
                     </motion.div>
                 ))}
