@@ -5,7 +5,7 @@ import Link from "next/link";
 import ArtDriveLogo from "../../public/images/ArtDriveWhiteLogo.png";
 import beta from "../../public/images/beta.svg";
 import tournaments from "../../public/images/tournaments.png"
-import langImage from "../../public/images/lang.svg";
+// import langImage from "../../public/images/lang.svg";
 import SignUpButton from "./SignUpButton";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -38,24 +38,24 @@ const Navbar = () => {
         >
             <div className="flex items-center justify-between w-full lg:w-[2000px]">
                 <Link href="/" className="flex space-x-2 items-end">
-                    <Image
+                    {ArtDriveLogo && <Image
                         src={ArtDriveLogo}
                         width={300}
                         height={300}
                         alt="logo"
                         className="w-[90px]"
-                    />
-                    <Image
+                    />}
+                    {beta && <Image
                         src={beta}
                         width={25}
                         height={10}
                         alt="beta"
                         className="w-[30px]"
-                    />
+                    />}
                 </Link>
                 <div className="flex space-x-3">
                     <Link href={"/tournaments"} className="flex items-center justify-center">
-                        <Image src={tournaments} alt="tournaments page" width={100} height={100} className="w-[30px] h-[30px] mr-[-5px]" />
+                        {tournaments && <Image src={tournaments} alt="tournaments page" width={100} height={100} className="w-[30px] h-[30px] mr-[-5px]" />}
                     </Link>
 
                     {/* <button

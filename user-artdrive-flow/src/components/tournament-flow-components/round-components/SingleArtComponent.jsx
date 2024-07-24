@@ -26,7 +26,7 @@ const SingleArtComponent = ({ handleClose, image, onLike }) => {
                             alt="images"
                             width={600}
                             height={800}
-                            className="rounded-lg w-[390px] object-cover bg-purple-950 animate-bg-pulse bg- h-[500px]"
+                            className="rounded-lg w-[390px] object-cover bg-purple-950 animate-bg-pulse h-[500px]"
                         />
                         {loading && (
                             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
