@@ -17,18 +17,21 @@ const Navbar = () => {
 
     useEffect(() => {
         setLanguage(routeLanguage);
-        localStorage.setItem('language', language);
-        const storedLanguage = localStorage.getItem("language");
-        console.log('storedLanguage: ' + storedLanguage);
+
+        if(window){
+            localStorage.setItem('language', language);
+            // console.log('storedLanguage: ' + storedLanguage);
+
+        }
     }, []);
 
-    const toggleLanguage = () => {
+    // const toggleLanguage = () => {
        
-        let toggledLang = language == 'ru' ? 'en' : 'ru';
-        const newPath = toggledLang === "en" ? "/" : "/ru";
-        console.log('pushed to: ', newPath);
-        router.push(newPath);
-    };
+    //     let toggledLang = language == 'ru' ? 'en' : 'ru';
+    //     const newPath = toggledLang === "en" ? "/" : "/ru";
+    //     console.log('pushed to: ', newPath);
+    //     router.push(newPath);
+    // };
    
 
     return (
