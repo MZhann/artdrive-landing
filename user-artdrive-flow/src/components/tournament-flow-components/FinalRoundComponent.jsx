@@ -3,12 +3,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import ProgressBar from "./round-components/ProgressBar";
 import SingleArtComponent from '@/components/tournament-flow-components/round-components/SingleArtComponent';
+import loading from '../../../public/loading.gif'
 
-const FinalRoundComponent = ({ totalParticipants, artworks, tournamentId }) => {
+const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, artworks, tournamentId }) => {
+    const totalArts = artworks.length;
+    const totalRounds = calculateRounds(totalParticipants);
+    const initialTime = 20;
     const [selectedImage, setSelectedImage] = useState(null);
     const [currentArtPair, setCurrentArtPair] = useState([]);
-    const [likedArtworks, setLikedArtworks] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [resetTimer, setResetTimer] = useState(false);
+    const [showWaitModal, setShowWaitModal] = useState(false);
+
+    function calculateRounds(participants) {
+        if (participants < 2) return 0;
+        let groupStageParticipants = Math.pow(2, Math.floor(Math.log2(participants)));
+        let totalRounds = 0;
+        if (groupStageParticipants === participants) {
+            totalRounds = Math.log2(participants);
+        } else {
+            totalRounds = Math.log2(groupStageParticipants) + 1;
+        }
+        return totalRounds + 1;
+    }
 
     useEffect(() => {
         if (artworks.length > 1) {
@@ -33,51 +50,58 @@ const FinalRoundComponent = ({ totalParticipants, artworks, tournamentId }) => {
             setCurrentIndex(nextIndex);
             setCurrentArtPair([artworks[nextIndex]]);
         } else {
-            // Submit the likes when all pairs are processed
-            sendLikes();
+            setShowWaitModal(true); // Show the wait modal when all pairs are assessed
         }
+        setResetTimer(true); // Reset the timer for the next image
     };
 
-    const handleLike = (artId) => {
-        setLikedArtworks((prevLikedArtworks) => [...prevLikedArtworks, artId]);
-        handleNextPair();
-    };
-
-    const handleDislike = () => {
-        handleNextPair();
-    };
-
-    const sendLikes = async () => {
+    const sendLike = async (artId) => {
+        const accessToken = localStorage.getItem("accessToken");
         try {
-            const accessToken = localStorage.getItem("accessToken");
-            const response = await fetch(`https://artdrivebackend-production.up.railway.app/api/v1/artwork/${tournamentId}/like/`, {
+            const response = await fetch(`https://artdrivebackend-production.up.railway.app/api/v1/artwork/${artId}/like/`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${accessToken}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ artwork_ids: likedArtworks })
             });
 
-            if (!response.ok) {
-                throw new Error("Failed to submit likes");
+            if (response.ok) {
+                console.log("Like submitted successfully");
+            } else {
+                console.error("Failed to submit like.");
             }
-            console.log("Likes submitted successfully");
         } catch (error) {
             console.error("An error occurred during submission:", error);
         }
     };
 
+    const handleLike = (artId) => {
+        sendLike(artId);
+        handleNextPair();
+    };
+
+    const handleTimeUp = () => {
+        handleNextPair();
+    };
+
+    useEffect(() => {
+        if (resetTimer) {
+            setResetTimer(false); // Clear the reset timer flag after the reset
+        }
+    }, [resetTimer]);
+
     return (
         <div className="relative w-full h-full flex flex-col items-center text-white pt-6">
             <ProgressBar
-                tournamentName={"Character Art"}
-                totalArts={artworks.length}
+                tournamentName={tournamentName}
+                totalArts={totalArts}
                 currentArt={currentIndex + 1}
-                totalRounds={totalParticipants}
-                currentRound={totalParticipants - artworks.length + 1}
+                totalRounds={totalRounds}
+                currentRound={currentRound}
                 initialTime={20}
-                onTimeUp={() => console.log("time is up")}
+                onTimeUp={handleTimeUp}
+                resetTimer={resetTimer} // Pass resetTimer as a prop
             />
             <div className="relative flex items-center overflow-hidden justify-between w-full h-[600px] px-4 mb-4">
                 {currentArtPair.map((image, index) => (
@@ -106,10 +130,18 @@ const FinalRoundComponent = ({ totalParticipants, artworks, tournamentId }) => {
                         handleClose={handleClose}
                         image={selectedImage.image}
                         onLike={() => handleLike(selectedImage.id)}
-                        onDislike={handleDislike}
                     />
                 )}
             </AnimatePresence>
+
+            {showWaitModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-md flex justify-center items-center z-50">
+                    <div className="text-center text-white flex flex-col items-center">
+                        <h1 className="text-3xl mb-8">You have assessed all the images. Wait till others complete assessing.</h1>
+                        <Image src={loading} alt='loading gif' width={65} height={65} />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

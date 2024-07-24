@@ -80,14 +80,14 @@ const Congrats = () => {
                     className="w-full p-5 mt-10 h-[50px] flex items-center justify-center text-white text-lg rounded-xl purple-gradient"
                     onClick={() => {
                         signOut().then(() => {
-                            console.log("back")
-                            window.location.href = "/"
+                            console.log("to login")
+                            window.location.href = "/auth/login"
                         })
                     }}
                 >
                     {language == "en"
-                        ? "Back to landing"
-                        : "Вернуться на главную"}
+                        ? "Please login"
+                        : "Логин"}
                 </button>
 
             </div>

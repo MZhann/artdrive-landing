@@ -99,15 +99,7 @@ const Tournament = () => {
                         <JudgeButton openModal={openJudgeModal} />
                     </div>
                 </>
-                // <>
-                //     <CountdownTimer startDate={tournamentInfo.startDate} />
-                //     <div className="mt-5 text-2xl">Tournament is Live now</div>
-                //     <div className="flex justify-center w-[90%] mt-5">
-                //         <button onClick={openTournament} className="purple-gradient text-white py-3 rounded-xl px-6">
-                //             Join
-                //         </button>
-                //     </div>
-                // </>
+              
                 
             );
         } else if (tournamentInfo.status === "past") {
@@ -127,13 +119,7 @@ const Tournament = () => {
                         </button>
                     </div>
                 </>
-                // <>
-                //     <CountdownTimer startDate={tournamentInfo.startDate} />
-                //     <div className="flex justify-between w-[90%] mt-5">
-                //         <ContestantButton openModal={openContestantModal} />
-                //         <JudgeButton openModal={openJudgeModal} />
-                //     </div>
-                // </>
+              
             );
         }
     };

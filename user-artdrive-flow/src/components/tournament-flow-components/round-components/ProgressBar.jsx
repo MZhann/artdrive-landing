@@ -8,9 +8,16 @@ const ProgressBar = ({
     currentRound,
     initialTime,
     onTimeUp,
+    resetTimer, // New prop to reset the timer
 }) => {
     const [timeRemaining, setTimeRemaining] = useState(initialTime);
     const progress = (currentArt / totalArts) * 100;
+
+    useEffect(() => {
+        if (resetTimer) {
+            setTimeRemaining(initialTime);
+        }
+    }, [resetTimer, initialTime]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -20,16 +27,16 @@ const ProgressBar = ({
                 } else {
                     clearInterval(timer);
                     onTimeUp();
-                    return 0;
+                    return initialTime;
                 }
             });
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [onTimeUp]);
+    }, [currentArt, initialTime, onTimeUp]);
 
     return (
-        <div className="w-full px-4 pb-4 text-white ">
+        <div className="w-full px-4 pb-4 text-white">
             <h1 className="text-2xl mb-2">{tournamentName}</h1>
             <div className="relative w-full h-4 rounded-full bg-gray-700 bg-opacity-10 flex items-center justify-start px-[2px] border-2 border-gray-500 mb-4">
                 <div

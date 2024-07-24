@@ -5,7 +5,6 @@ import ArtCarousel from "./round-components/ArtCarousel";
 const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artworks, tournamentId }) => {
     const totalArts = artworks.length;
     const [currentArt, setCurrentArt] = useState(0);
-    const [likedArtworks, setLikedArtworks] = useState([]);
     const totalRounds = calculateRounds(totalParticipants);
     const initialTime = 20;
 
@@ -22,13 +21,16 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
     }
 
     const handleTimeUp = () => {
-        console.log("time is up");
+        handleNextArt();
+    };
+
+    const resetTimer = () => {
+        setCurrentArt(currentArt + 1); // Force ProgressBar to reset the timer
     };
 
     const images = artworks.map(art => ({ src: art.image, alt: art.description, id: art.id }));
 
     const handleLike = async (artId) => {
-        setLikedArtworks((prevLikes) => [...prevLikes, artId]);
         await sendLikes(artId);
         handleNextArt();
     };
@@ -57,8 +59,8 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
     const handleNextArt = () => {
         if (currentArt < totalArts - 1) {
             setCurrentArt(currentArt + 1);
+            resetTimer();
         } else {
-            // onRoundOver();
             console.log('I guess round is over')
         }
     };
@@ -74,6 +76,7 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
                     currentRound={currentRound}
                     initialTime={initialTime}
                     onTimeUp={handleTimeUp}
+                    resetTimer={resetTimer} // Pass resetTimer as a prop
                 />
             </div>
             <div className="text-white w-full flex flex-col items-center">
@@ -84,6 +87,7 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
                     totalRounds={totalRounds}
                     currentRound={currentRound}
                     onNextRound={handleNextArt}
+                    resetTimer={resetTimer} // Pass resetTimer as a prop
                 />
             </div>
         </div>

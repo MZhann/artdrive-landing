@@ -4,11 +4,16 @@ import profile from "../../../../public/images/image-buttons/profile.svg";
 import share from "../../../../public/images/image-buttons/share.svg";
 import star from "../../../../public/images/image-buttons/star.svg";
 import like from "../../../../public/images/image-buttons/like.svg";
-import x from "../../../../public/images/image-buttons/x.svg";
 
-const SingleArtComponent = ({ handleClose, image, onLike, onDislike }) => {
+const SingleArtComponent = ({ handleClose, image, onLike }) => {
+
+    const closeSingleArtComponent = () => {
+        onLike();
+        handleClose();
+    }
+
     return (
-        <div className="fixed top-36 inset-0 bg-black w-full h-full flex flex-col items-center">
+        <div className="inset-0 bg-black w-full h-full flex flex-col items-center">
             <div className="text-white w-full flex flex-col items-center">
                 <div className="relative w-full flex flex-col items-center max-w-xl mx-auto">
                     <div className="relative">
@@ -54,15 +59,9 @@ const SingleArtComponent = ({ handleClose, image, onLike, onDislike }) => {
                             </button>
                         </div>
                     </div>
-                    <div className="flex justify-between space-x-16 mt-10">
+                    <div className="flex justify-between mt-10">
                         <button
-                            onClick={onDislike}
-                            className="w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500"
-                        >
-                            <Image src={x} alt="I don't like" />
-                        </button>
-                        <button
-                            onClick={onLike}
+                            onClick={closeSingleArtComponent}
                             className="w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500"
                         >
                             <Image src={like} alt="I like" />

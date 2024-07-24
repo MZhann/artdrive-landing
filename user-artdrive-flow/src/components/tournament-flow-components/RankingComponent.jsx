@@ -35,7 +35,7 @@ const RankingComponent = ({ tournamentId }) => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-center text-white pt-6 px-2">
+        <div className="w-full flex flex-col items-center gradient-tournament-background text-white pt-6 px-2 pb-20">
             <h1 className="text-2xl mb-3">Ranking</h1>
             <div className="h-[2px] w-[85%] mb-6 bg-gray-600"></div>
             <div className="w-full max-w-2xl flex flex-col items-center px-8 ">
@@ -96,7 +96,6 @@ const RankingComponent = ({ tournamentId }) => {
 
 
             <Link href={`/tournaments`}>
-            {/* <Link href={`/tournaments/${tournamentId}`}> */}
                 <div className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-indigo-800">Return to tournaments page</div>
             </Link>
         </div>
