@@ -109,6 +109,7 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
     const initialTime = 15;
 
     function calculateRounds(participants) {
+        console.log('backgroundImage: ', backgroundImage)
         if (participants < 2) return 0;
         let groupStageParticipants = Math.pow(2, Math.floor(Math.log2(participants)));
         let totalRounds = 0;

@@ -164,7 +164,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import ProgressBar from "./round-components/ProgressBar";
 import SingleArtComponent from '@/components/tournament-flow-components/round-components/SingleArtComponent';
-import loading from '../../../public/loading.gif';
+import loadingBird from '../../../public/loadingBird.gif';
 import LikesAndChanceIndicator from "./LikesAndChanceIndicator.jsx"; // Import the component
 
 const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, artworks, tournamentId, backgroundImage, likes }) => {
@@ -302,11 +302,13 @@ const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, 
 
             {showWaitModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-md flex justify-center items-center z-50">
-                    <div className="text-center text-white flex flex-col items-center">
-                        <h1 className="text-3xl mb-8">You have assessed all the images. Wait till others complete assessing.</h1>
-                        <Image src={loading} alt='loading gif' width={65} height={65} />
-                    </div>
+                <div className="text-center text-white flex flex-col items-center mt-[50px]">
+                    <h3 className="mt-[-100px] mb-4 text-normal">round 3 is finished</h3>
+                    <h1 className="px-4 text-3xl mb-8 text-bold">You been so fast to rate the arts!</h1>
+                    <h3 className="mb-4 text-thin">Lets wait the others</h3>
+                    <Image src={loadingBird} className="mt-10" alt='loading gif' width={150} height={150} />
                 </div>
+            </div>
             )}
         </div>
     );
