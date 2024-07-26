@@ -7,7 +7,7 @@ import MainContainer from "@/components/MainContainer";
 
 const Tournament = () => {
     const router = useRouter();
-    const { id } = router.query;
+    const { id, userRole } = router.query;
     const [tournamentData, setTournamentData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -48,6 +48,7 @@ const Tournament = () => {
             <MainContainer>
                 {tournamentData && (
                     <TournamentPage
+                        userRole={userRole}
                         tournamentData={tournamentData}
                         totalParticipants={tournamentData.total_participants}
                         tournamentId={id}

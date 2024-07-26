@@ -26,7 +26,8 @@ module.exports = {
                 "text-gradient": "linear-gradient(90deg, #818cf8, #21E342)",
                 "gradient-button":
                     "linear-gradient(315deg, #fd7b4f, #e13db3, #47affc)",
-                "bg-image": "url('/images/Main.svg')",
+                // "bg-image": "url('/images/Main.svg')",
+                "bg-image": "linear-gradient(30deg, #22133B 8%, #1F0B24 25%, #000000 100%)",
                 "bg-about": "url('/images/BGabout.svg')",
                 "bg-how": "url('/images/howBg.svg')",
             },

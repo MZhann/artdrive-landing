@@ -32,11 +32,11 @@ const Tournaments = () => {
     }, [activeTab]);
 
     return (
-        <div className="tournament-bg w-full h-full flex flex-col items-center">
+        <div className="tournament-bg bg-cover w-full h-[1200px] flex flex-col items-center">
             <Navbar />
             <div className="text-white mt-20">
                 <h1 className="text-center text-3xl">Tournaments</h1>
-                <div className="flex justify-between w-[300px] text-[#a9a8a9] space-x-2 mt-5">
+                <div className="flex justify-between  w-[300px] text-[#a9a8a9] space-x-2 mt-5">
                     <button
                         className={`rounded-3xl py-1 px-6 flex justify-center items-center ${
                             activeTab === "live"

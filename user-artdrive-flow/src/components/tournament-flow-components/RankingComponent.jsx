@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import whiteLike from "../../../public/images/image-buttons/white-like.svg";
 
 const RankingComponent = ({ tournamentId }) => {
     const [rankings, setRankings] = useState([]);
@@ -10,7 +11,9 @@ const RankingComponent = ({ tournamentId }) => {
     useEffect(() => {
         const fetchRankings = async () => {
             try {
-                const response = await fetch(`https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${tournamentId}/top_10_participants/`);
+                const response = await fetch(
+                    `https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${tournamentId}/top_10_participants/`
+                );
                 if (!response.ok) {
                     throw new Error("Failed to fetch rankings");
                 }
@@ -33,6 +36,9 @@ const RankingComponent = ({ tournamentId }) => {
     if (error) {
         return <div>Error: {error}</div>;
     }
+    const formatPrize = (prize) => {
+        return Math.floor(prize);
+    };
 
     return (
         <div className="w-full flex flex-col items-center gradient-tournament-background text-white pt-6 px-2 pb-20">
@@ -54,7 +60,7 @@ const RankingComponent = ({ tournamentId }) => {
                                     alt={`Rank ${index + 1}`}
                                     width={200}
                                     height={202}
-                                    className="w-[141px] mb-4 mt-7 h-[88px] object-cover rounded-2xl"
+                                    className="w-[90px] rounded-full mb-4 mt-7 h-[90px] object-cover"
                                 />
                             ) : (
                                 <Image
@@ -62,10 +68,10 @@ const RankingComponent = ({ tournamentId }) => {
                                     alt={`Rank ${index + 1}`}
                                     width={200}
                                     height={202}
-                                    className="w-[121px] h-[72px] object-cover rounded-2xl"
+                                    className="w-[75px] h-[75px] object-cover rounded-full"
                                 />
                             )}
-                         
+
                             {index === 0 && (
                                 <div className="absolute top-[-10px] left-[50%] transform -translate-x-1/2 w-8 h-8">
                                     <Image
@@ -78,29 +84,40 @@ const RankingComponent = ({ tournamentId }) => {
                             )}
                         </div>
                         <div className="flex ml-4">
-                            <div className="text-xl font-bold text-nowrap">
-                                {rank.prize} $
-                            </div>
-                            <div className="ml-8">
-                                <div className="text-xs">{rank.username}</div>
+                            <div className="ml-0">
+                                <div className="text-sm">{rank.username}</div>
                                 <Link href={rank.artist_page}>
-                                    <div className="text-xs underline text-blue-500">
+                                    <div className="text-xs underline text-gray-500">
                                         artist page
                                     </div>
                                 </Link>
+                            </div>
+                            <div className="font-normal text-nowrap ml-6 flex items-center text-xl">
+                                {/* {rank.prize} */}
+                                400 $
+                            </div>
+                            <div className="font-normal text-nowrap ml-4 text-xl flex items-center">
+                                <Image
+                                    src={whiteLike}
+                                    alt="like"
+                                    className="h-[20px] w-[20px]"
+                                    height={20}
+                                    width={20}
+                                />
+                                <div className="ml-2 text-xm">400</div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
 
-
             <Link href={`/tournaments`}>
-                <div className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-indigo-800">Return to tournaments page</div>
+                <div className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-indigo-800">
+                    Return to tournaments page
+                </div>
             </Link>
         </div>
     );
 };
 
 export default RankingComponent;
-

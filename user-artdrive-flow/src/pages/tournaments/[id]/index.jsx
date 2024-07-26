@@ -102,7 +102,7 @@ const Tournament = () => {
     const openTournament = () => {
         router.push({
             pathname: '/tournament',
-            query: { id: id }
+            query: { id: id, userRole: userRole }
         });
     };
 
@@ -165,13 +165,15 @@ const Tournament = () => {
                 <>
                     <CountdownTimer startDate={tournamentInfo.startDate} />
                     <div className={userRole=='' ? `flex justify-between w-[90%] mt-5` : `flex justify-center w-[90%] mt-5`}>
-                        {userRole === "participant_judge" ? (
+                        {userRole === "participant_judge" && (
                             <div className="text-2xl text-center px-3 py-2 rounded-2xl bg-indigo-500">You are registered as a contestant</div>
-                        ) : (
-                            <ContestantButton openModal={openContestantModal} />
+                        )} 
+                        {userRole === '' && (
+                            <ContestantButton openModal={openContestantModal} />                            
                         )}
+                        
                         {userRole === "judge" && (
-                            <div className="text-2xl flex justify-center items-center px-3 py-2 rounded-2xl bg-indigo-500">You are registered as a judge</div>
+                            <div className="text-2xl flex justify-center items-center px-4 text-center py-6 rounded-2xl bg-indigo-500">You are registered as a judge</div>
                         ) }
                         {userRole === '' &&  (
                             <JudgeButton openModal={openJudgeModal} />
@@ -181,7 +183,7 @@ const Tournament = () => {
             );
         } else if (tournamentInfo.status === "past") {
             return (
-                <div className="mt-5 text-2xl">
+                <div className="mt-5 text-2xl bg-purple-800 rounded-2xl border-4 px-10 py-6  mx-6 text-center py-2">
                     Tournament was over at {new Date(tournamentInfo.startDate).toLocaleDateString()}
                 </div>
             );

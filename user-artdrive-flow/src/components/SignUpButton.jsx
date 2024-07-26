@@ -92,7 +92,7 @@ const SignUpButton = ({ lang }) => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                if(!window) return;
+                if (!window) return;
                 const accessToken = localStorage.getItem("accessToken");
                 const response = await fetch(
                     "https://artdrivebackend-production.up.railway.app/api/v1/profile/",
@@ -149,7 +149,7 @@ const SignUpButton = ({ lang }) => {
                 </span>
                 {showModal && (
                     <div className="absolute mt-2 right-0 top-8 w-[120px] bg-white border border-gray-300 rounded-md shadow-lg z-10">
-                        <div
+                        {/* <div
                             className="p-2 cursor-pointer hover:bg-gray-200 rounded-3xl"
                             onClick={navigateToLogin}
                         >
@@ -157,6 +157,18 @@ const SignUpButton = ({ lang }) => {
                         </div>
                         <div
                             className="p-2 cursor-pointer hover:bg-gray-200 rounded-3xl "
+                            onClick={navigateToRegister}
+                        >
+                            Register
+                        </div> */}
+                        <div
+                            className="p-2 cursor-pointer hover:bg-gray-300 rounded-md"
+                            onClick={navigateToLogin}
+                        >
+                            Log In
+                        </div>
+                        <div
+                            className="p-2 cursor-pointer hover:bg-gray-300 rounded-md"
                             onClick={navigateToRegister}
                         >
                             Register
@@ -182,13 +194,13 @@ const SignUpButton = ({ lang }) => {
             {showModal && (
                 <div className="absolute mt-2 right-0 w-[120px] bg-white border border-gray-300 rounded-md shadow-lg z-10">
                     <div
-                        className="p-2 cursor-pointer hover:bg-gray-100"
+                        className="p-2 cursor-pointer hover:bg-gray-300 rounded-md"
                         onClick={navigateToLogin}
                     >
                         Log In
                     </div>
                     <div
-                        className="p-2 cursor-pointer hover:bg-gray-100"
+                        className="p-2 cursor-pointer hover:bg-gray-300 rounded-md"
                         onClick={navigateToRegister}
                     >
                         Register
