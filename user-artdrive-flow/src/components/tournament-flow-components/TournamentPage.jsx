@@ -704,9 +704,9 @@ const TournamentPage = ({
     //         setError(error.message);
     //     }
     // };
-    
+
     const fetchBackgroundImage = async () => {
-        if (userRole !== 'judge_contestant') {
+        if (userRole !== 'participant_judge') {
             console.log("User is not a judge_contestant, cannot fetch background image.");
             return;
         }
