@@ -619,7 +619,7 @@ const TournamentPage = ({
     const [showFinalModal, setShowFinalModal] = useState(false);
     const [showTournamentEnded, setShowTournamentEnded] = useState(false);
     const [backgroundImage, setBackgroundImage] = useState(null); // New state for background image
-    const [likes, setLikes] = useState(0); // New state for likes
+    const [likes, setLikes] = useState(null); // New state for likes
     const ws = useRef(null);
 
     useEffect(() => {

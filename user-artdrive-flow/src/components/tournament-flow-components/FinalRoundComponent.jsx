@@ -255,7 +255,7 @@ const FinalRoundComponent = ({ tournamentName, currentRound, totalParticipants, 
 
     return (
         <div className="relative w-full h-full flex flex-col items-center text-white pt-6">
-            {backgroundImage && 
+            {likes!=null && 
             <LikesAndChanceIndicator backgroundImage={backgroundImage} likes={likes} totalParticipants={totalParticipants} currentRound={currentRound} />
             
             }
