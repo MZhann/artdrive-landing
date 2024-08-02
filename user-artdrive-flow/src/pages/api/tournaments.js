@@ -69,6 +69,7 @@ export const getMyTournaments = async () => {
     }
 };
 
+
 export const getLiveTournaments = async () => {
     try {
         const response = await backendApiInstance.get("tournaments/live/");
@@ -85,6 +86,74 @@ export const getUpcomingTournaments = async () => {
         return response.data;
     } catch (error) {
         console.error("Error fetching upcoming tournaments:", error);
+        throw error;
+    }
+};
+
+
+
+// BELOW WILL BE TOURNAMENT FLOW REQUESTS
+//
+//
+//
+//
+
+
+export const fetchArtworks = async (tournamentId) => {
+    try {
+        const response = await backendApiInstance.get(`tournaments/${tournamentId}/judge_artworks/`);
+        return response.data;
+    }catch(error){
+        console.error("Error fetching judge_artworks in tournament flow:", error);
+        throw error;
+    }
+} 
+
+
+export const fetchCurrentRound = async (tournamentId) => {
+    try {
+        const response = await backendApiInstance.get(`tournaments/${tournamentId}/current_round/`);
+        return response.data;
+    }catch(error){
+        console.error("Error fetching current_round in tournament flow:", error);
+        throw error;
+    }
+} 
+
+
+export const fetchUserImage = async (tournamentId) => {
+    try {
+        const response = await backendApiInstance.get(`tournaments/${tournamentId}/user_artwork/`);
+        return response.data;
+    }catch(error){
+        console.error("Error fetching user_artwork in tournament flow:", error);
+        throw error;
+    }
+} 
+
+
+
+// export const fetchRanking = async (tournamentId) => {
+//     try {
+//         const response = await backendApiInstance.get(`tournaments/${tournamentId}/top_10_participants/`);
+//         return response.data;
+//     }catch(error){
+//         console.error("Error fetching ranking in tournament flow:", error);
+//         throw error;
+//     }
+// } 
+
+export const fetchRanking = async (tournamentId, page = 1, username = "") => {
+    try {
+        const url = `tournaments/${tournamentId}/top_participants/`;
+        const params = { page };
+        if (username) {
+            params.username = username;
+        }
+        const response = await backendApiInstance.get(url, { params });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching ranking in tournament flow:", error);
         throw error;
     }
 };

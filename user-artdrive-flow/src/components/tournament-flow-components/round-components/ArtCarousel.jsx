@@ -8,13 +8,22 @@
 // import like from "../../../../public/images/image-buttons/like.svg";
 // import x from "../../../../public/images/image-buttons/x.svg";
 // import RoundStartModal from "../RoundStartModal";
-// import loadingBird from '../../../../public/loadingBird.gif'
+// import loadingGame from "../../../../public/loadingGame.gif";
 
-// const ArtCarousel = ({ images, onLike, onDislike, totalRounds, currentRound, onNextRound, resetTimer }) => {
+// const ArtCarousel = ({
+//     images,
+//     onLike,
+//     onDislike,
+//     totalRounds,
+//     currentRound,
+//     onNextRound,
+//     resetTimer,
+// }) => {
 //     const [currentIndex, setCurrentIndex] = useState(0);
 //     const [showRoundModal, setShowRoundModal] = useState(false);
 //     const [showWaitModal, setShowWaitModal] = useState(false);
 //     const [loading, setLoading] = useState(false); // New state for loading
+//     const [expandedImage, setExpandedImage] = useState(null); // New state for expanded image
 
 //     useEffect(() => {
 //         const savedRound = localStorage.getItem("currentRound");
@@ -61,6 +70,14 @@
 //         return () => clearInterval(timer);
 //     }, [currentIndex]);
 
+//     const handleExpand = () => {
+//         setExpandedImage(images[currentIndex]);
+//     };
+
+//     const handleCloseExpand = () => {
+//         setExpandedImage(null);
+//     };
+
 //     return (
 //         <div className="relative w-full flex flex-col items-center max-w-xl mx-auto">
 //             <div className="relative">
@@ -77,33 +94,32 @@
 //                     </div>
 //                 )}
 //                 <div className="absolute top-3 right-3">
-//                     <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-between border-gray-400 bg-opacity-50 rounded-full">
-//                         <Image src={expand} alt='expand' />
-//                     </button>
-//                 </div>
-//                 <div className="absolute bottom-3 left-3">
-//                     <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full">
-//                         <Image src={share} alt='share'/>
+//                     <button
+//                         className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-between border-gray-400 bg-opacity-50 rounded-full"
+//                         onClick={handleExpand}
+//                     >
+//                         <Image src={expand} alt="expand" />
 //                     </button>
 //                 </div>
 //                 <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
 //                     <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full">
-//                         <Image src={star} alt='star' />
-//                     </button>
-//                 </div>
-//                 <div className="absolute bottom-3 right-3">
-//                     <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full">
-//                         <Image src={profile} alt='profile' />
+//                         <Image src={star} alt="star" />
 //                     </button>
 //                 </div>
 //             </div>
 
-//             <div className='flex justify-between space-x-16 mt-10'>
-//                 <button onClick={handleDislike} className='w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500'>
-//                     <Image src={x} alt='I dont like' />
+//             <div className="flex justify-between space-x-16 mt-10">
+//                 <button
+//                     onClick={handleDislike}
+//                     className="w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500"
+//                 >
+//                     <Image src={x} alt="I don't like" />
 //                 </button>
-//                 <button onClick={() => handleLike(images[currentIndex].id)} className='w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500'>
-//                     <Image src={like} alt='I like' />
+//                 <button
+//                     onClick={() => handleLike(images[currentIndex].id)}
+//                     className="w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500"
+//                 >
+//                     <Image src={like} alt="I like" />
 //                 </button>
 //             </div>
 
@@ -115,19 +131,42 @@
 //             />
 
 //             {showWaitModal && (
-                
 //                 <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-md flex justify-center items-center z-50">
 //                     <div className="text-center text-white flex flex-col items-center mt-[50px]">
 //                         <h3 className="mt-[-100px] mb-4 text-normal">round 3 is finished</h3>
-//                         <h1 className="px-4 text-3xl mb-8 text-bold">You been so fast to rate the arts!</h1>
-//                         {/* <Image src={loadingGif} alt='loading gif' width={65} height={65} /> */}
+//                         <h1 className="px-4 text-3xl mb-8 text-bold">
+//                             You been so fast to rate the arts!
+//                         </h1>
 //                         <h3 className="mb-4 text-thin">Lets wait the others</h3>
-
-//                         <Image src={loadingBird} className="mt-10" alt='loading gif' width={150} height={150} />
-
+//                         <Image
+//                             src={loadingGame}
+//                             className="mt-10"
+//                             alt="loading gif"
+//                             width={150}
+//                             height={150}
+//                         />
 //                     </div>
 //                 </div>
+//             )}
 
+//             {expandedImage && (
+//                 <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50">
+//                     <div className="relative w-full h-full flex flex-col justify-center items-center">
+//                         <button
+//                             className="absolute top-5 right-5 text-white text-3xl"
+//                             onClick={handleCloseExpand}
+//                         >
+//                             ✕
+//                         </button>
+//                         <Image
+//                             src={expandedImage.src}
+//                             alt={expandedImage.alt}
+//                             width={1200}
+//                             height={800}
+//                             className="w-auto h-auto max-h-full max-w-full"
+//                         />
+//                     </div>
+//                 </div>
 //             )}
 //         </div>
 //     );
@@ -146,13 +185,24 @@ import star from "../../../../public/images/image-buttons/star.svg";
 import like from "../../../../public/images/image-buttons/like.svg";
 import x from "../../../../public/images/image-buttons/x.svg";
 import RoundStartModal from "../RoundStartModal";
-import loadingBird from '../../../../public/loadingBird.gif'
+import loadingGame from "../../../../public/loadingGame.gif";
+import { addToFavorites, removeFromFavorites } from "@/pages/api/favorites"; // Add the import
 
-const ArtCarousel = ({ images, onLike, onDislike, totalRounds, currentRound, onNextRound, resetTimer }) => {
+const ArtCarousel = ({
+    images,
+    onLike,
+    onDislike,
+    totalRounds,
+    currentRound,
+    onNextRound,
+    resetTimer,
+}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showRoundModal, setShowRoundModal] = useState(false);
     const [showWaitModal, setShowWaitModal] = useState(false);
     const [loading, setLoading] = useState(false); // New state for loading
+    const [expandedImage, setExpandedImage] = useState(null); // New state for expanded image
+    const [favorites, setFavorites] = useState([]); // State to track favorites
 
     useEffect(() => {
         const savedRound = localStorage.getItem("currentRound");
@@ -199,6 +249,25 @@ const ArtCarousel = ({ images, onLike, onDislike, totalRounds, currentRound, onN
         return () => clearInterval(timer);
     }, [currentIndex]);
 
+    const handleExpand = () => {
+        setExpandedImage(images[currentIndex]);
+    };
+
+    const handleCloseExpand = () => {
+        setExpandedImage(null);
+    };
+
+    const handleFavorite = async (artId) => {
+        console.log('save to favs clicked');
+        if (favorites.includes(artId)) {
+            await removeFromFavorites(artId);
+            setFavorites(favorites.filter((id) => id !== artId));
+        } else {
+            await addToFavorites(artId);
+            setFavorites([...favorites, artId]);
+        }
+    };
+
     return (
         <div className="relative w-full flex flex-col items-center max-w-xl mx-auto">
             <div className="relative">
@@ -215,33 +284,43 @@ const ArtCarousel = ({ images, onLike, onDislike, totalRounds, currentRound, onN
                     </div>
                 )}
                 <div className="absolute top-3 right-3">
-                    <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-between border-gray-400 bg-opacity-50 rounded-full">
-                        <Image src={expand} alt='expand' />
-                    </button>
-                </div>
-                <div className="absolute bottom-3 left-3">
-                    <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full">
-                        <Image src={share} alt='share'/>
+                    <button
+                        className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-between border-gray-400 bg-opacity-50 rounded-full"
+                        onClick={handleExpand}
+                    >
+                        <Image src={expand} alt="expand" />
                     </button>
                 </div>
                 <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2">
-                    <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full">
-                        <Image src={star} alt='star' />
-                    </button>
-                </div>
-                <div className="absolute bottom-3 right-3">
-                    <button className="p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full">
-                        <Image src={profile} alt='profile' />
+                    <button
+                        onClick={() => handleFavorite(images[currentIndex].id)}
+                        className={`p-2 bg-gray-800 border-[1px] h-[35px] w-[35px] flex items-center justify-center border-gray-400 bg-opacity-50 rounded-full ${
+                            favorites.includes(images[currentIndex].id)
+                                ? "bg-green-500"
+                                : ""
+                        } transition-transform duration-300 transform ${
+                            favorites.includes(images[currentIndex].id)
+                                ? "scale-125"
+                                : "scale-100"
+                        }`}
+                    >
+                        <Image src={star} alt="star" />
                     </button>
                 </div>
             </div>
 
-            <div className='flex justify-between space-x-16 mt-10'>
-                <button onClick={handleDislike} className='w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500'>
-                    <Image src={x} alt='I dont like' />
+            <div className="flex justify-between space-x-16 mt-10">
+                <button
+                    onClick={handleDislike}
+                    className="w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500"
+                >
+                    <Image src={x} alt="I don't like" />
                 </button>
-                <button onClick={() => handleLike(images[currentIndex].id)} className='w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500'>
-                    <Image src={like} alt='I like' />
+                <button
+                    onClick={() => handleLike(images[currentIndex].id)}
+                    className="w-[65px] h-[60px] flex items-center justify-center bg-white bg-opacity-10 rounded-3xl border-[1px] border-gray-500"
+                >
+                    <Image src={like} alt="I like" />
                 </button>
             </div>
 
@@ -256,9 +335,37 @@ const ArtCarousel = ({ images, onLike, onDislike, totalRounds, currentRound, onN
                 <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-md flex justify-center items-center z-50">
                     <div className="text-center text-white flex flex-col items-center mt-[50px]">
                         <h3 className="mt-[-100px] mb-4 text-normal">round 3 is finished</h3>
-                        <h1 className="px-4 text-3xl mb-8 text-bold">You been so fast to rate the arts!</h1>
+                        <h1 className="px-4 text-3xl mb-8 text-bold">
+                            You been so fast to rate the arts!
+                        </h1>
                         <h3 className="mb-4 text-thin">Lets wait the others</h3>
-                        <Image src={loadingBird} className="mt-10" alt='loading gif' width={150} height={150} />
+                        <Image
+                            src={loadingGame}
+                            className="mt-10"
+                            alt="loading gif"
+                            width={150}
+                            height={150}
+                        />
+                    </div>
+                </div>
+            )}
+
+            {expandedImage && (
+                <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50">
+                    <div className="relative w-full h-full flex flex-col justify-center items-center">
+                        <button
+                            className="absolute top-5 right-5 text-white text-3xl"
+                            onClick={handleCloseExpand}
+                        >
+                            ✕
+                        </button>
+                        <Image
+                            src={expandedImage.src}
+                            alt={expandedImage.alt}
+                            width={1200}
+                            height={800}
+                            className="w-auto h-auto max-h-full max-w-full"
+                        />
                     </div>
                 </div>
             )}
