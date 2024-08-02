@@ -72,7 +72,7 @@ const Navbar = () => {
                         />
                     </button> */}
 
-                    <div className="flex justify-center items-center w-[95px] h-[65px] mr-[-5px]">
+                    <div className="flex justify-center items-center h-[65px] mr-[-5px]">
                         <SignUpButton lang={language} />
                     </div>
                 </div>

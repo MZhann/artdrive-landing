@@ -20,15 +20,7 @@ const TournamentCard = ({
     const openTournament = () => {
         router.push({
             pathname: `/tournaments/${id}`,
-            query: {
-                ...props,
-                id,
-                name,
-                startDate,
-                prizeFund,
-                audience,
-                backgroundImage,
-            },
+            query: {id},
         });
     };
 

@@ -33,7 +33,7 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
         }
 
         const formData = {
-            crypto_wallet: cryptoWallet,
+            crypto_wallet: 'awdawdawdawdafaawfad',
             is_cheater: isCheater,
             is_judge: isJudge,
         };
@@ -69,7 +69,7 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
                     Register Form
                 </h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4 mt-5">
+                    {/* <div className="mb-4 mt-5">
                         <label className="block mb-2 pl-1">
                             Your USDT wallet address (trc 20)
                             <span className="text-red-500 text-xl pl-1 pt-2 font-bold">
@@ -86,7 +86,7 @@ const ModalJudgeRegistration = ({ show, onClose, onSubmit }) => {
                         <p className="text-[#a9a8a9] text-xs mt-2 pl-1 mb-5">
                             this address will be used for reward payments
                         </p>
-                    </div>
+                    </div> */}
 
                     <div className="mt-8 space-y-5 mb-8">
                         <div className="mb-4">

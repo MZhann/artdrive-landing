@@ -11,6 +11,13 @@ import PrizeBlock from "@/components/tournament-components/PrizeBlock";
 import PrizeDivision from "@/components/tournament-components/PrizeDivision";
 import ModalContestantRegister from "@/components/modals/ModalContestantRegister";
 import ModalJudgeRegister from "@/components/modals/ModalJudgeRegister";
+import { checkAuthorization } from "@/pages/api/profile";
+import {
+    getTournamentInfo,
+    checkUserRole,
+    registerContestant,
+    registerJudge,
+} from "@/pages/api/tournaments";
 
 const Tournament = () => {
     const router = useRouter();
@@ -21,78 +28,60 @@ const Tournament = () => {
     const [userRole, setUserRole] = useState("");
 
     useEffect(() => {
-        if (router.query) {
-            setTournamentInfo(router.query);
-        }
-    }, [router.query]);
+        const fetchTournamentInfo = async () => {
+            if (id) {
+                const data = await getTournamentInfo(id);
+                setTournamentInfo(data);
+            }
+        };
+
+        fetchTournamentInfo();
+    }, [id]);
 
     useEffect(() => {
-        const checkUserRole = async () => {
+        const checkUsersRole = async () => {
             const accessToken = localStorage.getItem("accessToken");
             if (!accessToken) {
                 return;
             }
-            try {
-                const response = await fetch(
-                    `https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${id}/check_user_role/`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${accessToken}`,
-                        },
-                    }
-                );
-                if (response.ok) {
-                    const data = await response.json();
-                    const role = data.role;
-                    
-                    if (role === "participant_judge" || role === "judge") {
-                        setUserRole(role);
-                    }
-                    console.log('role: ', role);
-                }
-            } catch (error) {
-                console.error("Failed to check user role:", error);
+
+            const response = await checkUserRole(id);
+            const role = response.role;
+            if (role === "participant_judge" || role === "judge") {
+                setUserRole(role);
             }
+            console.log("role: ", role);
         };
 
         if (id) {
-            checkUserRole();
+            checkUsersRole();
         }
     }, [id]);
 
-    const checkAuthorization = async () => {
-        try {
-            const accessToken = localStorage.getItem("accessToken");
-            if (!accessToken) {
-                return false;
-            }
-            const response = await fetch('https://artdrivebackend-production.up.railway.app/api/v1/profile/', {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            });
-            return response.ok;
-        } catch (error) {
-            console.error("Authorization check failed:", error);
+    const checkUserAuthorization = () => {
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
             return false;
+        }else{
+            return true;
         }
     };
 
     const openContestantModal = async () => {
-        const isAuthorized = await checkAuthorization();
+        const isAuthorized = await checkUserAuthorization();
         if (isAuthorized) {
             setContestantShowModal(true);
         } else {
-            router.push('/auth/login');
+            router.push("/auth/login");
         }
     };
 
     const openJudgeModal = async () => {
-        const isAuthorized = await checkAuthorization();
+        const isAuthorized = await checkUserAuthorization();
         if (isAuthorized) {
             setJudgeShowModal(true);
         } else {
-            router.push('/auth/login');
+            router.push("/auth/login");
         }
     };
 
@@ -101,33 +90,18 @@ const Tournament = () => {
 
     const openTournament = () => {
         router.push({
-            pathname: '/tournament',
-            query: { id: id, userRole: userRole }
+            pathname: "/tournament",
+            query: { id: id, userRole: userRole },
         });
     };
 
     const handleJudgeSubmit = async (formData) => {
         try {
-            const accessToken = localStorage.getItem("accessToken");
-            const response = await fetch(
-                `https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${id}/register_judge/`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${accessToken}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData),
-                }
-            );
+            const response = await registerJudge(id, formData);
 
-            if (response.ok) {
-                console.log("Successfully registered as a judge!");
-                closeJudgeModal();
-                setUserRole("judge");
-            } else {
-                console.error("Failed to register as a judge.");
-            }
+            console.log("Successfully registered as a judge!", response);
+            closeJudgeModal();
+            setUserRole("judge");
         } catch (error) {
             console.error("An error occurred during registration:", error);
         }
@@ -136,24 +110,11 @@ const Tournament = () => {
     const handleContestantSubmit = async (formData) => {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const response = await fetch(
-                `https://artdrivebackend-production.up.railway.app/api/v1/tournaments/${id}/register_participant/`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${accessToken}`
-                    },
-                    body: formData,
-                }
-            );
+            const response = await registerContestant(id, formData);
 
-            if (response.ok) {
-                console.log("Successfully registered as a participant!");
-                closeContestantModal();
-                setUserRole("participant_judge");
-            } else {
-                console.error("Failed to register as a participant.");
-            }
+            console.log("Successfully registered as a contestant!", response);
+            closeContestantModal();
+            setUserRole("participant_judge");
         } catch (error) {
             console.error("An error occurred during registration:", error);
         }
@@ -163,19 +124,29 @@ const Tournament = () => {
         if (tournamentInfo.status === "upcoming") {
             return (
                 <>
-                    <CountdownTimer startDate={tournamentInfo.startDate} />
-                    <div className={userRole=='' ? `flex justify-between w-[90%] mt-5` : `flex justify-center w-[90%] mt-5`}>
+                    <CountdownTimer startDate={tournamentInfo.start_date} />
+                    <div
+                        className={
+                            userRole == ""
+                                ? `flex justify-between w-[90%] mt-5`
+                                : `flex justify-center w-[90%] mt-5`
+                        }
+                    >
                         {userRole === "participant_judge" && (
-                            <div className="text-2xl text-center px-3 py-2 rounded-2xl bg-indigo-500">You are registered as a contestant</div>
-                        )} 
-                        {userRole === '' && (
-                            <ContestantButton openModal={openContestantModal} />                            
+                            <div className="text-2xl text-center px-3 py-4 md:px-5 border-2 border-white rounded-2xl bg-purple-700">
+                                You are registered as a contestant
+                            </div>
                         )}
-                        
+                        {userRole === "" && (
+                            <ContestantButton openModal={openContestantModal} />
+                        )}
+
                         {userRole === "judge" && (
-                            <div className="text-2xl flex justify-center items-center px-4 text-center py-6 rounded-2xl bg-indigo-500">You are registered as a judge</div>
-                        ) }
-                        {userRole === '' &&  (
+                            <div className="text-2xl flex justify-center items-center px-4 text-center border-2 border-white py-6 rounded-2xl bg-purple-700">
+                                You are registered as a judge
+                            </div>
+                        )}
+                        {userRole === "" && (
                             <JudgeButton openModal={openJudgeModal} />
                         )}
                     </div>
@@ -184,16 +155,20 @@ const Tournament = () => {
         } else if (tournamentInfo.status === "past") {
             return (
                 <div className="mt-5 text-2xl bg-purple-800 rounded-2xl border-4 px-10 py-6  mx-6 text-center py-2">
-                    Tournament was over at {new Date(tournamentInfo.startDate).toLocaleDateString()}
+                    Tournament was over at{" "}
+                    {new Date(tournamentInfo.start_date).toLocaleDateString()}
                 </div>
             );
         } else if (tournamentInfo.status === "live") {
             return (
                 <>
-                    <CountdownTimer startDate={tournamentInfo.startDate} />
+                    <CountdownTimer startDate={tournamentInfo.start_date} />
                     <div className="mt-5 text-2xl">Tournament is Live now</div>
                     <div className="flex justify-center w-[90%] mt-5">
-                        <button onClick={openTournament} className="purple-gradient text-white py-3 rounded-xl px-6">
+                        <button
+                            onClick={openTournament}
+                            className="purple-gradient text-white py-3 rounded-xl px-6"
+                        >
                             Join
                         </button>
                     </div>
@@ -209,7 +184,7 @@ const Tournament = () => {
                 <div
                     className="w-[90%] h-[290px] rounded-3xl flex justify-center"
                     style={{
-                        backgroundImage: `url(${tournamentInfo.backgroundImage})`,
+                        backgroundImage: `url(${tournamentInfo.background_image})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}
@@ -234,15 +209,26 @@ const Tournament = () => {
 
                 <div className="w-[90%] mt-7 pl-2 pr-2">
                     <h1 className="text-xl font-bold mb-2">Prize Fund</h1>
-                    <div className="">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </div>
+                    <div className="">
+                        Sed ut perspiciatis unde omnis iste natus error sit
+                        voluptatem accusantium doloremque laudantium, totam rem
+                        aperiam.{" "}
+                    </div>
                 </div>
 
                 <PrizeDivision />
-                
             </div>
             <Footer />
-            <ModalContestantRegister show={showContestantModal} onClose={closeContestantModal} onSubmit={handleContestantSubmit} />
-            <ModalJudgeRegister show={showJudgeModal} onClose={closeJudgeModal} onSubmit={handleJudgeSubmit} />
+            <ModalContestantRegister
+                show={showContestantModal}
+                onClose={closeContestantModal}
+                onSubmit={handleContestantSubmit}
+            />
+            <ModalJudgeRegister
+                show={showJudgeModal}
+                onClose={closeJudgeModal}
+                onSubmit={handleJudgeSubmit}
+            />
         </div>
     );
 };

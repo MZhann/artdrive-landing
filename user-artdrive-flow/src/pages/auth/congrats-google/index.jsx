@@ -14,9 +14,6 @@ const Congrats = () => {
     const [userName, setUserName] = useState("");
     const [language, setLanguage] = useState("en");
     const {data: session} = useSession()
-    const back = () => {
-        router.push("/");
-    };
 
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");

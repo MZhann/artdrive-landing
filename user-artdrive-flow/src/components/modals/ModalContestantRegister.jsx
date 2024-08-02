@@ -40,7 +40,7 @@ const ModalContestantRegister = ({ show, onClose, onSubmit }) => {
         const formData = new FormData();
         formData.append("image", selectedFile);
         formData.append("description", workDescription);
-        formData.append("crypto_wallet", cryptoWallet);
+        formData.append("crypto_wallet", 'awdasdawdasdawda');
         formData.append("paid_entry", true);
         onSubmit(formData);
     };
@@ -163,14 +163,14 @@ const ModalContestantRegister = ({ show, onClose, onSubmit }) => {
                                 </span>
                                 <span className="text-white w-full font-thin">
                                     Human/AI<br></br>{" "}
-                                    <span className="text-xs">
+                                    {/* <span className="text-xs">
                                         (specify % how much AI contributed)
-                                    </span>
+                                    </span> */}
                                 </span>
                             </label>
                         </div>
                     </div>
-                    <div className="mb-4 mt-5">
+                    {/* <div className="mb-4 mt-5">
                         <label className="block mb-2 pl-1">
                             Your USDT wallet address (trc 20)
                             <span className="text-red-500 text-xl pl-1 pt-2 font-bold">
@@ -187,7 +187,7 @@ const ModalContestantRegister = ({ show, onClose, onSubmit }) => {
                         <p className="text-[#a9a8a9] text-xs mt-2 pl-1 mb-5">
                             this address will be used for reward payments
                         </p>
-                    </div>
+                    </div> */}
 
                     <div className="mt-8 space-y-5 mb-8">
                         <div className="mb-4">
