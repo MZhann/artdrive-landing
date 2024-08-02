@@ -31,3 +31,4 @@ export const fetchFavoriteArtworks = async () => {
         throw error;
     }
 };
+
