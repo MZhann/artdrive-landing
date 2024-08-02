@@ -72,13 +72,13 @@ const ProfileTournaments = () => {
         <div className="w-full">
             {myTournaments.live_tournaments.length > 0 && (
                 <>
-                    <h2 className="text-2xl text-white mb-4">Live Tournaments</h2>
+                    <h2 className="text-2xl text-center text-white mb-4">Live Tournaments</h2>
                     {renderTournaments(myTournaments.live_tournaments)}
                 </>
             )}
             {myTournaments.upcoming_tournaments.length > 0 && (
                 <>
-                    <h2 className="text-2xl text-white mb-4">Upcoming Tournaments</h2>
+                    <h2 className="text-2xl text-center text-white mb-4">Upcoming Tournaments</h2>
                     {renderTournaments(myTournaments.upcoming_tournaments)}
                 </>
             )}
