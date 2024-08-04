@@ -35,8 +35,6 @@ const LoginForm = ({ language }) => {
 
                     console.log("JWT token generated");
                     sendTokenToBackend(token);
-                    router.push("/");
-
                 } catch (error) {
                     console.error("Error generating token:", error);
                 }
@@ -69,7 +67,7 @@ const LoginForm = ({ language }) => {
 
                 console.log("Tokens saved to localStorage");
                 
-                router.push("/");
+                router.push("/auth/congrats-google");
             } else {
                 console.error("Failed to send user info to backend");
             }
