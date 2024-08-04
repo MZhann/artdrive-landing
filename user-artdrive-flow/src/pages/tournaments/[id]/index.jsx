@@ -155,7 +155,7 @@ const Tournament = () => {
             );
         } else if (tournamentInfo.status === "past") {
             return (
-                <div className="mt-5 text-2xl bg-purple-800 rounded-2xl border-4 px-10 py-6  mx-6 text-center py-2">
+                <div className="mt-10 text-2xl bg-purple-800 rounded-2xl border-4 px-10 py-6  mx-6 text-center">
                     Tournament was over at{" "}
                     {new Date(tournamentInfo.start_date).toLocaleDateString()}
                 </div>
@@ -182,8 +182,9 @@ const Tournament = () => {
         <div className="tournament-bg font-montserrat w-full flex flex-col items-center">
             <Navbar />
             <div className="text-white mt-24 w-full flex flex-col items-center ">
+                <div className="w-[90%] h-[290px] rounded-3xl flex justify-center absolute bg-purple-900 animate-pulse"></div>
                 <div
-                    className="w-[90%] h-[290px] rounded-3xl flex justify-center"
+                    className="w-[90%] h-[290px] rounded-3xl flex justify-center z-10 "
                     style={{
                         backgroundImage: `url(${tournamentInfo.background_image})`,
                         backgroundSize: "cover",
@@ -199,7 +200,7 @@ const Tournament = () => {
 
                 {renderContent()}
 
-                <div className="mt-5 text-2xl">Art Drive Tournament</div>
+                <div className="mt-10 text-2xl">Art Drive Tournament</div>
 
                 <SponsorBlock bonus_prizes={tournamentInfo.bonus_prizes} />
                 <PrizeBlock

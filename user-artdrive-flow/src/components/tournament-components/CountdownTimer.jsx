@@ -29,7 +29,7 @@ const CountdownTimer = ({ startDate, startTime }) => {
     }, [startDate, startTime]);
 
     return (
-        <div className="flex flex-col font-dinround items-center text-white mt-7">
+        <div className="flex flex-col font-dinround items-center text-white mt-7 mb-5">
             <p className="text-lg mb-2 font-montserrat">tournament will start in:</p>
             <div className="flex text-2xl items-center space-x-4">
                 <div className="flex flex-col items-center">
