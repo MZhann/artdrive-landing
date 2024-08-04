@@ -212,9 +212,7 @@ const Tournament = () => {
                 <div className="w-[90%] mt-7 pl-2 pr-2">
                     <h1 className="text-xl font-bold mb-2">Prize Fund</h1>
                     <div className="">
-                        Sed ut perspiciatis unde omnis iste natus error sit
-                        voluptatem accusantium doloremque laudantium, totam rem
-                        aperiam.{" "}
+                       For tournament <strong className="text-yellow-400">&apos;{tournamentInfo.name}&apos;</strong>  the prize fund corresponds to the information below: {" "}
                     </div>
                 </div>
 
