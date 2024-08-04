@@ -20,7 +20,7 @@ const TournamentCard = ({
     const openTournament = () => {
         router.push({
             pathname: `/tournaments/${id}`,
-            query: {id},
+            query: { id },
         });
     };
 
@@ -56,9 +56,22 @@ const TournamentCard = ({
                         </div>
                         <div className="flex text-white text-right space-x-4">
                             <p className="text-sm text-start">
-                                <span className="text-gradient text-start text-lg font-extrabold">
-                                    {prizeFund}$
-                                </span>{" "}
+                                {name === "August Art 2024" && (
+                                    <span className="text-gradient text-start text-lg font-extrabold">
+                                        50 000₸
+                                    </span>
+                                )}
+                                {name === "Aesthetics of Almaty" && (
+                                    <span className="text-gradient text-start text-lg font-extrabold">
+                                        30 000₸
+                                    </span>
+                                )}
+                                {name != "August Art 2024" &&
+                                    name != "Aesthetics of Almaty" && (
+                                        <span className="text-gradient text-start text-lg font-extrabold">
+                                            {prizeFund}$
+                                        </span>
+                                    )}
                                 <br></br> prize fund
                             </p>
                             <p className="text-sm text-start">
