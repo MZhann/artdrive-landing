@@ -14,21 +14,16 @@ const PrizeDivision = () => {
                         <div>1</div>
                         <div>2</div>
                         <div>3</div>
-                        <div>4</div>
-                        <div>5-10</div>
-                        <div>11-30</div>
-                        <div>31-100</div>
-                        <div>101-500</div>
+                        <div>4-7</div>
+                        <div>8-12</div>
                     </div>
                     <div className="w-[40%]">
-                        <div>1000 $</div>
-                        <div>500 $</div>
-                        <div>100 $</div>
-                        <div>50 $</div>
-                        <div>20 $</div>
-                        <div>10 $</div>
-                        <div>5 $</div>
-                        <div>0 $</div>
+                        <div>20 000 ₸</div>
+                        <div>10 000 ₸</div>
+                        <div>5000 ₸</div>
+                        <div>2500 ₸</div>
+                        <div>1000 ₸</div>
+                        
                     </div>
                 </div>
             </div>

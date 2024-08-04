@@ -56,9 +56,10 @@ const Navbar = () => {
                         className="w-[30px]"
                     />}
                 </Link>
-                <div className="flex space-x-3">
-                    <Link href={"/tournaments"} className="flex items-center justify-center">
-                        {tournaments && <Image src={tournaments} alt="tournaments page" width={100} height={100} className="w-[30px] h-[30px] mr-[-5px]" />}
+                <div className="flex space-x-3 items-center justify-center">
+                    <Link href={"/tournaments"} className="flex items-center justify-center h-[40px] transition-all duration-200 hover:rounded-2xl pr-3 pl-3 hover:bg-white hover:bg-opacity-5">
+                        {tournaments && <div className="text-white font-montserrat hidden sm:flex mr-1">Tournaments</div>}
+                        {tournaments && <Image src={tournaments} alt="tournaments page" width={100} height={100} className="w-[30px] h-[30px]" />}
                     </Link>
 
                     {/* <button

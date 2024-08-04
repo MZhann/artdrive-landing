@@ -89,13 +89,13 @@ const SignUpButton = ({ lang }) => {
     }
 
     return (
-        <div className="relative" ref={buttonRef}>
+        <div className="relative flex justify-center items-center" ref={buttonRef}>
             <button
                 onClick={toggleModal}
                 className={`${
                     lang === "en"
-                        ? "p-1 w-[90px] hover:w-[95px] text-[12px]"
-                        : "text-[11px] text-nowrap w-[140px]  flex items-center hover:w-[95px] justify-center"
+                        ? "p-1 w-[90px]  text-[12px]"
+                        : "text-[11px] text-nowrap w-[140px]  flex items-center  justify-center"
                 } h-[25px] rounded-3xl bg-[#A8FF35] text-black text-center font-montserrat font-semibold hover:h-[35px] duration-200 transition-all`}
             >
                 {lang === "en" ? "Start Now" : "Начни сейчас"}

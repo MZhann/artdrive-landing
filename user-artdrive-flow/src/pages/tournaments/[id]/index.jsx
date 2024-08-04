@@ -28,6 +28,7 @@ const Tournament = () => {
     const [userRole, setUserRole] = useState("");
 
     useEffect(() => {
+        console.log('tournamentInfo:', tournamentInfo)
         const fetchTournamentInfo = async () => {
             if (id) {
                 const data = await getTournamentInfo(id);
@@ -124,7 +125,7 @@ const Tournament = () => {
         if (tournamentInfo.status === "upcoming") {
             return (
                 <>
-                    <CountdownTimer startDate={tournamentInfo.start_date} />
+                    <CountdownTimer startDate={tournamentInfo.start_date} startTime={tournamentInfo.start_time}/>
                     <div
                         className={
                             userRole == ""
@@ -162,7 +163,7 @@ const Tournament = () => {
         } else if (tournamentInfo.status === "live") {
             return (
                 <>
-                    <CountdownTimer startDate={tournamentInfo.start_date} />
+                    <CountdownTimer startDate={tournamentInfo.start_date} startTime={tournamentInfo.start_date} />
                     <div className="mt-5 text-2xl">Tournament is Live now</div>
                     <div className="flex justify-center w-[90%] mt-5">
                         <button
