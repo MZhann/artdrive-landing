@@ -6,6 +6,8 @@ const LogOut = () => {
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
+        localStorage.removeItem('nextauth.message');
+        localStorage.removeItem('currentRound');
         router.push('/');
         // router.reload();
     };
