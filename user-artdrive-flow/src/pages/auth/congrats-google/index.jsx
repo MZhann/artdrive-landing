@@ -62,7 +62,7 @@ const Congrats = () => {
                             alt="x/twitter logo"
                         />
                     </Link>
-                    <Link href={'https://discord.gg/byq8huwJ'}>
+                    <Link href={'https://discord.com/invite/Qndddk9dK4'}>
                         <Image
                             src={discordLogo}
                             width={300}
