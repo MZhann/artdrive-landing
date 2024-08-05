@@ -26,13 +26,14 @@ const LikesAndChanceIndicator = ({ backgroundImage, likes, totalParticipants, cu
 
     return (
         <div className="relative w-[93%] h-[90px] mb-4 flex mt-10 justify-between items-center p-4 bg-cover bg-center rounded-xl border-2 px-8 border-gray-600" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <div className="text-white text-lg flex flex-col items-center mt-4 justify-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/35 rounded-xl"></div>
+            <div className="text-white z-10 text-lg flex flex-col items-center mt-4 justify-center">
                 <Image src={chanceToWinTrophy} alt="trophy" width={45} height={45} />
                 <span className="font-bold ml-2">{chanceToWin.toFixed(0)}%</span>
             </div>
-            <div className="relative flex flex-col items-center justify-center mt-2">
+            <div className="relative flex z-10 flex-col items-center justify-center mt-2">
                 <Image src={likeIndicator} alt="likes" width={55} height={55} />
-                <span className="text-white text-lg mt-[-8px]">{likes}</span>
+                <span className="text-white font-bold text-lg mt-[-8px]">{likes}</span>
 
                 {showAnimation && (
                     <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center">
