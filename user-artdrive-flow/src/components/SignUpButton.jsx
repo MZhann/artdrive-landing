@@ -40,6 +40,7 @@ const SignUpButton = ({ lang }) => {
                     }
                 );
                 if (response.ok) {
+                    console.log('succesfully fetched user info in SignUpButton component')
                     const data = await response.json();
                     setUserInfo(data);
                 }

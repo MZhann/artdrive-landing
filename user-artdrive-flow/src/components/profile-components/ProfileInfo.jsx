@@ -1,22 +1,28 @@
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { updateProfile } from "@/pages/api/profile";
 import loading from "../../../public/loading.gif";
 import Image from "next/image";
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const ProfileInfo = ({ userData }) => {
     const router = useRouter();
     const [editMode, setEditMode] = useState(false);
     const [avatarFile, setAvatarFile] = useState(null);
+    const [avatarPreview, setAvatarPreview] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         username: userData?.username || "",
         email: userData?.email || "",
         avatar: userData?.avatar || "",
         socialLinks: Object.entries(userData?.social_links || {}),
-       
     });
+
+    const fileInputRef = useRef(null);
+
+    useEffect(() => {
+        setAvatarPreview(userData?.avatar || "");
+    }, [userData]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -42,10 +48,7 @@ const ProfileInfo = ({ userData }) => {
             setAvatarFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
-                setFormData((prevData) => ({
-                    ...prevData,
-                    avatar: reader.result,
-                }));
+                setAvatarPreview(reader.result);
             };
             reader.readAsDataURL(file);
         }
@@ -57,7 +60,9 @@ const ProfileInfo = ({ userData }) => {
             profileFormData.append("username", formData.username);
             profileFormData.append("country", "default, not yet");
             profileFormData.append("wallet_address", "default, not yet");
-            profileFormData.append("avatar", avatarFile);
+            if (avatarFile) {
+                profileFormData.append("avatar", avatarFile);
+            }
             profileFormData.append(
                 "social_links",
                 JSON.stringify(Object.fromEntries(formData.socialLinks))
@@ -65,8 +70,6 @@ const ProfileInfo = ({ userData }) => {
             profileFormData.append("new_email", formData.email);
             setIsLoading(true);
             await updateProfile(profileFormData);
-
-        
 
             // Reload user data or handle success
             setIsLoading(false);
@@ -88,10 +91,10 @@ const ProfileInfo = ({ userData }) => {
 
     return (
         <div className="flex space-x-2 w-full pl-2 pr-2 md:pl-0 md:pr-0">
-            <div className="w-1/2  p-4 rounded-xl ">
+            <div className="w-1/2 p-4 rounded-xl ">
                 {editMode ? (
                     <div className="text-xs">
-                        <p className="mb-1">name</p>
+                        <p className="mb-1">Name</p>
                         <input
                             type="text"
                             name="username"
@@ -100,7 +103,7 @@ const ProfileInfo = ({ userData }) => {
                             placeholder="Your name"
                             className="w-full p-2 mb-2 rounded-md bg-opacity-10 bg-white border-[1px] border-gray-400"
                         />
-                        <p className="mb-1">email</p>
+                        <p className="mb-1">Email</p>
                         <input
                             type="email"
                             name="email"
@@ -109,7 +112,7 @@ const ProfileInfo = ({ userData }) => {
                             placeholder="Your email"
                             className="w-full p-2 mb-2 rounded-md bg-opacity-10 bg-white border-[1px] border-gray-400"
                         />
-                       
+
                         <button
                             onClick={handleSubmit}
                             className="mt-4 bg-green-500 bg-opacity-20 border-white border-[1px] text-xs mr-4 text-white py-2 px-4 rounded-md"
@@ -142,7 +145,7 @@ const ProfileInfo = ({ userData }) => {
                         <p className="text-xs mb-3 truncate">
                             <strong>Email:</strong> {userData.email}
                         </p>
-                        <p className="text-xs truncate">
+                        <div className="text-xs truncate">
                             <strong>Social Media Links:</strong>
                             {Object.entries(userData.social_links).map(
                                 ([key, value], index) => (
@@ -158,7 +161,7 @@ const ProfileInfo = ({ userData }) => {
                                     </div>
                                 )
                             )}
-                        </p>
+                        </div>
                         <button
                             onClick={() => setEditMode(true)}
                             className="mt-4 bg-purple-500 bg-opacity-40 border-white border-[1px] text-xs text-white py-2 px-4 rounded-md"
@@ -169,34 +172,35 @@ const ProfileInfo = ({ userData }) => {
                 )}
             </div>
             <div className="w-1/2 p-4 rounded-xl">
-                <div className="flex items-center">
-                    <p className="text-xs">
-                        <img
-                            src={
-                                avatarFile
-                                    ? URL.createObjectURL(avatarFile)
-                                    : userData.avatar
-                            }
-                            alt="Avatar"
-                            className="w-16 object-cover h-16 rounded-full cursor-pointer"
-                            onClick={() =>
-                                document.getElementById("avatarUpload").click()
-                            }
-                        />
-                    </p>
+                <div className="flex  items-center">
+                    <div className="text-xs">
+                        {avatarPreview ? (
+                            <img
+                                src={avatarPreview}
+                                alt="Avatar"
+                                className="w-16 object-cover h-16 rounded-full cursor-pointer"
+                                onClick={() => fileInputRef.current.click()}
+                            />
+                        ) : (
+                            <div
+                                className="w-16 h-16 bg-gray-200 rounded-full cursor-pointer flex items-center justify-center"
+                                onClick={() => fileInputRef.current.click()}
+                            >
+                                <span className="text-gray-500">No Image</span>
+                            </div>
+                        )}
+                    </div>
                     <p
                         className="text-[10px] w-[30px] ml-3 text-center cursor-pointer"
-                        onClick={() =>
-                            document.getElementById("avatarUpload").click()
-                        }
+                        onClick={() => fileInputRef.current.click()}
                     >
                         Change Avatar
                     </p>
                     <input
                         type="file"
-                        id="avatarUpload"
+                        ref={fileInputRef}
                         accept="image/*"
-                        style={{ display: "none" }}
+                        className="hidden"
                         onChange={handleAvatarChange}
                     />
                 </div>

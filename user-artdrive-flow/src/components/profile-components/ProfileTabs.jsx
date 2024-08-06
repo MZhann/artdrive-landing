@@ -22,6 +22,7 @@ const ProfileTabs = () => {
             try {
                 const data = await getUserData();
                 setUserData(data);
+                console.log('user data: ', userData)
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }

@@ -24,7 +24,7 @@ export const checkAuthorization = async () => {
 
 export const updateProfile = async (formData) => {
     try {
-        const response = await backendApiInstance.put("profile/update/", formData, {
+        const response = await backendApiInstance.patch("profile/update/", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -38,7 +38,7 @@ export const updateProfile = async (formData) => {
 
 export const changePassword = async (formData) => {
     try {
-        const response = await backendApiInstance.put("profile/change-password/", formData);
+        const response = await backendApiInstance.patch("profile/change-password/", formData);
         return response.data;
     } catch (error) {
         console.error("Error changing password:", error);
