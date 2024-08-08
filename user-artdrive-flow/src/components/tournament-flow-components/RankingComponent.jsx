@@ -1,34 +1,352 @@
-import React, { useEffect, useState } from "react";
+// import { useState, useEffect } from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+// import { fetchRanking } from "@/pages/api/tournaments";
+// import like from "../../../public/images/image-buttons/like.svg";
+// import TournamentUserCard from "../../components/tournament-components//TournamentUserCard";
+// import Lottie from "lottie-react";
+// import fireworkAnimation from "../../../public/firework-throwed.json";
+// import TournamentResultSingleCard from "../../components/tournament-components/TournamentResultSingleCard";
+
+// const RankingComponent = ({ tournamentId }) => {
+//     const [rankings, setRankings] = useState([]);
+//     const [userRank, setUserRank] = useState(null);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+//     const [page, setPage] = useState(1);
+//     const [username, setUsername] = useState("");
+//     const [noMoreData, setNoMoreData] = useState(false);
+//     const [searchResults, setSearchResults] = useState([]);
+//     const [showFireworks, setShowFireworks] = useState(true);
+
+//     useEffect(() => {
+//         const fetchRankings = async () => {
+//             try {
+//                 console.log(
+//                     "Fetching rankings for tournament ID:",
+//                     tournamentId,
+//                     "page:",
+//                     page,
+//                     "username:",
+//                     username
+//                 );
+//                 const data = await fetchRanking(tournamentId, page, username);
+//                 console.log("Fetched rankings data:", data);
+
+//                 if (page === 1 && username === "") {
+//                     setRankings(data.results.participants);
+//                 } else if (page === 1 && username !== "") {
+//                     setSearchResults(data.results.participants);
+//                 } else {
+//                     setRankings((prev) => [
+//                         ...prev,
+//                         ...data.results.participants,
+//                     ]);
+//                 }
+
+//                 setUserRank(data.results.user_rank);
+
+//                 if (!data.next) {
+//                     setNoMoreData(true);
+//                 } else {
+//                     setNoMoreData(false);
+//                 }
+
+//                 setLoading(false);
+//             } catch (error) {
+//                 console.error(
+//                     "Error fetching rankings in TournamentResult component:",
+//                     error.response ? error.response.data : error.message
+//                 );
+//                 setError(error.message);
+//                 setLoading(false);
+//             }
+//         };
+
+//         fetchRankings();
+//     }, [tournamentId, page, username]);
+
+//     const loadMore = () => {
+//         setPage((prev) => prev + 1);
+//     };
+
+//     const handleSearch = (e) => {
+//         setUsername(e.target.value);
+//         setPage(1);
+//     };
+//     if (loading) {
+//         return <div>Loading...</div>;
+//     }
+
+//     if (error) {
+//         return <div>Error: {error}</div>;
+//     }
+
+//     return (
+//         <div className="bg-green-200 w-[90%] rounded-3xl text-white bg-opacity-5 mt-10 border-2 border-gray-500 flex flex-col items-center">
+//             {showFireworks && (
+//                 <div className="absolute inset-0 flex justify-center items-center">
+//                     <Lottie
+//                         animationData={fireworkAnimation}
+//                         className="w-[450px] h-[450px]"
+//                     />
+//                 </div>
+//             )}
+//             <h1 className="my-3 text-xl font-bold">Tournament Ranking</h1>
+//             <div className="flex justify-center space-x-3 w-full">
+//                 {rankings.length > 1 && (
+//                     <div className="flex flex-col items-center mt-10">
+//                         <div className="relative">
+//                             <div className="w-[90px] h-[90px] border-2 border-gray-400 bg-gray-700 rounded-full overflow-hidden">
+//                                 <Image
+//                                     src={rankings[1].artwork.image}
+//                                     alt={`Rank 2`}
+//                                     width={200}
+//                                     height={200}
+//                                     className="object-fit rounded-full "
+//                                 />
+//                             </div>
+//                             <div className="absolute top-0 right-0 w-8 h-8 bg-gray-400 text-xs font-bold text-black flex items-center justify-center rounded-full">
+//                                 2nd
+//                             </div>
+//                         </div>
+//                         <div className="text-xs text-gray-300 mt-2">
+//                             {rankings[1].username}
+//                         </div>
+//                         <div className="text-xs font-bold text-white">
+//                             {rankings[1].prize} $
+//                         </div>
+//                         <div className="flex items-center space-x-1">
+//                             <Image
+//                                 src={like}
+//                                 alt="like"
+//                                 width={15}
+//                                 height={15}
+//                                 className="w-[15px] h-[15px]"
+//                             />
+//                             <div className="text-xs">
+//                                 {rankings[1].artwork.likes_count}
+//                             </div>
+//                         </div>
+//                     </div>
+//                 )}
+//                 {rankings.length > 0 && (
+//                     <div className="flex flex-col items-center">
+//                         <div className="relative">
+//                             <div className="w-[110px] h-[110px] border-2 border-gray-400 bg-gray-700 rounded-full overflow-hidden">
+//                                 <Image
+//                                     src={rankings[0].artwork.image}
+//                                     alt={`Rank 1`}
+//                                     width={200}
+//                                     height={200}
+//                                     className="object-fit rounded-full "
+//                                 />
+//                             </div>
+//                             <div className="absolute top-0 right-0 w-8 h-8 text-xs font-bold  text-black flex items-center justify-center rounded-full bg-yellow-400">
+//                                 1st
+//                             </div>
+//                         </div>
+//                         <div className="text-xs text-gray-300 mt-2">
+//                             {rankings[0].username}
+//                         </div>
+//                         <div className="text-xs font-bold text-white">
+//                             {rankings[0].prize} $
+//                         </div>
+//                         <div className="flex items-center space-x-1">
+//                             <Image
+//                                 src={like}
+//                                 alt="like"
+//                                 width={15}
+//                                 height={15}
+//                                 className="w-[15px] h-[15px]"
+//                             />
+//                             <div className="text-xs">
+//                                 {rankings[0].artwork.likes_count}
+//                             </div>
+//                         </div>
+//                     </div>
+//                 )}
+//                 {rankings.length > 2 && (
+//                     <div className="flex flex-col items-center mt-20">
+//                         <div className="relative">
+//                             <div className="w-[80px] h-[80px] border-2 border-gray-400 bg-gray-700 rounded-full overflow-hidden">
+//                                 <Image
+//                                     src={rankings[2].artwork.image}
+//                                     alt={`Rank 3`}
+//                                     width={200}
+//                                     height={200}
+//                                     className="object-fit rounded-full "
+//                                 />
+//                             </div>
+//                             <div className="absolute top-0 right-0 w-8 h-8  text-xs font-bold text-black flex items-center justify-center rounded-full bg-yellow-600">
+//                                 3rd
+//                             </div>
+//                         </div>
+//                         <div className="text-xs text-gray-300 mt-2">
+//                             {rankings[2].username}
+//                         </div>
+//                         <div className="text-xs font-bold text-white">
+//                             {rankings[2].prize} $
+//                         </div>
+//                         <div className="flex items-center space-x-1">
+//                             <Image
+//                                 src={like}
+//                                 alt="like"
+//                                 width={15}
+//                                 height={15}
+//                                 className="w-[15px] h-[15px]"
+//                             />
+//                             <div className="text-xs">
+//                                 {rankings[2].artwork.likes_count}
+//                             </div>
+//                         </div>
+//                     </div>
+//                 )}
+//             </div>
+
+//             <input
+//                 className="w-[250px] h-[40px] mt-4 mb-4 rounded-3xl bg-white bg-opacity-5 border-2 px-4 border-gray-300"
+//                 placeholder="search"
+//                 value={username}
+//                 onChange={handleSearch}
+//             />
+
+//             <div className="w-[330px] flex flex-col items-center">
+//                 {searchResults.length > 0 ? (
+//                     searchResults.map((rank) => (
+//                         <TournamentUserCard
+//                             key={rank.user_id}
+//                             rank={rank.rank}
+//                             user={rank}
+//                         />
+//                     ))
+//                 ) : (
+//                     <>
+//                         {userRank && userRank.participant && (
+//                             <>
+//                                 <TournamentUserCard
+//                                     rank={userRank.rank}
+//                                     user={userRank.participant}
+//                                 />
+//                                 <div className="h-[1px] w-full bg-gray-300 mb-5 mt-3"></div>
+//                             </>
+//                         )}
+//                         {rankings.slice(3).map((rank) => (
+//                             <TournamentResultSingleCard
+//                                 key={rank.user_id}
+//                                 rank={rank}
+//                             />
+//                         ))}
+//                     </>
+//                 )}
+//             </div>
+//             {!noMoreData && (
+//                 <button
+//                     onClick={loadMore}
+//                     className="my-3 underline  hover p-3 hover:bg-gray-400 hover:bg-opacity-10 hover:rounded-2xl transition-all duration-200"
+//                 >
+//                     Show more
+//                 </button>
+//             )}
+
+//             <Link
+//                 href={`/tournaments`}
+//                 className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-purple-800 hover:bg-purple-500"
+//             >
+//                 Return to tournaments page
+//             </Link>
+//         </div>
+//     );
+// };
+
+// export default RankingComponent;
+
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import whiteLike from "../../../public/images/image-buttons/white-like.svg";
 import { fetchRanking } from "@/pages/api/tournaments";
+import like from "../../../public/images/image-buttons/like.svg";
+import TournamentUserCard from "../../components/tournament-components/TournamentUserCard";
+import Lottie from "lottie-react";
+import fireworkAnimation from "../../../public/firework-throwed.json";
+import TournamentResultSingleCard from "../../components/tournament-components/TournamentResultSingleCard";
 
 const RankingComponent = ({ tournamentId }) => {
     const [rankings, setRankings] = useState([]);
+    const [userRank, setUserRank] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isClient, setIsClient] = useState(false);
+    const [page, setPage] = useState(1);
+    const [username, setUsername] = useState("");
+    const [noMoreData, setNoMoreData] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const [showFireworks, setShowFireworks] = useState(true);
 
     useEffect(() => {
         const fetchRankings = async () => {
             try {
-                const data = await fetchRanking(tournamentId);
-                setRankings(data.results.participants);
+                console.log(
+                    "Fetching rankings for tournament ID:",
+                    tournamentId,
+                    "page:",
+                    page,
+                    "username:",
+                    username
+                );
+                const data = await fetchRanking(tournamentId, page, username);
+                console.log("Fetched rankings data:", data);
+
+                if (page === 1 && username === "") {
+                    setRankings(data.results.participants);
+                } else if (page === 1 && username !== "") {
+                    setSearchResults(data.results.participants);
+                } else {
+                    setRankings((prev) => [
+                        ...prev,
+                        ...data.results.participants,
+                    ]);
+                }
+
+                setUserRank(data.results.user_rank);
+
+                if (!data.next) {
+                    setNoMoreData(true);
+                } else {
+                    setNoMoreData(false);
+                }
+
+                setLoading(false);
             } catch (error) {
+                console.error(
+                    "Error fetching rankings in TournamentResult component:",
+                    error.response ? error.response.data : error.message
+                );
                 setError(error.message);
-            } finally {
                 setLoading(false);
             }
         };
 
         fetchRankings();
-    }, [tournamentId]);
+    }, [tournamentId, page, username]);
 
-    // Ensure the component is rendered only on the client side
+    const loadMore = () => {
+        setPage((prev) => prev + 1);
+    };
+
+    const handleSearch = (e) => {
+        setUsername(e.target.value);
+        setPage(1);
+    };
+
     useEffect(() => {
-        setIsClient(true);
-    }, []);
+        if (showFireworks) {
+            const timer = setTimeout(() => {
+                setShowFireworks(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [showFireworks]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -38,89 +356,179 @@ const RankingComponent = ({ tournamentId }) => {
         return <div>Error: {error}</div>;
     }
 
-    const formatPrize = (prize) => {
-        return Math.floor(prize);
-    };
-
     return (
-        <div className="w-full flex flex-col items-center gradient-tournament-background text-white pt-6 px-2 pb-20">
-            <h1 className="text-2xl mb-3">Ranking</h1>
-            <div className="h-[2px] w-[85%] mb-6 bg-gray-600"></div>
-            <div className="w-full max-w-2xl flex flex-col items-center px-8">
-                {rankings.map((rank, index) => (
-                    <div
-                        key={rank.user_id}
-                        className="flex w-full items-center space-x-5 mb-4"
-                    >
-                        <div className="flex items-center justify-center text-sm text-gray-300">
-                            {index + 1}
-                        </div>
+        <div className="bg-green-200 w-[90%] rounded-3xl text-white mt-10 flex flex-col items-center relative">
+            {showFireworks && (
+                <div className="absolute inset-0 flex justify-center items-center">
+                    <Lottie
+                        animationData={fireworkAnimation}
+                        className="w-[450px] h-[450px]"
+                    />
+                </div>
+            )}
+            <h1 className="my-3 text-xl font-bold">Tournament Ranking</h1>
+            <div className="flex justify-center space-x-3 w-full">
+                {rankings.length > 1 && (
+                    <div className="flex flex-col items-center mt-10">
                         <div className="relative">
-                            {index === 0 ? (
+                            <div className="w-[90px] h-[90px] border-2 border-gray-400 bg-gray-700 rounded-full overflow-hidden">
                                 <Image
-                                    src={rank.artwork.image}
-                                    alt={`Rank ${index + 1}`}
+                                    src={rankings[1].artwork.image}
+                                    alt={`Rank 2`}
                                     width={200}
-                                    height={202}
-                                    className="w-[90px] rounded-full mb-4 mt-7 h-[90px] object-cover"
+                                    height={200}
+                                    className="object-fit rounded-full "
                                 />
-                            ) : (
-                                <Image
-                                    src={rank.artwork.image}
-                                    alt={`Rank ${index + 1}`}
-                                    width={200}
-                                    height={202}
-                                    className="w-[75px] h-[75px] object-cover rounded-full"
-                                />
-                            )}
-
-                            {index === 0 && (
-                                <div className="absolute top-[-10px] left-[50%] transform -translate-x-1/2 w-8 h-8">
-                                    <Image
-                                        src="/images/image-buttons/crown.png"
-                                        alt="Crown"
-                                        layout="fill"
-                                        objectFit="contain"
-                                    />
-                                </div>
-                            )}
+                            </div>
+                            <div className="absolute top-0 right-0 w-8 h-8 bg-gray-400 text-xs font-bold text-black flex items-center justify-center rounded-full">
+                                2nd
+                            </div>
                         </div>
-                        <div className="flex ml-4">
-                            <div className="ml-0">
-                                <div className="text-sm">{rank.username}</div>
-                                {isClient && rank.artist_page && (
-                                    <Link className="text-xs underline text-gray-500" href={rank.artist_page}>
-                                        
-                                            artist page
-                                        
-                                    </Link>
-                                )}
-                            </div>
-                            <div className="font-normal text-nowrap ml-6 flex items-center text-xl">
-                                {formatPrize(rank.prize)} $
-                            </div>
-                            <div className="font-normal text-nowrap ml-4 text-xl flex items-center">
-                                <Image
-                                    src={whiteLike}
-                                    alt="like"
-                                    className="h-[20px] w-[20px]"
-                                    height={20}
-                                    width={20}
-                                />
-                                <div className="ml-2 text-xm">{rank.artwork.likes_count}</div>
+                        <div className="text-xs text-gray-300 mt-2">
+                            {rankings[1].username}
+                        </div>
+                        <div className="text-xs font-bold text-white">
+                            {rankings[1].prize} $
+                        </div>
+                        <div className="flex items-center space-x-1">
+                            <Image
+                                src={like}
+                                alt="like"
+                                width={15}
+                                height={15}
+                                className="w-[15px] h-[15px]"
+                            />
+                            <div className="text-xs">
+                                {rankings[1].artwork.likes_count}
                             </div>
                         </div>
                     </div>
-                ))}
+                )}
+                {rankings.length > 0 && (
+                    <div className="flex flex-col items-center">
+                        <div className="relative">
+                            <div className="w-[110px] h-[110px] border-2 border-gray-400 bg-gray-700 rounded-full overflow-hidden">
+                                <Image
+                                    src={rankings[0].artwork.image}
+                                    alt={`Rank 1`}
+                                    width={200}
+                                    height={200}
+                                    className="object-fit rounded-full "
+                                />
+                            </div>
+                            <div className="absolute top-0 right-0 w-8 h-8 text-xs font-bold  text-black flex items-center justify-center rounded-full bg-yellow-400">
+                                1st
+                            </div>
+                        </div>
+                        <div className="text-xs text-gray-300 mt-2">
+                            {rankings[0].username}
+                        </div>
+                        <div className="text-xs font-bold text-white">
+                            {rankings[0].prize} $
+                        </div>
+                        <div className="flex items-center space-x-1">
+                            <Image
+                                src={like}
+                                alt="like"
+                                width={15}
+                                height={15}
+                                className="w-[15px] h-[15px]"
+                            />
+                            <div className="text-xs">
+                                {rankings[0].artwork.likes_count}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {rankings.length > 2 && (
+                    <div className="flex flex-col items-center mt-20">
+                        <div className="relative">
+                            <div className="w-[80px] h-[80px] border-2 border-gray-400 bg-gray-700 rounded-full overflow-hidden">
+                                <Image
+                                    src={rankings[2].artwork.image}
+                                    alt={`Rank 3`}
+                                    width={200}
+                                    height={200}
+                                    className="object-fit rounded-full "
+                                />
+                            </div>
+                            <div className="absolute top-0 right-0 w-8 h-8  text-xs font-bold text-black flex items-center justify-center rounded-full bg-yellow-600">
+                                3rd
+                            </div>
+                        </div>
+                        <div className="text-xs text-gray-300 mt-2">
+                            {rankings[2].username}
+                        </div>
+                        <div className="text-xs font-bold text-white">
+                            {rankings[2].prize} $
+                        </div>
+                        <div className="flex items-center space-x-1">
+                            <Image
+                                src={like}
+                                alt="like"
+                                width={15}
+                                height={15}
+                                className="w-[15px] h-[15px]"
+                            />
+                            <div className="text-xs">
+                                {rankings[2].artwork.likes_count}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
-            {isClient && (
-                <Link href={`/tournaments`} className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-indigo-800">
-                    
-                        Return to tournaments page
-                    
-                </Link>
+            <input
+                className="w-[250px] h-[40px] mt-4 mb-4 rounded-3xl bg-white bg-opacity-5 border-2 px-4 border-gray-300"
+                placeholder="search"
+                value={username}
+                onChange={handleSearch}
+            />
+
+            <div className="w-[330px] flex flex-col items-center">
+                {searchResults.length > 0 ? (
+                    searchResults.map((rank) => (
+                        <TournamentUserCard
+                            key={rank.user_id}
+                            rank={rank.rank}
+                            user={rank}
+                        />
+                    ))
+                ) : (
+                    <>
+                        {userRank && userRank.participant && (
+                            <>
+                                <TournamentUserCard
+                                    rank={userRank.rank}
+                                    user={userRank.participant}
+                                />
+                                <div className="h-[1px] w-full bg-gray-300 mb-5 mt-3"></div>
+                            </>
+                        )}
+                        {rankings.slice(3).map((rank) => (
+                            <TournamentResultSingleCard
+                                key={rank.user_id}
+                                rank={rank}
+                            />
+                        ))}
+                    </>
+                )}
+            </div>
+            {!noMoreData && (
+                <button
+                    onClick={loadMore}
+                    className="my-3 underline  hover p-3 hover:bg-gray-400 hover:bg-opacity-10 hover:rounded-2xl transition-all duration-200"
+                >
+                    Show more
+                </button>
             )}
+
+            <Link
+                href={`/tournaments`}
+                className="text-white mt-10 text-xl border-2 rounded-2xl px-4 py-2 border-purple-800 hover:bg-purple-500"
+            >
+                Return to tournaments page
+            </Link>
         </div>
     );
 };

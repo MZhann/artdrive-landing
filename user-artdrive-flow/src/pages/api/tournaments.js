@@ -132,16 +132,20 @@ export const fetchUserImage = async (tournamentId) => {
 } 
 
 
-
-// export const fetchRanking = async (tournamentId) => {
+// export const fetchRanking = async (tournamentId, page = 1, username = "") => {
 //     try {
-//         const response = await backendApiInstance.get(`tournaments/${tournamentId}/top_10_participants/`);
+//         const url = `tournaments/${tournamentId}/top_participants/`;
+//         const params = { page };
+//         if (username) {
+//             params.username = username;
+//         }
+//         const response = await backendApiInstance.get(url, { params });
 //         return response.data;
-//     }catch(error){
+//     } catch (error) {
 //         console.error("Error fetching ranking in tournament flow:", error);
 //         throw error;
 //     }
-// } 
+// };
 
 export const fetchRanking = async (tournamentId, page = 1, username = "") => {
     try {
@@ -150,10 +154,12 @@ export const fetchRanking = async (tournamentId, page = 1, username = "") => {
         if (username) {
             params.username = username;
         }
+        console.log("Fetching ranking with params:", { url, params });
         const response = await backendApiInstance.get(url, { params });
+        console.log("Fetched ranking data:", response.data);
         return response.data;
     } catch (error) {
-        console.error("Error fetching ranking in tournament flow:", error);
+        console.error("Error fetching ranking in tournament flow:", error.response ? error.response.data : error.message);
         throw error;
     }
 };

@@ -2,24 +2,24 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import likeIndicator from "../../../public/images/image-buttons/likeIndicator.svg";
 import chanceToWinTrophy from "../../../public/images/image-buttons/chanceToWinTrophy.svg";
+import Lottie from "lottie-react";
+import likeAnimationData from "../../../public/like-animation.json";
 
 const LikesAndChanceIndicator = ({ backgroundImage, likes, totalParticipants, currentRound }) => {
     const [showAnimation, setShowAnimation] = useState(false);
-    const [chanceToWin, setChanceToWin] = useState(100 / totalParticipants); // Initial chance to win
+    const [chanceToWin, setChanceToWin] = useState(100 / totalParticipants);
 
     useEffect(() => {
-        // Recalculate chance to win based on current round
-        const newChanceToWin = (100 / (totalParticipants / Math.pow(2, currentRound)));
+        const newChanceToWin = 100 / (totalParticipants / Math.pow(2, currentRound));
         setChanceToWin(newChanceToWin);
     }, [totalParticipants, currentRound]);
 
-    // Simulate the like animation
     useEffect(() => {
         if (likes > 0) {
             setShowAnimation(true);
             const timer = setTimeout(() => {
                 setShowAnimation(false);
-            }, 1000); // Animation duration in milliseconds
+            }, 2000);
             return () => clearTimeout(timer);
         }
     }, [likes]);
@@ -36,8 +36,8 @@ const LikesAndChanceIndicator = ({ backgroundImage, likes, totalParticipants, cu
                 <span className="text-white font-bold text-lg mt-[-8px]">{likes}</span>
 
                 {showAnimation && (
-                    <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center">
-                        <Image src="/like-animation.png" alt="like animation" width={50} height={50} className="animate-bounce" />
+                    <div className="absolute top-0">
+                        <Lottie animationData={likeAnimationData} style={{ width: 120, height: 120, marginTop: -100 }} />
                     </div>
                 )}
             </div>
