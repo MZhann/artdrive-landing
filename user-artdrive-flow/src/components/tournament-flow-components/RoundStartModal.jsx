@@ -66,15 +66,6 @@ const RoundStartModal = ({ show, totalRounds, currentRound, onClose }) => {
                         </React.Fragment>
                     ))}
                 </div>
-                <motion.div
-                    className="absolute text-2xl"
-                    initial={{ left: `${48 * (currentRound - 1)}px` }}
-                    animate={{ left: `${trianglePosition}px` }}
-                    transition={{ duration: 0.5 }}
-                    style={{ top: "-20px" }}
-                >
-                    ▼
-                </motion.div>
             </motion.div>
         </div>
     );

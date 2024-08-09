@@ -54,7 +54,7 @@ const TournamentUserCard = ({ rank, user }) => {
                         alt="user artwork"
                         width={70}
                         height={70}
-                        className="object-fit rounded-full"
+                        className="w-[70px] h-[70px] object-cover object-center rounded-full"
                     />
                 </div>
                 <div>

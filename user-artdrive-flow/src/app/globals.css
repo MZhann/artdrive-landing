@@ -85,6 +85,9 @@
 body {
     font-family: "dinround", sans-serif;
     width: 100%;
+    background: black;
+    /* background: linear-gradient(to bottom, #010101, #1a0128,  #290636); */
+    background-repeat: no-repeat;
     height: 100vh;
     padding: 0;
     margin: 0;

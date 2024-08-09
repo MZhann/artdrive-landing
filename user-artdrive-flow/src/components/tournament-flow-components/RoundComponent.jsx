@@ -64,7 +64,7 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
             {backgroundImage &&
                 <LikesAndChanceIndicator backgroundImage={backgroundImage} likes={likes} totalParticipants={totalParticipants} currentRound={currentRound} />
             }
-            <div className="text-white pt-6 w-full flex flex-col items-center">
+            <div className="text-white pt-4 w-full flex flex-col items-center">
                 <ProgressBar
                     tournamentName={tournamentName}
                     totalArts={totalArts}
@@ -76,7 +76,7 @@ const RoundComponent = ({ currentRound, tournamentName, totalParticipants, artwo
                     resetTimer={resetTimer} // Pass resetTimer as a prop
                 />
             </div>
-            <div className="text-white w-full flex flex-col items-center">
+            <div className="text-white w-full h-full flex flex-col items-center">
                 <ArtCarousel
                     images={images}
                     onLike={handleLike}
